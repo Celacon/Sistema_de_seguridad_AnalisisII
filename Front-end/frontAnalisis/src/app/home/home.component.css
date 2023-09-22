@@ -1,0 +1,62 @@
+/* Estilos para el contenedor del menú */
+
+.custom-button {
+    background-color: red; /* Fondo rojo */
+    color: white; /* Texto blanco */
+    /* Otros estilos según sea necesario */
+}
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0; /* Cambiamos "right" por "left" para que esté en el lado izquierdo */
+    height: 100%;
+    width: 300px; /* Ancho del menú lateral */
+    background-color: #333; /* Color de fondo del menú */
+    padding: 20px;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Cambiamos la dirección de la sombra */
+    overflow-y: auto; /* Scroll vertical si es necesario */
+    z-index: 999; /* Asegura que el menú esté por encima de otros elementos */
+}
+
+/* Estilos para el título del menú */
+.menu-title {
+    font-size: 24px;
+    color: #fff; /* Color del texto del título */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para los elementos del menú desplegable */
+.dropdownlink {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #444; /* Color de fondo de los elementos del menú */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdownlink:hover {
+    background-color: #555; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilos para los íconos */
+.fa {
+    margin-right: 10px;
+    color: #fff; /* Color de los íconos */
+}
+
+/* Estilos para los enlaces de las opciones */
+.opcion-link {
+    text-decoration: none;
+    color: #fff; /* Color del texto de las opciones */
+}
+
+.opcion-link:hover {
+    text-decoration: underline;
+}
+
+
+  

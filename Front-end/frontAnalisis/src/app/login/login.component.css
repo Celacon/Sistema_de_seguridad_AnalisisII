@@ -1,0 +1,111 @@
+body { 
+    background: url(https://img.freepik.com/vector-gratis/particula-tecnologia-abstracta-realista-fondo_23-2148431735.jpg?w=1800&t=st=1695360996~exp=1695361596~hmac=5fa06a3d47d2212d5a8dadda446a5ba03c2f35bb3d41bbc4af0911e34da6e620) 
+    no-repeat center center fixed;
+  
+    box-shadow: 2px 2px 10px #999;
+   
+    margin: 0;
+    padding:0;
+    font-family: 'Open Sans', sans-serif;
+   height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  
+  
+    ::selection {
+      background: rgba(255,255,255,.5);
+      color: #333;
+    }
+    ::-moz-selection {
+      background: rgba(0,0,0,.5);
+      color: red;
+    }
+  
+    .container-fluid{ position: absolute;
+    
+      margin: auto;
+      top: 0; left: 0; bottom: 0; right: 0;
+      width: 300px;
+      height: 500px;
+      background: rgba(3, 3, 3, 0.7);
+      overflow: hidden;
+  
+    }
+  
+   
+    .header{
+      position: relative;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: auto;
+      background: rgba(3,3,3,.1);
+    }
+    h1{
+      margin: 0;
+      padding: 10px 0;
+      text-align: center;
+      font-weight: 300;
+      font-size: 21px;
+      color: rgba(255,255,255,.5);
+    }
+    form,.alerta{
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+    }
+    input,
+    .iniciar{
+      font-family: 'Open Sans', sans-serif;
+      position: relative;
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      width: 84%;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+    input{
+      border: none;
+      border-left: 5px solid;
+      background: none;
+      border-color: rgb(225, 40, 54);
+      color: #fff;
+      font-weight: 300;
+      font-size: 18px;
+      -webkit-transition: all .2s ease-in-out;
+      -moz-transition: all .2s ease-in-out;
+      -o-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+    }
+    input:focus{
+      outline: 0;
+      background: rgba(225, 40, 54,.2);
+      border-radius: 20px;
+      border-color: transparent;
+    }
+    a{
+      text-decoration: none;
+    }
+  
+    input.iniciar{
+      border-radius: 4px;
+      text-align: center;
+      background: rgb(225, 40, 54);
+      color: #fff;
+    }
+    .alerta{
+      
+      border-radius: 4px;
+      text-align: center;
+    
+      color: #fff;
+  
+  
+      background: rgba(3,3,3,.7);
+      overflow: hidden;
+  
+     
+    }

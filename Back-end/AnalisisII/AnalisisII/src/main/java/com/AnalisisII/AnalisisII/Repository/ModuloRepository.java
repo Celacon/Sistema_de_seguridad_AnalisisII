@@ -10,4 +10,6 @@ import com.AnalisisII.AnalisisII.entity.Modulo;
 @Repository("moduloRepository")
 public interface ModuloRepository extends JpaRepository<Modulo, Serializable> {
 
+	
+	
 }

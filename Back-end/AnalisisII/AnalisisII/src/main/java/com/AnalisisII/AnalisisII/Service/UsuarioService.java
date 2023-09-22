@@ -1,5 +1,8 @@
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,12 +63,76 @@ public class UsuarioService {
 	    errorResponse.put("error", respuestaError);
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
+	
+	
+	@PostMapping(path = "/actualizarPassword", produces = "application/json")
+	public ResponseEntity<Map<String, Object>> actualizarPassword(@RequestBody Usuario usuario) { 
+		String password = MyCipher.encrypted(usuario.getPassword());
+
+		Map<String, Object> resultados = validarUsuarioPassword(usuario.getIdUsuario(),password);
+		boolean usuarioPasswordValido = (boolean) resultados.get("valorBooleano");
+		String mensaje = (String) resultados.get("valorString");
+		Usuario usuarioExistente = (Usuario) resultados.get("usuario");
+		
+		if (!usuarioPasswordValido) {
+			
+			
+			if(usuario.getNewPassword().equals(usuario.getConfirmarNewPassword())) {
+				
+				System.out.println(usuarioExistente.getIdSucursal()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+				String respuestaError = validarPassword(usuarioExistente.getIdSucursal(), usuario.getNewPassword());
+			    
+			    if (respuestaError.trim().isEmpty()) {
+			    	
+			    	String encryptedPassword = MyCipher.encrypted(usuario.getNewPassword());
+			    	LocalDate fechaHoy = LocalDate.now();
+			    	System.out.println(fechaHoy+"22222222222222222222222222222222222222222222");
+			    	  Date date = Date.valueOf(fechaHoy);
+			    	  System.out.println(date+"2222222222222222233333333333333");
+			        
+			    	usuarioExistente.setPassword(encryptedPassword);
+			    	usuarioExistente.setUltimaFechaCambioPassword(date);
+			    	usuarioExistente.setUsuarioModificacion(usuario.getUsuarioModificacion());
+			    	
+			    	usuarioRepository.save(usuarioExistente);
+			    	
+			        Map<String, Object> successResponse = new HashMap<>();
+			        successResponse.put("mensaje", "Su contraseña ha sido actualizada");
+			        successResponse.put("usuario",usuarioExistente);
+			        successResponse.put("pagina", "home");
+			        return ResponseEntity.ok(successResponse);
+			    }
+			    
+			    Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("error", respuestaError);
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+				
+			}else {
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("error", "Compruebe que la contraseña nueva y la confirmacion sean iguales ");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+				
+			}
+			
+		
+			
+		}
+		
+		
+		Map<String, Object> errorResponse = new HashMap<>();
+	    errorResponse.put("error", mensaje);
+	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		
+		
+		
+		
+		
+	    
+	}
 
 	
 	
-	
-	
-	
+		
 	public String validarPassword(Integer idSucursal, String password) {
 			
 		List<Sucursal> sucu = sucursalRepository.findByIdSucursal(idSucursal);
@@ -78,4 +145,31 @@ public class UsuarioService {
 		
 		return k;
 		}
+	
+
+	public Map<String, Object> validarUsuarioPassword(String idUsuario, String password) {
+
+		boolean boolResult = false;
+		String strResult = "";
+
+		List<Usuario> usua = usuarioRepository.findByIdUsuarioAndPassword(idUsuario, password);
+
+		Map<String, Object> resultados = new HashMap<>();
+		if (usua.isEmpty()) {
+			boolResult = true;
+			System.out.println(boolResult + "21111111111");
+			strResult = "La contraseña anterior es invalida.";
+			resultados.put("valorBooleano", boolResult);
+			resultados.put("valorString", strResult);
+			return resultados;
+		}
+
+		
+		Usuario usuario = usua.get(0);
+		resultados.put("valorBooleano", boolResult);
+		resultados.put("valorString", strResult);
+		resultados.put("usuario", usuario);
+		return resultados;
+	}
+
 }

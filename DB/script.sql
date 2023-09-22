@@ -431,10 +431,32 @@ use nomina;
 select * from genero;
 select * from usuario_pregunta;
 
-select * from role;
-select * from opcion;
-select * from role_opcion;
-select * from usuario_role;
-select * from empresa;
 
+select * from opcion;
+
+
+select * from empresa;
+select * from role;
+
+select * from usuario_role;
+select * from role_opcion;
 select * from usuario;
+select * from opcion;
+
+/*SELECT  usuario_role.*,role.*, opcion.*, menu.*, modulo.* */
+ SELECT modulo.*,menu.*,opcion.*,role_opcion.*
+ FROM usuario 
+                          JOIN usuario_role ON usuario.idUsuario = usuario_role.idUsuario
+                        JOIN role ON usuario_role.idRole = role.idRole
+						JOIN role_opcion ON role.idRole = role_opcion.idRole 
+                          JOIN opcion ON role_opcion.idOpcion = opcion.idOpcion 
+                          JOIN menu ON opcion.idMenu = menu.idMenu 
+                          JOIN modulo ON menu.idModulo = modulo.idModulo
+                          where usuario_role.idRole = 3
+                          ;
+                          
+                          
+
+
+
+

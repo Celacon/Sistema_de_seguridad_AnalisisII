@@ -22,5 +22,7 @@ public class GeneroService {
 	public List<Genero> buscar(){
 		return generoRepository.findAll();
 	}
+	
+	
 
 }

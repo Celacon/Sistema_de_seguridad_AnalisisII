@@ -2,6 +2,7 @@ package com.AnalisisII.AnalisisII.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "sucursal")
@@ -48,6 +50,9 @@ public class Sucursal implements Serializable{
 
 	@Column(name = "usuariomodificacion")
 	private String usuarioModificacion;
+	
+	@OneToMany(mappedBy = "idSucursal")
+	private List<Usuario> listUsuarios;
 
 	public Integer getIdSucursal() {
 		return idSucursal;
@@ -112,6 +117,16 @@ public class Sucursal implements Serializable{
 	public void setUsuarioModificacion(String usuarioModificacion) {
 		this.usuarioModificacion = usuarioModificacion;
 	}
+
+	public List<Usuario> getListUsuarios() {
+		return listUsuarios;
+	}
+
+	public void setListUsuarios(List<Usuario> listUsuarios) {
+		this.listUsuarios = listUsuarios;
+	}
+	
+	
 	
 	
 }

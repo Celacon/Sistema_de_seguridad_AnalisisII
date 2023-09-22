@@ -1,0 +1,29 @@
+
+<body>
+  
+  <div class="menu-container">
+    <button type="button" class="btn btn-danger" (click)="salir()">SALIR</button>
+      <h2 class="menu-title">MENU</h2>
+      <ul class="accordion-menu">
+          <li *ngFor="let modulo of opciones">
+              <div class="dropdownlink" (click)="toggleSubMenu(modulo)">
+                  <i class="fa fa-road" aria-hidden="true"></i> {{ modulo.nombre }}
+                  <i class="fa fa-chevron-down" aria-hidden="true"></i>
+              </div>
+              <ul class="submenuItems" *ngIf="modulo.showSubmenu">
+                  <li *ngFor="let menu of modulo.listMenu">
+                      <div class="dropdownlink" (click)="toggleSubMenu(menu)">
+                          <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ menu.nombre }}
+                          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                      </div>
+                      <ul class="submenuItems" *ngIf="menu.showSubmenu">
+                          <li *ngFor="let opcion of menu.listOpcion">
+                              <a href="#" class="opcion-link">{{ opcion.nombre }}</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+  </div>
+</body>

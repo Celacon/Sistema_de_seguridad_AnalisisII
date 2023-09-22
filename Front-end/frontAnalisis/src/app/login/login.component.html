@@ -1,0 +1,21 @@
+<body>
+    <main>
+  
+      <div class="container-fluid">
+        <div class="header">
+          <h1>Log In</h1>
+        </div>            
+          
+        
+        <form (ngSubmit)= "formularioLogin()" id="login-form">
+            <input type="usuario" [(ngModel)]="usuario.idUsuario" placeholder="Usuario" [ngModelOptions]="{standalone:true}" required>
+            <input type="password" [(ngModel)]="usuario.password" placeholder="Password" [ngModelOptions]="{standalone:true}" required>              
+          <br>
+          <input  class = "iniciar" type ="submit"  value = "Iniciar Sesion" >
+        </form> 
+      </div>
+       
+      
+      
+   </main>
+  </body>

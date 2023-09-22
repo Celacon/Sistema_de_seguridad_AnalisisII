@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 
@@ -57,6 +62,8 @@ public class Usuario implements Serializable{
 	@Column(name = "sesionactual")
 	private String sesionActual;
 	
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "ultimafechacambiopassword")
 	private Date ultimaFechaCambioPassword;
 
@@ -87,6 +94,15 @@ public class Usuario implements Serializable{
 
 	@Column(name = "usuariomodificacion")
 	private String usuarioModificacion;
+	
+	//para la nueva contraseña 
+	@Transient
+	private String newPassword;
+	
+	//para confirmar nueva contraseña 
+	@Transient
+		private String confirmarNewPassword;
+	
 	
 	@OneToMany(mappedBy = "id.idUsuario")
     private List<UsuarioRole> listUsuarioRole;
@@ -252,6 +268,24 @@ public class Usuario implements Serializable{
 
 	public void setUsuarioModificacion(String usuarioModificacion) {
 		this.usuarioModificacion = usuarioModificacion;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	
+	
+
+	public String getConfirmarNewPassword() {
+		return confirmarNewPassword;
+	}
+
+	public void setConfirmarNewPassword(String confirmarNewPassword) {
+		this.confirmarNewPassword = confirmarNewPassword;
 	}
 
 	public List<UsuarioRole> getListUsuarioRole() {
