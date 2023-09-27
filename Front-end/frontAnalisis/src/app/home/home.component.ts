@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
   public usuarioMomentaneo:any = {};
 
   constructor(private http: HttpClient ){}
+
 
   ngOnInit(): void {
 
@@ -32,8 +34,7 @@ console.log(this.opciones);
 opcionesService(id:any){
   this.buscarOpciones(id).subscribe(
     (response:any)=> {
-      this.opciones = response; // Asigna los datos a la variable opciones dentro de la función subscribe
-     // console.log(this.opciones); // Ahora puedes imprimir los datos aquí y deberían estar disponibles
+      this.opciones = response;
     } );
  
   
@@ -53,7 +54,73 @@ opcionesService(id:any){
   salir(){
     localStorage.clear();
     location.href="/";
+this.salirSer();
+
   }
+
+  usuarioOpcion(idOpcion:any){
+    const p = {
+      idRole:this.usuarioMomentaneo.listUsuarioRole[0].id.idRole,
+     idOpcion:idOpcion
+    };
+
+ localStorage.setItem("opcion",JSON.stringify(p))    
+
+  }
+
+
+
+
+
+  salirSer(){
+    
+    
+   
+      this.servicioSalir().subscribe(
+        (respuesta: any)=>  this.responseSalir(respuesta)
+      )
+      
+    
+
+  }
+
+  responseSalir(res: any){
+      let json = JSON.parse(res);
+  
+      if(json.ususario != "none"){
+
+        localStorage.setItem("usu",JSON.stringify(json))        
+        //this.session = true;
+        //this.mensaje = "Bienvenido " + json.usuario;
+        alert(json.mensaje);
+        location.href=json.pagina;
+  
+      }
+  
+    }
+ 
+
+    
+    servicioSalir(){
+      let httpOptions ={
+        Headers: new HttpHeaders({
+          'Accept':'txt/html'
+        }),responseType:'text' as 'json'
+        
+      } 
+     
+     
+      
+      return this.http.post<any>('http://localhost:6500/miapp/login/cerrar',this.usuarioMomentaneo,httpOptions).pipe(
+        catchError((error) => {
+          console.log(error);
+          const mensaje =error.error;
+          const objetoJSON = JSON.parse(mensaje);
+          alert(objetoJSON.mensaje);
+          throw error; 
+          }))
+      }
+
 
  
   

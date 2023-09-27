@@ -8,11 +8,14 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import com.AnalisisII.AnalisisII.Repository.EmpresaRepository;
 import com.AnalisisII.AnalisisII.Repository.SucursalRepository;
 import com.AnalisisII.AnalisisII.Repository.UsuarioRepository;
 import com.AnalisisII.AnalisisII.entity.Empresa;
+import com.AnalisisII.AnalisisII.entity.Modulo;
 import com.AnalisisII.AnalisisII.entity.Sucursal;
 import com.AnalisisII.AnalisisII.entity.Usuario;
 
@@ -42,6 +46,7 @@ public class LoginService {
 	@PostMapping(path = "/logearse", produces = "application/json")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody Usuario usuario) {
 		String usuarioA = usuario.getIdUsuario();
+		String sesion = usuario.getSesionActual();
 
 		Map<String, Object> resultados = metodoConMultiplesValores(usuarioA);
 		boolean usuarioExiste = (boolean) resultados.get("valorBooleano");
@@ -71,34 +76,68 @@ public class LoginService {
 			errorResponse.put("mensaje", mensaje2);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		}
-
+		
+		
+		// ver de como ese dos no quede quemado 
+		
 		if (usuarioExistente.getIdStatusUsuario() == 2) {
 			Map<String, Object> successResponse = new HashMap<>();
 			successResponse.put("mensaje", "Su usuario actualmente esta bloqueado.");
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(successResponse);
+		}////////
+		
+		String sesionActual = user.getSesionActual();
+		if (sesionActual!=null) {
+			Map<String, Object> successResponse = new HashMap<>();
+			successResponse.put("mensaje", "El usuario actualemente tiene una seciona activa");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(successResponse);
 		}
+		
 		
 		boolean validarCaducidad= caducidadPassword(user.getUltimaFechaCambioPassword(),empresa.getPasswordCantidadCaducidadDias());
 		
 		if (validarCaducidad) {
 			Map<String, Object> successResponse = new HashMap<>();
-			successResponse.put("mensaje", "validacion exitosa");
+			LocalDate fechaHoy = LocalDate.now();
+	    	Date date = Date.valueOf(fechaHoy);
+	    	user.setSesionActual(sesion);
+	    	
+	    	user.setIntentosDeAcceso(0);
+	  		user.setUltimaFechaIngreso(date);
 			successResponse.put("usuario", user);
 			successResponse.put("pagina", "actualizarPassword");
 			return ResponseEntity.ok(successResponse);
 			
 		}
+		
+		if (user.getListUsuarioPregunta().size()<empresa.getPasswordCantidadPreguntasValidar()) {
+			Map<String, Object> successResponse = new HashMap<>();
+			LocalDate fechaHoy = LocalDate.now();
+	    	Date date = Date.valueOf(fechaHoy);
+	    	user.setSesionActual(sesion);
+	    	user.setIntentosDeAcceso(0);
+	  		user.setUltimaFechaIngreso(date);
+			successResponse.put("usuario", user);
+			successResponse.put("pagina", "agregar_preguntas");
+			
+			usuarioRepository.save(user);
+			return ResponseEntity.ok(successResponse);
+		}
+		
+		
+		
 
 		Map<String, Object> successResponse = new HashMap<>();
 		LocalDate fechaHoy = LocalDate.now();
-    	  Date date = Date.valueOf(fechaHoy);
+    	Date date = Date.valueOf(fechaHoy);
     	
-		
+    	user.setSesionActual(sesion);
+    	user.setIntentosDeAcceso(0);
+  		user.setUltimaFechaIngreso(date);
 		successResponse.put("mensaje", "validacion exitosa");
 		successResponse.put("usuario", user);
 		successResponse.put("pagina", "home");
-		user.setIntentosDeAcceso(0);
-		user.setUltimaFechaIngreso(date);
+		
 		usuarioRepository.save(user);
 		return ResponseEntity.ok(successResponse);
 	}
@@ -191,7 +230,6 @@ public class LoginService {
 		String fecha2 =sdf.format(ultimaFechaDeModificacion);
 		   LocalDate fecha = LocalDate.parse(fecha2);
 	       fecha = fecha.plusDays(diasValidos);
-	        System.out.println(fecha);
 	       
 	        LocalDate fechaActual = LocalDate.now();
 	        
@@ -203,5 +241,25 @@ public class LoginService {
 		
 		return validar;
 	}
+	
+	
+	@PostMapping(path = "/cerrar", produces = "application/json")
+	
+	public ResponseEntity<Map<String, String>> cerrar(@RequestBody Usuario usuario) {    
+		
+		List<Usuario> usu = usuarioRepository.findByIdUsuario(usuario.getIdUsuario());
+		Usuario usu2 = usu.get(0);
+		
+		usu2.setSesionActual(null);
+		
+		usuarioRepository.save(usu2);
+	   
+	    Map<String, String> errorResponse = new HashMap<>();
+	    errorResponse.put("mensaje", "Cierre de sesion exitosa");
+	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+	}
+	
+	
+
 
 }

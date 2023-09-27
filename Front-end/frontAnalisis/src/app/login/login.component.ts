@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit{
   public mensaje:string = "";
   public role:String = "";
   public userOnline:any = [] ;
+  browserName:String ="";
  
  
  
@@ -22,6 +23,8 @@ export class LoginComponent implements OnInit{
  constructor(private http: HttpClient) { }
 
  ngOnInit(): void {
+  const userAgent = window.navigator.userAgent;
+  this.browserName = this.detectBrowser(userAgent);
 
    if (!this.session){
      sessionStorage.clear();
@@ -80,6 +83,7 @@ export class LoginComponent implements OnInit{
        }),responseType:'text' as 'json'
        
      } 
+     this.usuario.sesionActual = this.browserName;
      return this.http.post<any>('http://localhost:6500/miapp/login/logearse',this.usuario,httpOptions).pipe(
        catchError((error) => {
         //console.error('Ocurrió un error:', error);
@@ -89,6 +93,27 @@ export class LoginComponent implements OnInit{
         throw error;
        }))
      }
+
+
+
+     detectBrowser(userAgent: string): string {
+      // Realiza alguna lógica para determinar el navegador aquí.
+      // Puedes utilizar expresiones regulares o bibliotecas de detección de navegadores, como 'bowser' o 'platform.js'.
+      // Aquí hay un ejemplo básico utilizando expresiones regulares:
+      if (/MSIE|Trident/.test(userAgent)) {
+        return 'Internet Explorer';
+      } else if (/Edge/.test(userAgent)) {
+        return 'Microsoft Edge';
+      } else if (/Chrome/.test(userAgent)) {
+        return 'Google Chrome';
+      } else if (/Firefox/.test(userAgent)) {
+        return 'Mozilla Firefox';
+      } else if (/Safari/.test(userAgent)) {
+        return 'Apple Safari';
+      } else {
+        return 'Navegador desconocido';
+      }
+    }
 
 
 }

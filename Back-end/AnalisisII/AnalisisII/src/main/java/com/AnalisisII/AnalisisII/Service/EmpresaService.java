@@ -40,6 +40,8 @@ public class EmpresaService {
 	@GetMapping ("/ConsultaEmpresa")
 	public Optional <Empresa> ConsultarEmpresa (@RequestParam Integer par_idEmpresa){
 	return empresaRepository.findById(par_idEmpresa);
+	
+	
 	}
 	@GetMapping(path = "/buscarId/{idEmpresa}")
 	public List<Empresa> buscarId (@PathVariable ("idEmpresa") Integer idEmpresa){
@@ -55,8 +57,6 @@ public class EmpresaService {
 	@DeleteMapping("/eliminarEmpresa/{idEmpresa}")
 	  public ResponseEntity<Map<String, Object>> eliminarEmpresa(
 	      @PathVariable("idEmpresa") Integer idEmpresa) {
-	    
-
 	      
 	      try {
 	          empresaRepository.deleteById(idEmpresa);

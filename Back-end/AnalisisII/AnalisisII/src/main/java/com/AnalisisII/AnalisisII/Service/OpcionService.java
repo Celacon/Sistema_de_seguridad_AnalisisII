@@ -43,17 +43,19 @@ public class OpcionService {
 	{
 		return opcionRepository.findById(idOpcion);
 	}
+	
+	
 	@PostMapping (path="/InserteOpcion")
 	public Opcion InserteOpcion (@RequestBody Opcion opcion ) {
 	opcionRepository.save(opcion);
 	return opcion;
 	} 
+	
+	
 	@DeleteMapping("/EliminarOpcion/{idOpcion}")
 	  public ResponseEntity<Map<String, Object>> EliminarOpcion(
 	      @PathVariable("idOpcion") Integer idOpcion){
-	      
-
-			
+	 	
 	      
 	      try {
 	          opcionRepository.deleteById(idOpcion);

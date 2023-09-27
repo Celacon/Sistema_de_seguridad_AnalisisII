@@ -40,6 +40,8 @@ public class GeneroService {
 	{
 		return generoRepository.findById(par_idGenero);
 	}
+	
+	
 	@GetMapping(path = "/buscarId/{par_idGenero}")
 	public Optional <Genero> ConsultaGenero2 (@PathVariable Integer par_idGenero)
 	{

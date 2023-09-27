@@ -42,6 +42,8 @@ public class RoleService {
 	{
 		return roleRepository.findById(idRole);
 	}
+	
+	
 	@GetMapping(path = "/buscarId/{idRole}")
 	public Optional <Role> ConsultaRole2 (@PathVariable Integer idRole)
 	{

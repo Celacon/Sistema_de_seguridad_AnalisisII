@@ -42,6 +42,8 @@ public class SucursalService {
 	sucursalRepository.save(sucursal);
 	return sucursal;
 	} 
+	
+	
 	@DeleteMapping("/EliminaSucursal/{idSucursal}")
 	  public ResponseEntity<Map<String, Object>> EliminaSucursal(
 	      @PathVariable("idSucursal") Integer idSucursal){

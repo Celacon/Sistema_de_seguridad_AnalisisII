@@ -1,5 +1,6 @@
 package com.AnalisisII.AnalisisII.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,9 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.AnalisisII.AnalisisII.Repository.MenuRepository;
 import com.AnalisisII.AnalisisII.Repository.ModuloRepository;
-
+import com.AnalisisII.AnalisisII.Repository.OpcionRepository;
+import com.AnalisisII.AnalisisII.Repository.RoleOpcionRepository;
+import com.AnalisisII.AnalisisII.entity.Menu;
 import com.AnalisisII.AnalisisII.entity.Modulo;
+import com.AnalisisII.AnalisisII.entity.Opcion;
+import com.AnalisisII.AnalisisII.entity.RoleOpcion;
 
 @RestController
 @RequestMapping("/modulo")
@@ -30,6 +36,15 @@ public class ModuloService {
 
 	@Autowired
 	ModuloRepository moduloRepository;
+	
+	@Autowired
+	RoleOpcionRepository roleOpcionRepository;
+	
+	@Autowired
+	OpcionRepository opcionRepository;
+	
+	@Autowired
+	MenuRepository menuRepository;
 	
 	@GetMapping(path ="buscar")
 	public List<Modulo> buscar(){
@@ -41,6 +56,8 @@ public class ModuloService {
 	{
 		return moduloRepository.findById(idModulo);
 	}
+	
+	
 	@GetMapping(path = "/buscarId/{idModulo}")
 	public Optional <Modulo> ConsultaModulo2 (@PathVariable Integer idModulo)
 	{
@@ -72,4 +89,132 @@ public class ModuloService {
 		   }
 
 }
+	
+	
+	
+	@GetMapping(path ="/buscarIdRole/{idRole}")
+	public List<Modulo> buscarIdRole(@PathVariable ("idRole")Integer idRole){
+
+		List<RoleOpcion> roleOpcionTodo = roleOpcionRepository.findAll();
+
+		List<Opcion> opcion = opcionRepository.findAll();
+
+		List<Menu> menu = menuRepository.findAll();
+
+		List<Modulo> modulo = moduloRepository.findAll();
+
+
+
+		List<RoleOpcion> roleOpcionNuevos = new ArrayList<>();
+
+		List<Opcion> opcionNuevos = new ArrayList<>();
+
+		List<Menu> menuNuevos = new ArrayList<>();
+
+		List<Modulo> moduloNuevos = new ArrayList<>();
+
+		for(RoleOpcion roleOpcion: roleOpcionTodo) {
+			if(roleOpcion.getId().getIdRole().equals(idRole)) {
+				roleOpcionNuevos.add(roleOpcion);
+
+			}
+		}
+
+
+
+		for(RoleOpcion roleOpcion: roleOpcionNuevos) {
+
+				for (Opcion op: opcion) {
+					if (roleOpcion.getId().getIdOpcion()== op.getIdOpcion()) {
+						opcionNuevos.add(op);
+
+					}
+				}	
+
+		}
+
+		List<Opcion> opcionSinDuplicar = new ArrayList<>();
+		for (Opcion elemento : opcionNuevos) {
+		    if (!opcionSinDuplicar.contains(elemento)) {
+		        opcionSinDuplicar.add(elemento);
+		    }
+		}
+
+
+
+
+		for (Opcion op : opcionSinDuplicar) {
+
+			for (Menu men : menu) {
+				if(op.getIdMenu()==men.getIdMenu()) {
+					menuNuevos.add(men);
+				}
+
+			}
+		}
+
+
+		List<Menu> menuSinDuplicar = new ArrayList<>();
+		for (Menu men : menuNuevos) {
+		    if (!menuSinDuplicar.contains(men)) {
+		        menuSinDuplicar.add(men);
+		    }
+		}
+
+
+		for (Menu men : menuSinDuplicar) {
+
+			for (Modulo mod : modulo) {
+				if(men.getIdModulo()==mod.getIdModulo()) {
+					moduloNuevos.add(mod);
+				}
+
+			}
+		}
+
+
+		List<Modulo> moduloSinDuplicar = new ArrayList<>();
+		for (Modulo men : moduloNuevos) {
+		    if (!moduloSinDuplicar.contains(men)) {
+		        moduloSinDuplicar.add(men);
+		    }
+		}
+
+
+
+
+		for (Menu men: menuSinDuplicar) {
+			List<Opcion> opc = new ArrayList<>();
+			for(Opcion op: opcionSinDuplicar) {
+				if(men.getIdMenu()==op.getIdMenu()) {
+					opc.add(op);
+				}
+			}
+
+			men.setListOpcion(opc);
+		}
+
+
+		for (Modulo mod: moduloSinDuplicar) {
+			List<Menu> mnu = new ArrayList<>();
+			for(Menu men: menuSinDuplicar) {
+				if(mod.getIdModulo()==men.getIdModulo()) {
+					mnu.add(men);
+				}
+			}
+
+		mod.setListMenu(mnu);
+		}
+
+
+		return moduloSinDuplicar;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -41,7 +41,7 @@ public class RoleOpcionService {
 	        return  result;
 	    }
 	  
-	  @PostMapping("/guardarRoleOpcion")
+	  @PostMapping("/guardar")
 	  public RoleOpcion guardarRoleOpcion(@RequestBody RoleOpcion roleOpcion) {
 	       roleOpcionRepository.save(roleOpcion);
 	       return roleOpcion;

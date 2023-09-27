@@ -454,8 +454,97 @@ select * from opcion;
                           JOIN modulo ON menu.idModulo = modulo.idModulo
                           where usuario_role.idRole = 3
                           ;
+                          use nomina;
                           
                           
+	select *from modulo;
+    select *from menu;
+    select * from opcion;
+    select * from role;
+     select * from role_opcion;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*inserts en role opcion*/
+    
+    INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '4', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '5', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '6', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '7', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '8', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '9', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '10', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('1', '11', '1', '1', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+
+    
+    
+	DELETE FROM `nomina`.`role_opcion` WHERE (`IdRole` = '3') and (`IdOpcion` = '2');
+DELETE FROM `nomina`.`role_opcion` WHERE (`IdRole` = '3') and (`IdOpcion` = '3');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '4', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '5', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '6', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '7', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '8', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '9', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '10', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('3', '11', '1', '0', '1', '1', '1', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '4', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '5', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '6', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '7', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '8', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '9', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '10', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+INSERT INTO `nomina`.`role_opcion` (`IdRole`, `IdOpcion`, `Alta`, `Baja`, `Cambio`, `Imprimir`, `Exportar`, `FechaCreacion`, `UsuarioCreacion`, `FechaModificacion`, `UsuarioModificacion`) VALUES ('4', '11', '1', '0', '1', '0', '0', '2023-09-21 00:00:00', 'System', '2023-09-21 00:00:00', 'System');
+                          
+/*usuario */                          
+                     
+                     UPDATE `nomina`.`usuario` SET `Password` = 'HwcVAt+uufu8+chLdG5imA==', `UltimaFechaCambioPassword` = '2023-05-10' WHERE (`IdUsuario` = 'system');
+UPDATE `nomina`.`usuario` SET `IdUsuario` = 'Gerente2', `Nombre` = 'Luis', `Apellido` = 'Martinez', `Password` = 'HwcVAt+uufu8+chLdG5imA==', `UltimaFechaCambioPassword` = '2023-09-01' WHERE (`IdUsuario` = 'Administrador8');
+UPDATE `nomina`.`usuario` SET `Nombre` = 'Ferdin', `Apellido` = 'Cardona', `Password` = 'HwcVAt+uufu8+chLdG5imA==', `UltimaFechaCambioPassword` = '2023-07-10' WHERE (`IdUsuario` = 'Administrador');
+UPDATE `nomina`.`usuario` SET `Nombre` = 'Rosa', `Apellido` = 'Maria', `Password` = 'HwcVAt+uufu8+chLdG5imA==', `IdGenero` = '2', `UltimaFechaCambioPassword` = '2023-08-30' WHERE (`IdUsuario` = 'Administrador7');
+UPDATE `nomina`.`usuario` SET `Nombre` = 'Emanuel', `Apellido` = 'Lopez' WHERE (`IdUsuario` = 'Administrador9');
+UPDATE `nomina`.`usuario` SET `Nombre` = 'Melvin', `Apellido` = 'Juarez', `IntentosDeAcceso` = '5' WHERE (`IdUsuario` = 'UsuarioPrueba');
+UPDATE `nomina`.`usuario` SET `IdUsuario` = 'Gerente1', `Nombre` = 'Marvin ', `Apellido` = 'Soliz', `UltimaFechaCambioPassword` = '2023-06-01' WHERE (`IdUsuario` = 'UsuarioPrueba2');
+INSERT INTO `nomina`.`usuario` (`IdUsuario`, `Nombre`, `Apellido`, `FechaNacimiento`, `IdStatusUsuario`, `Password`, `IdGenero`, `IntentosDeAcceso`, `UltimaFechaCambioPassword`, `CorreoElectronico`, `RequiereCambiarPassword`, `TelefonoMovil`, `IdSucursal`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('SubGerente1', 'Nicolas', 'Juarez', '1990-05-14', '1', 'HwcVAt+uufu8+chLdG5imA==', '1', '0', '2023-07-11', 'itadmin@example.com', '1', '555-1234567', '1', '2023-09-10 00:00:00', 'system');
+INSERT INTO `nomina`.`usuario` (`IdUsuario`, `Nombre`, `Apellido`, `FechaNacimiento`, `IdStatusUsuario`, `Password`, `IdGenero`, `IntentosDeAcceso`, `UltimaFechaCambioPassword`, `CorreoElectronico`, `RequiereCambiarPassword`, `TelefonoMovil`, `IdSucursal`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('SubGerente2', 'Maria', 'Rosa', '1990-05-14', '2', 'HwcVAt+uufu8+chLdG5imA==', '2', '5', '2023-03-10', 'itadmin@example.com', '1', '555-1234567', '1', '2023-09-10 00:00:00', 'system');
+
+
+
+select * from usuario_role;
+select * from usuario;
+select * from role;
+
+
+
+/*usuariorole*/
+
+UPDATE `nomina`.`usuario_role` SET `IdRole` = '1' WHERE (`IdUsuario` = 'system') and (`IdRole` = '2');
+INSERT INTO `nomina`.`usuario_role` (`IdUsuario`, `IdRole`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('Administrador7', '1', '2023-09-11 00:00:00', 'system');
+INSERT INTO `nomina`.`usuario_role` (`IdUsuario`, `IdRole`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('Administrador9', '1', '2023-09-11 00:00:00', 'system');
+INSERT INTO `nomina`.`usuario_role` (`IdUsuario`, `IdRole`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('Gerente1', '3', '2023-09-11 00:00:00', 'system');
+INSERT INTO `nomina`.`usuario_role` (`IdUsuario`, `IdRole`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('Gerente2', '3', '2023-09-11 00:00:00', 'system');
+INSERT INTO `nomina`.`usuario_role` (`IdUsuario`, `IdRole`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('SubGerente1', '4', '2023-09-11 00:00:00', 'system');
+INSERT INTO `nomina`.`usuario_role` (`IdUsuario`, `IdRole`, `FechaCreacion`, `UsuarioCreacion`) VALUES ('SubGerente2', '4', '2023-09-11 00:00:00', 'system');
+
+select * from opcion;
+
+
+
+use nomina;
+
+select * from usuario;
+
+select * from usuario_pregunta;
+
 
 
 

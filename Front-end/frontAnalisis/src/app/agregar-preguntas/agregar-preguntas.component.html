@@ -1,0 +1,53 @@
+<body>
+    <main>
+  
+      <div class="container-fluid">
+        <div class="header">
+          <h1>Actualizar Password</h1>
+          <h2>Agrege {{noPreguntas}} preguntas</h2>
+        </div>            
+          
+        
+        <form (ngSubmit)= "agregarPregunta()" id="agregarPregunta" >
+            <input type="text" [(ngModel)]="pregunta.pregunta" placeholder="Agregar Pregunta" [ngModelOptions]="{standalone:true}" required [disabled]="!formularioHabilitado">
+            <input type="text" [(ngModel)]="pregunta.respuesta" placeholder="Agrega Respuesta" [ngModelOptions]="{standalone:true}" required [disabled]="!formularioHabilitado">              
+            <select [(ngModel)]="pregunta.ordenPregunta" [name]="'ordenPregunta'" [disabled]="!formularioHabilitado">
+              <option *ngFor="let i of numerosDisponibles" [value]="i">{{ i }}</option>
+            </select>           
+        
+        
+            <br>
+          <input  class = "iniciar" type ="submit"  value = "Agregar" [disabled]="!formularioHabilitado">
+        </form> 
+
+        
+    
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Pregunta</th>
+            <th>Respuesta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fila of preguntas">
+            <td>{{ fila.pregunta }}</td>
+            <td>{{ fila.respuesta }}</td>
+            <td>{{ fila.ordenPregunta }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button
+  type="button"
+  class="btn btn-primary"
+  [disabled]="formularioHabilitado"
+  (click)="formularioLogin()"
+>
+  Enviar Preguntas
+</button>
+
+<button type="button" class="btn btn-danger" (click)="salir()">SALIR</button>
+      

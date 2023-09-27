@@ -12,11 +12,12 @@ export class ActualizarPasswordComponent implements OnInit{
 
   public usuarioA:any = {};
   public usuarioMomentaneo:any = {};
+  temporal:any ={};
   public session:boolean = false;
   public mensaje:string = "";
   public role:String = "";
   public userOnline:any = [] ;
-  temporal:any ={};
+ 
 
   constructor(private http: HttpClient) { }
   ngOnInit(): void {
@@ -26,7 +27,7 @@ export class ActualizarPasswordComponent implements OnInit{
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
   
    this.usuarioMomentaneo= this.temporal.usuario;
-   console.log(this.usuarioMomentaneo);
+
 
   
   
@@ -58,7 +59,7 @@ export class ActualizarPasswordComponent implements OnInit{
         localStorage.setItem("usu",JSON.stringify(json))        
         //this.session = true;
         //this.mensaje = "Bienvenido " + json.usuario;
-        //this.role = json.rol;
+        alert(json.mensaje);
         location.href=json.pagina;
   
       }/* else {
@@ -85,11 +86,19 @@ export class ActualizarPasswordComponent implements OnInit{
       
       return this.http.post<any>('http://localhost:6500/miapp/usuario/actualizarPassword',this.usuarioA,httpOptions).pipe(
         catchError((error) => {
-          console.error('Ocurrió un error:', error);
-       
-          throw error; // Propaga el error para que pueda ser manejado por quien llame a esta función
-        }))
+          console.log(error);
+          const mensaje =error.error;
+          const objetoJSON = JSON.parse(mensaje);
+          alert(objetoJSON.mensaje);
+          throw error; 
+          }))
       }
+
+      salir(){
+        localStorage.clear();
+        location.href="/";
+      }
+    
  
  
  }

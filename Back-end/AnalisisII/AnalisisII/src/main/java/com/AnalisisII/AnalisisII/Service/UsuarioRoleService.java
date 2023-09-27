@@ -41,7 +41,7 @@ public class UsuarioRoleService {
 		return result;
 	}
 	
-	@PostMapping("/guardarUsuarioRole")
+	@PostMapping("/guardar")
 	public UsuarioRole guardarUsuarioRole(@RequestBody UsuarioRole usuarioRole) {
 		usuarioRoleRepository.save(usuarioRole);
 		return usuarioRole;

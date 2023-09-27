@@ -18,7 +18,7 @@
                       </div>
                       <ul class="submenuItems" *ngIf="menu.showSubmenu">
                           <li *ngFor="let opcion of menu.listOpcion">
-                              <a href="#" class="opcion-link">{{ opcion.nombre }}</a>
+                              <a href="{{opcion.pagina}}" class="opcion-link" (click)="usuarioOpcion(opcion.idOpcion)">{{ opcion.nombre }}</a>
                           </li>
                       </ul>
                   </li>

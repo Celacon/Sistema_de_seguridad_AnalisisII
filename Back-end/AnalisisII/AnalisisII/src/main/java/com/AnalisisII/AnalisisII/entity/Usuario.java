@@ -68,7 +68,7 @@ public class Usuario implements Serializable{
 	private Date ultimaFechaCambioPassword;
 
 	@Column(name = "correoelectronico")
-	private String correoElectrónico;
+	private String correoElectronico;
 	
 	@Column(name = "requierecambiarpassword")
 	private Integer requiereCambiarPassword;
@@ -198,12 +198,14 @@ public class Usuario implements Serializable{
 		this.ultimaFechaCambioPassword = ultimaFechaCambioPassword;
 	}
 
-	public String getCorreoElectrónico() {
-		return correoElectrónico;
+	
+
+	public String getCorreoElectronico() {
+		return correoElectronico;
 	}
 
-	public void setCorreoElectrónico(String correoElectrónico) {
-		this.correoElectrónico = correoElectrónico;
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
 	}
 
 	public Integer getRequiereCambiarPassword() {

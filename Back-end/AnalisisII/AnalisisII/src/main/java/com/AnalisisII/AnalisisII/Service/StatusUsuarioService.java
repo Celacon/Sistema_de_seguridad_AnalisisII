@@ -35,23 +35,23 @@ public class StatusUsuarioService {
 	public List<StatusUsuario> buscar(){
 		return statusUsuarioRepository.findAll();
 	}
-@GetMapping ("/ConsultaStatusUsuario")
+	
+    @GetMapping ("/ConsultaStatusUsuario")
 	public Optional <StatusUsuario> ConsultaStatusUsuario (@RequestParam Integer idStatuUsuario)
 	{
 		return statusUsuarioRepository.findById(idStatuUsuario);
 	}
+    
 	@PostMapping (path="/InserteStatusUsuario")
 	public StatusUsuario InserteStatusUsuario (@RequestBody StatusUsuario statusUsuario ) {
 	statusUsuarioRepository.save(statusUsuario);
 	return statusUsuario;
-	} 
+	}
+	
 	@DeleteMapping("/EliminarEstatusUsuario/{idStatusUsuario}")
 	  public ResponseEntity<Map<String, Object>> EliminarEstatusUsuario(
 	      @PathVariable("idStatusUsuario") Integer idStatusUsuario){
-	      
-
-			
-	      
+ 
 	      try {
 	          statusUsuarioRepository.deleteById(idStatusUsuario);
 	          Map<String, Object> successResponse = new HashMap<>();
