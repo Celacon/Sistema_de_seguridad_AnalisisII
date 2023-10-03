@@ -2,7 +2,7 @@ package com.AnalisisII.AnalisisII.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +23,7 @@ import com.AnalisisII.AnalisisII.Repository.EmpresaRepository;
 import com.AnalisisII.AnalisisII.Repository.SucursalRepository;
 import com.AnalisisII.AnalisisII.Repository.UsuarioRepository;
 import com.AnalisisII.AnalisisII.entity.Empresa;
-import com.AnalisisII.AnalisisII.entity.RoleOpcionId;
+
 import com.AnalisisII.AnalisisII.entity.Sucursal;
 import com.AnalisisII.AnalisisII.entity.Usuario;
 

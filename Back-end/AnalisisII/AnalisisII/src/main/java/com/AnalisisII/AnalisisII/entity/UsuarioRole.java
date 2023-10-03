@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
+
 import javax.persistence.Table;
 
 import javax.persistence.Column;

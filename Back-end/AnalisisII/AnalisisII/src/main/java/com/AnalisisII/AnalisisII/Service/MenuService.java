@@ -2,6 +2,8 @@
 
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,11 +52,47 @@ public class MenuService {
 		return menuRepository.findById(idMenu);
 
 	}
-	@PostMapping (path="/InserteMenu")
-	public Menu InserteMenu (@RequestBody Menu menu ) {
-	menuRepository.save(menu);
-	return menu;
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String,Object>> InserteMenu (@RequestBody Menu menu ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		menu.setFechaCreacion(date);
+		
+		try {
+			menuRepository.save(menu);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se guardó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo guardar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
 	} 
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String,Object>> editarMenu (@RequestBody Menu menu ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		menu.setFechaModificacion(date);
+		
+		try {
+			menuRepository.save(menu);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se editó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo editar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
+	} 
+	
+	
+	
+	
+	
+	
 	@DeleteMapping("/EliminarMenu/{idMenu}")
 	  public ResponseEntity<Map<String, Object>> eliminarMenu(
 	      @PathVariable("idMenu") Integer idMenu){

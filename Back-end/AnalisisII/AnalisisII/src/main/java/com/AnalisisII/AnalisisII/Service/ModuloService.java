@@ -1,5 +1,7 @@
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,11 +66,47 @@ public class ModuloService {
 		return moduloRepository.findById(idModulo);
 
 	}
-	@PostMapping (path="/InserteModulo")
-	public Modulo InserteModulo (@RequestBody Modulo modulo ) {
-	moduloRepository.save(modulo);
-	return modulo;
+	
+	
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String, Object>> InserteModulo (@RequestBody Modulo modulo ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		modulo.setFechaCreacion(date);
+		
+		try {
+			moduloRepository.save(modulo);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se guardó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo guardar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
 	} 
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String, Object>> editarModulo (@RequestBody Modulo modulo ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		modulo.setFechaModificacion(date);
+		
+		try {
+			moduloRepository.save(modulo);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se editó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo editar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
+	}
+	
+	
+	
+	
 	@DeleteMapping("/EliminarModulo/{idModulo}")
 	  public ResponseEntity<Map<String, Object>> EliminarModulo(
 	      @PathVariable("idModulo") Integer idModulo){

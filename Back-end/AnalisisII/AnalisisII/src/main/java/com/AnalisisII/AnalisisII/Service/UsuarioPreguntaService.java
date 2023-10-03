@@ -27,6 +27,7 @@ import com.AnalisisII.AnalisisII.Repository.EmpresaRepository;
 import com.AnalisisII.AnalisisII.Repository.SucursalRepository;
 import com.AnalisisII.AnalisisII.Repository.UsuarioPreguntaRepository;
 import com.AnalisisII.AnalisisII.entity.Empresa;
+import com.AnalisisII.AnalisisII.entity.Role;
 import com.AnalisisII.AnalisisII.entity.Sucursal;
 import com.AnalisisII.AnalisisII.entity.UsuarioPregunta;
 
@@ -82,6 +83,26 @@ public class UsuarioPreguntaService {
         return ResponseEntity.ok(successResponse);
 
 }
+	
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String, Object>> editarPregunta (@RequestBody UsuarioPregunta usuariopregunta ) {
+		 LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			usuariopregunta.setFechaModificacion(date);
+			
+			try {
+				usuarioPreguntaRepository.save(usuariopregunta);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se editó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo editar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
+	}
+	
 	
 	
 	

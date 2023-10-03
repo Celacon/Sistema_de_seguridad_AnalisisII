@@ -2,6 +2,8 @@
 
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,10 +44,41 @@ public class StatusUsuarioService {
 		return statusUsuarioRepository.findById(idStatuUsuario);
 	}
     
-	@PostMapping (path="/InserteStatusUsuario")
-	public StatusUsuario InserteStatusUsuario (@RequestBody StatusUsuario statusUsuario ) {
-	statusUsuarioRepository.save(statusUsuario);
-	return statusUsuario;
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String,Object>> InserteStatusUsuario (@RequestBody StatusUsuario statusUsuario ) {
+		 LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			statusUsuario.setFechaCreacion(date);
+			
+			try {
+				statusUsuarioRepository.save(statusUsuario);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se guardó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo guardar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
+	}
+	
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String,Object>> editarStatusUsuario (@RequestBody StatusUsuario statusUsuario ) {
+		 LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			statusUsuario.setFechaModificacion(date);
+			
+			try {
+				statusUsuarioRepository.save(statusUsuario);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se editó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo editar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
 	}
 	
 	@DeleteMapping("/EliminarEstatusUsuario/{idStatusUsuario}")

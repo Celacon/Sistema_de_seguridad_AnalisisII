@@ -1,5 +1,7 @@
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +44,21 @@ public class RoleOpcionService {
 	    }
 	  
 	  @PostMapping("/guardar")
-	  public RoleOpcion guardarRoleOpcion(@RequestBody RoleOpcion roleOpcion) {
-	       roleOpcionRepository.save(roleOpcion);
-	       return roleOpcion;
+	  public ResponseEntity<Map<String, Object>> guardarRoleOpcion(@RequestBody RoleOpcion roleOpcion) {
+		  LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			roleOpcion.setFechaCreacion(date);
+			
+			try {
+				roleOpcionRepository.save(roleOpcion);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se guardó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo guardar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
 	  }
 	  
 	  

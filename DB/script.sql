@@ -540,8 +540,17 @@ select * from opcion;
 
 
 use nomina;
+select * from empresa;
 
 select * from usuario;
+
+select * from usuario_pregunta;
+select * from usuario_role;
+
+
+
+
+select * from usuario_role;
 
 select * from usuario_pregunta;
 

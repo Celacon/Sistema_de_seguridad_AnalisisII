@@ -3,6 +3,8 @@
 
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,11 +39,44 @@ public class SucursalService {
 	public List<Sucursal> buscar(){
 		return sucursalRepository.findAll();
 	}
-	@PostMapping (path="/InserteSucursal")
-	public Sucursal InserteSucursal (@RequestBody Sucursal sucursal ) {
-	sucursalRepository.save(sucursal);
-	return sucursal;
+	
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String, Object>> InserteSucursal (@RequestBody Sucursal sucursal ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		sucursal.setFechaCreacion(date);
+		
+		try {
+			sucursalRepository.save(sucursal);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se guardó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo guardar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
 	} 
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String, Object>> editarSucursal (@RequestBody Sucursal sucursal ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		sucursal.setFechaModificacion(date);
+		
+		try {
+			sucursalRepository.save(sucursal);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se editó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo editar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
+	} 
+	
+	
 	
 	
 	@DeleteMapping("/EliminaSucursal/{idSucursal}")

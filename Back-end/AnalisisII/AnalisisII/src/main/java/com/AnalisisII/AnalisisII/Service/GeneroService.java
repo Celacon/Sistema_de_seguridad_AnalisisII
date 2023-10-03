@@ -6,6 +6,8 @@ package com.AnalisisII.AnalisisII.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +50,40 @@ public class GeneroService {
 		return generoRepository.findById(par_idGenero);
 
 	}
-	@PostMapping (path="/InserteGenero")
-	public Genero InserteGenero (@RequestBody Genero genero ) {
-	generoRepository.save(genero);
-	return genero;
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String, Object>> InserteGenero (@RequestBody Genero genero ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		genero.setFechaCreacion(date);
+		
+		try {
+			generoRepository.save(genero);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se guardó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo guardar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
+	} 
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String, Object>> editarGenero (@RequestBody Genero genero ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		genero.setFechaModificacion(date);
+		
+		try {
+			generoRepository.save(genero);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se editó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo editar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
 	} 
 
 

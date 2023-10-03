@@ -2,6 +2,8 @@
 
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,11 +52,43 @@ public class RoleService {
 		return roleRepository.findById(idRole);
 
 	}
-	@PostMapping (path="/InserteRole")
-	public Role InserteRole (@RequestBody Role role ) {
-	roleRepository.save(role);
-	return role;
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String, Object>> InserteRole (@RequestBody Role role ) {
+		 LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			role.setFechaCreacion(date);
+			
+			try {
+				roleRepository.save(role);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se guardó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo guardar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
 	} 
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String, Object>> editarRole (@RequestBody Role role ) {
+		 LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			role.setFechaModificacion(date);
+			
+			try {
+				roleRepository.save(role);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se editó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo editar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
+	}
+	
+	
 	@DeleteMapping("/EliminarRole/{idRole}")
 	  public ResponseEntity<Map<String, Object>> EliminarRole(
 	      @PathVariable("idRole") Integer idRole){

@@ -1,5 +1,7 @@
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.AnalisisII.AnalisisII.Repository.UsuarioRoleRepository;
-import com.AnalisisII.AnalisisII.entity.RoleOpcionId;
+
 import com.AnalisisII.AnalisisII.entity.UsuarioRole;
 import com.AnalisisII.AnalisisII.entity.UsuarioRoleId;
 
@@ -42,10 +44,42 @@ public class UsuarioRoleService {
 	}
 	
 	@PostMapping("/guardar")
-	public UsuarioRole guardarUsuarioRole(@RequestBody UsuarioRole usuarioRole) {
-		usuarioRoleRepository.save(usuarioRole);
-		return usuarioRole;
+	public ResponseEntity <Map<String, Object>> guardarUsuarioRole(@RequestBody UsuarioRole usuarioRole) {
+		LocalDate fechaHoy = LocalDate.now();
+    	Date date = Date.valueOf(fechaHoy);
+    	usuarioRole.setFechaCreacion(date);
+    	
+    	try {
+    		usuarioRoleRepository.save(usuarioRole);
+    		  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro guradado exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+    	}catch(Exception e){
+    		 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo guardar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+    	}
 	}
+	
+	@PostMapping("/editar")
+	public ResponseEntity <Map<String, Object>> editarUsuarioRole(@RequestBody UsuarioRole usuarioRole) {
+		LocalDate fechaHoy = LocalDate.now();
+    	Date date = Date.valueOf(fechaHoy);
+    	usuarioRole.setFechaModificacion(date);
+    	
+    	try {
+    		usuarioRoleRepository.save(usuarioRole);
+    		  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro editó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+    	}catch(Exception e){
+    		 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo editar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+    	}
+	}
+	
+	
 	
      @DeleteMapping("/eliminarUsuarioRole/{idUsuario}/{idRole}")
 	  public ResponseEntity<Map<String, Object>> eliminarUsuarioRole(

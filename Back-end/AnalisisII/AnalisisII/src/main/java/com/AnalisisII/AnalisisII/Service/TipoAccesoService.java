@@ -2,6 +2,8 @@
 
 package com.AnalisisII.AnalisisII.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,11 +44,45 @@ public class TipoAccesoService {
 	{
 		return tipoAccesoRepository.findById(idTipoAcceso);
 	}
-	@PostMapping (path="/InserteTipoAcceso")
-	public TipoAcceso InserteTipoAcceso (@RequestBody TipoAcceso tipoAcceso ) {
-	tipoAccesoRepository.save(tipoAcceso);
-	return tipoAcceso;
+	
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String, Object>> InserteTipoAcceso (@RequestBody TipoAcceso tipoAcceso ) {
+		 LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			tipoAcceso.setFechaCreacion(date);
+			
+			try {
+				tipoAccesoRepository.save(tipoAcceso);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se guardó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo guardar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
 	} 
+	
+	
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String, Object>> editarTipoAcceso (@RequestBody TipoAcceso tipoAcceso ) {
+		 LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			tipoAcceso.setFechaModificacion(date);
+			
+			try {
+				tipoAccesoRepository.save(tipoAcceso);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se editó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo editar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
+	}
+	
 	@DeleteMapping("/EliminaTipoAcceso/{idTipoAcceso}")
 	  public ResponseEntity<Map<String, Object>> EliminaTipoAcceso(
 	      @PathVariable("idTipoAcceso") Integer idTipoAcceso){
