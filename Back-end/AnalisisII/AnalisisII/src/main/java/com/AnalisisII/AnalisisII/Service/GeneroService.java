@@ -37,6 +37,7 @@ public class GeneroService {
 	public List<Genero> buscar(){
 		return generoRepository.findAll();
 	}
+	
 	@GetMapping ("/ConsultaGenero")
 	public Optional <Genero> ConsultaGenero (@RequestParam Integer par_idGenero)
 	{
@@ -50,6 +51,7 @@ public class GeneroService {
 		return generoRepository.findById(par_idGenero);
 
 	}
+	
 	@PostMapping (path="/guardar")
 	public ResponseEntity<Map<String, Object>> InserteGenero (@RequestBody Genero genero ) {
 		LocalDate fechaHoy = LocalDate.now();

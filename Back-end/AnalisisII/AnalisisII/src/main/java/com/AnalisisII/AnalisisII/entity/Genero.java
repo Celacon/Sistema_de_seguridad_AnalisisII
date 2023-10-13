@@ -1,7 +1,7 @@
 package com.AnalisisII.AnalisisII.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -48,6 +48,9 @@ public class Genero implements Serializable{
 	
 	@OneToMany(mappedBy = "idGenero")
     private List<Usuario> listUsuarios;
+	
+	@OneToMany(mappedBy = "idGenero")
+    private List<Persona> listPersonas;
 
 	public Integer getIdGenero() {
 		return idGenero;
@@ -103,6 +106,14 @@ public class Genero implements Serializable{
 
 	public void setListUsuarios(List<Usuario> listUsuarios) {
 		this.listUsuarios = listUsuarios;
+	}
+
+	public List<Persona> getListPersonas() {
+		return listPersonas;
+	}
+
+	public void setListPersonas(List<Persona> listPersonas) {
+		this.listPersonas = listPersonas;
 	}
 	
 	

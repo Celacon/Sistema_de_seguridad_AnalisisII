@@ -1,0 +1,98 @@
+package com.AnalisisII.AnalisisII.Service;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.AnalisisII.AnalisisII.Repository.DepartamentoRepository;
+import com.AnalisisII.AnalisisII.entity.Departamento;
+
+@RestController
+@RequestMapping("/departamento")
+@CrossOrigin
+public class DepartamentoService {
+
+	@Autowired
+	DepartamentoRepository departamentoRepository;
+	
+	@GetMapping(path = "/buscar")
+	public List<Departamento> buscar(){
+		return departamentoRepository.findAll();
+	}
+	
+	@GetMapping(path = "/buscarId/{idDepartamento}")
+	public List<Departamento> departamentoId (@PathVariable ("idDepartamento") Integer idDepartamento ){
+		List<Departamento> departamento = departamentoRepository.findByIdDepartamento(idDepartamento);
+		return departamento;
+	}
+	
+	@PostMapping (path="/guardar")
+	public ResponseEntity<Map<String, Object>> guardar (@RequestBody Departamento departamento ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		departamento.setFechaCreacion(date);
+		
+		try {
+			departamentoRepository.save(departamento);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se guardó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo guardar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
+	} 
+	
+	
+	@PostMapping (path="/editar")
+	public ResponseEntity<Map<String, Object>> editar (@RequestBody Departamento departamento ) {
+		LocalDate fechaHoy = LocalDate.now();
+		Date date = Date.valueOf(fechaHoy);
+		departamento.setFechaModificacion(date);
+		
+		try {
+			departamentoRepository.save(departamento);
+			  Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro se editó exitosamente");
+	          return ResponseEntity.ok(successResponse);	
+		}catch(Exception e){
+			 Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("mensaje", "El registro no se pudo editar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+		}
+	}
+	
+	@DeleteMapping("/eliminar/{idDepartamento}")
+	  public ResponseEntity<Map<String, Object>> eliminar(
+	      @PathVariable("idDepartamento") Integer idDepartamento) {
+	    
+
+	      
+	      try {
+	          departamentoRepository.deleteById(idDepartamento);
+	          Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro borrado exitosamente");
+	         
+	          return ResponseEntity.ok(successResponse);
+	      } catch (Exception e) {
+	    	  Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("error", "El registro no se pudo borrar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		   }
+	  }
+}

@@ -62,6 +62,25 @@ public class RoleOpcionService {
 	  }
 	  
 	  
+	  @PostMapping("/editar")
+	  public ResponseEntity<Map<String, Object>> editar(@RequestBody RoleOpcion roleOpcion) {
+		  LocalDate fechaHoy = LocalDate.now();
+			Date date = Date.valueOf(fechaHoy);
+			roleOpcion.setFechaModificacion(date);
+			
+			try {
+				roleOpcionRepository.save(roleOpcion);
+				  Map<String, Object> successResponse = new HashMap<>();
+		          successResponse.put("mensaje", "Registro se editó exitosamente");
+		          return ResponseEntity.ok(successResponse);	
+			}catch(Exception e){
+				 Map<String, Object> errorResponse = new HashMap<>();
+				    errorResponse.put("mensaje", "El registro no se pudo editar");
+				    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);		
+			}
+	  }
+	  
+	  
 	  
 	  @DeleteMapping("/eliminarRoleOpcion/{idRole}/{idOpcion}")
 	  public ResponseEntity<Map<String, Object>> eliminarRoleOpcion(

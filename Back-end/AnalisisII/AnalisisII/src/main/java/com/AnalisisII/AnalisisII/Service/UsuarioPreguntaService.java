@@ -27,7 +27,6 @@ import com.AnalisisII.AnalisisII.Repository.EmpresaRepository;
 import com.AnalisisII.AnalisisII.Repository.SucursalRepository;
 import com.AnalisisII.AnalisisII.Repository.UsuarioPreguntaRepository;
 import com.AnalisisII.AnalisisII.entity.Empresa;
-import com.AnalisisII.AnalisisII.entity.Role;
 import com.AnalisisII.AnalisisII.entity.Sucursal;
 import com.AnalisisII.AnalisisII.entity.UsuarioPregunta;
 

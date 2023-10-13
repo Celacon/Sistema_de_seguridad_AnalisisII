@@ -5,7 +5,7 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 
 @Entity

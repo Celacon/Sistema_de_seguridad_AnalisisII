@@ -46,6 +46,7 @@ public class MenuService {
 	{
 		return menuRepository.findById(idMenu);
 	}
+	
 	@GetMapping(path = "/buscarId/{idMenu}")
 	public Optional <Menu> ConsultaMenu2 (@PathVariable Integer idMenu)
 	{

@@ -13,6 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 
 @Entity
@@ -58,8 +62,8 @@ public class Usuario implements Serializable{
 	@Column(name = "sesionactual")
 	private String sesionActual;
 	
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
-    //@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "ultimafechacambiopassword")
 	private Date ultimaFechaCambioPassword;
 

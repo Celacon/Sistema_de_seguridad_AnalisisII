@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.AnalisisII.AnalisisII.entity.RoleOpcion;
 import com.AnalisisII.AnalisisII.entity.RoleOpcionId;
 
-@Repository("roleOpcionREpository")
+@Repository("roleOpcionRepository")
 public interface RoleOpcionRepository extends JpaRepository<RoleOpcion, Serializable> {
    List<RoleOpcion> findById (RoleOpcionId id);
 		

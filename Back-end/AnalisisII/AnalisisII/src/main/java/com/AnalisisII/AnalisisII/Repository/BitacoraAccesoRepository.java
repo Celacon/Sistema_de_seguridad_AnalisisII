@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.AnalisisII.AnalisisII.entity.BitacoraAcceso;
 
-@Repository("bitacoraAcceso")
+@Repository("bitacoraAccesoRepository")
 public interface BitacoraAccesoRepository extends JpaRepository<BitacoraAcceso, Serializable> {
 
 }

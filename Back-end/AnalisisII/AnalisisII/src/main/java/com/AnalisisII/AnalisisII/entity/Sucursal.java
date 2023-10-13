@@ -1,11 +1,15 @@
 package com.AnalisisII.AnalisisII.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -39,12 +43,16 @@ public class Sucursal implements Serializable{
 	@Column(name = "idempresa")
 	private Integer idEmpresa;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "fechacreacion")
 	private Date fechaCreacion;
 	
 	@Column(name = "usuariocreacion")
 	private String usuarioCreacion;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "fechamodificacion")
 	private Date fechaModificacion;
 
@@ -53,6 +61,9 @@ public class Sucursal implements Serializable{
 	
 	@OneToMany(mappedBy = "idSucursal")
 	private List<Usuario> listUsuarios;
+	
+	@OneToMany(mappedBy = "idSucursal")
+	private List<Empleado> listEmpleados;
 
 	public Integer getIdSucursal() {
 		return idSucursal;
@@ -125,6 +136,15 @@ public class Sucursal implements Serializable{
 	public void setListUsuarios(List<Usuario> listUsuarios) {
 		this.listUsuarios = listUsuarios;
 	}
+
+	public List<Empleado> getListEmpleados() {
+		return listEmpleados;
+	}
+
+	public void setListEmpleados(List<Empleado> listEmpleados) {
+		this.listEmpleados = listEmpleados;
+	}
+	
 	
 	
 	

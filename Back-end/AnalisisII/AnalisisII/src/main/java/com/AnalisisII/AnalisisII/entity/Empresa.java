@@ -1,7 +1,7 @@
 package com.AnalisisII.AnalisisII.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -76,6 +76,9 @@ public class Empresa implements Serializable{
 	
 	@OneToMany(mappedBy = "idEmpresa")
 	private List<Sucursal> listSucursal;
+	
+	@OneToMany(mappedBy = "idEmpresa")
+	private List<Departamento> listDepartamento;
 	
 
 	public Integer getIdEmpresa() {
@@ -212,6 +215,14 @@ public class Empresa implements Serializable{
 
 	public void setListSucursal(List<Sucursal> listSucursal) {
 		this.listSucursal = listSucursal;
+	}
+
+	public List<Departamento> getListDepartamento() {
+		return listDepartamento;
+	}
+
+	public void setListDepartamento(List<Departamento> listDepartamento) {
+		this.listDepartamento = listDepartamento;
 	}
 	
 	

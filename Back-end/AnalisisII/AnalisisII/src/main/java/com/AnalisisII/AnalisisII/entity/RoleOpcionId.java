@@ -16,8 +16,7 @@ public class RoleOpcionId implements Serializable{
 
 	@Column(name = "idrole")
 	private Integer idRole;
-	
-	
+		
 	@Column(name = "idopcion")
 	private Integer idOpcion;
 
