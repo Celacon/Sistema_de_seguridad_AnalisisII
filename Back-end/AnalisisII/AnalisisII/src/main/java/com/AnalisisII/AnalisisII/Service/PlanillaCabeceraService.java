@@ -32,7 +32,7 @@ public class PlanillaCabeceraService {
 	@GetMapping("/buscarId/{anio}/{mes}")
     public List<PlanillaCabecera> geById(@PathVariable ("anio")Integer anio, @PathVariable ("mes")Integer mes) {
         PlanillaId id = new PlanillaId(anio, mes);
-        List<PlanillaCabecera> result = planillaCabeceraRepository.findById(id);
+        List<PlanillaCabecera> result = planillaCabeceraRepository.findByIdPlanillaCabecera(id);
         //RoleOpcion us = result.get(0);
         return  result;
     }

@@ -10,5 +10,5 @@ import com.AnalisisII.AnalisisII.entity.PlanillaId;
 
 @Repository("planillaCabeceraRepository")
 public interface PlanillaCabeceraRepository extends JpaRepository<PlanillaCabecera, Serializable> {
-	List<PlanillaCabecera> findById (PlanillaId id);
+	List<PlanillaCabecera> findByIdPlanillaCabecera (PlanillaId id);
 }
