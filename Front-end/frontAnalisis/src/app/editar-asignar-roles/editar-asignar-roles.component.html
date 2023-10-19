@@ -1,0 +1,22 @@
+<body>
+  <h1>Formulario de Asignar Roles</h1>
+  <form id="editarAsignarRoles" (ngSubmit)="editarAsignarRoles()">
+
+    <label for="idRole">Role:</label>
+    <select id="idRole" type="text" class="form-control form-control-lg " [(ngModel)]="asignarroles.id.idRole"  [ngModelOptions]="{standalone:true}" required>
+      <option ></option>
+      <option *ngFor="let rol of role" [value]="rol.idRole">{{rol.nombre}}</option>
+         </select>
+         <br>
+
+     <label for="idUsuario">Usuario:</label>
+     <select id="idUsuario" type="text" class="form-control form-control-lg " [(ngModel)]="asignarroles.id.idUsuario"  [ngModelOptions]="{standalone:true}" required>
+       <option ></option>
+       <option *ngFor="let usu of usuario" [value]="usu.idUsuario">{{usu.nombre}}</option>
+          </select>
+          <br>
+     <input type="submit" value="Guardar">
+
+   </form>
+   <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+   </body>

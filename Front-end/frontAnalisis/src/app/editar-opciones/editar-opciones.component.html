@@ -1,0 +1,19 @@
+<body>
+  <h1>Editar Opciones</h1>
+  <form id="editarOpcion" (ngSubmit)="editarOpcion()">
+
+
+
+     <label for="nombre">Nombre Opcion:</label>
+     <input type="text" id="nombre" name="nombre" [(ngModel)]="opcion.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+     <label for="orden">Orden Menu:</label>
+     <input type="number" id="orden" name="orden" [(ngModel)]="opcion.ordenMenu" [ngModelOptions]="{standalone:true}"required><br><br>
+     <label for="pagina">PAGINA:</label>
+     <input type="text" id="pagina" name="pagina" [(ngModel)]="opcion.pagina" [ngModelOptions]="{standalone:true}"required><br><br>
+
+
+    <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+  </body>

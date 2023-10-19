@@ -22,6 +22,40 @@ import { AsignarOpcionesComponent } from './asignar-opciones/asignar-opciones.co
 import { AgregarPreguntasComponent } from './agregar-preguntas/agregar-preguntas.component';
 import { AgregaUsuarioComponent } from './agrega-usuario/agrega-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { AgregarGeneroComponent } from './agregar-genero/agregar-genero.component';
+import { EditarGeneroComponent } from './editar-genero/editar-genero.component';
+import { AgregarAsignarOpcionesComponent } from './agregar-asignar-opciones/agregar-asignar-opciones.component';
+import { EditarAsignarOpcionesComponent } from './editar-asignar-opciones/editar-asignar-opciones.component';
+import { AgregarEmpresaComponent } from './agregar-empresa/agregar-empresa.component';
+import { EditarEmpresaComponent } from './editar-empresa/editar-empresa.component';
+import { AgregarAsignarRolesComponent } from './agregar-asignar-roles/agregar-asignar-roles.component';
+import { EditarAsignarRolesComponent } from './editar-asignar-roles/editar-asignar-roles.component';
+import { AgregarMenuComponent } from './agregar-menu/agregar-menu.component';
+import { EditarMenuComponent } from './editar-menu/editar-menu.component';
+import { AgregarModuloComponent } from './agregar-modulo/agregar-modulo.component';
+import { EditarModuloComponent } from './editar-modulo/editar-modulo.component';
+import { AgregarOpcionesComponent } from './agregar-opciones/agregar-opciones.component';
+import { EditarOpcionesComponent } from './editar-opciones/editar-opciones.component';
+import { AgregarRoleComponent } from './agregar-role/agregar-role.component';
+import { EditarRoleComponent } from './editar-role/editar-role.component';
+import { BancoComponent } from './banco/banco.component';
+import { AgregarBancoComponent } from './agregar-banco/agregar-banco.component';
+import { EditarBancoComponent } from './editar-banco/editar-banco.component';
+import { DepartamentoComponent } from './departamento/departamento.component';
+import { EditarDepartamentoComponent } from './editar-departamento/editar-departamento.component';
+import { AgregarDepartamentoComponent } from './agregar-departamento/agregar-departamento.component';
+import { EmpleadoComponent } from './empleado/empleado.component';
+import { AgregarEmpleadoComponent } from './agregar-empleado/agregar-empleado.component';
+import { EditarEmpleadoComponent } from './editar-empleado/editar-empleado.component';
+import { DocumentoPersonaComponent } from './documento-persona/documento-persona.component';
+import { AgregarDocumentoPersonaComponent } from './agregar-documento-persona/agregar-documento-persona.component';
+import { EditarDocumentoPersonaComponent } from './editar-documento-persona/editar-documento-persona.component';
+import { PersonaComponent } from './persona/persona.component';
+import { EditarPersonaComponent } from './editar-persona/editar-persona.component';
+import { AgregarPersonaComponent } from './agregar-persona/agregar-persona.component';
+import { TipoDocumentoComponent } from './tipo-documento/tipo-documento.component';
+import { AgregarTipoDocumentoComponent } from './agregar-tipo-documento/agregar-tipo-documento.component';
+import { EditarTipoDocumentoComponent } from './editar-tipo-documento/editar-tipo-documento.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +76,41 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
     AsignarOpcionesComponent,
     AgregarPreguntasComponent,
     AgregaUsuarioComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    AgregarGeneroComponent,
+    EditarGeneroComponent,
+    AgregarAsignarOpcionesComponent,
+    EditarAsignarOpcionesComponent,
+    AgregarEmpresaComponent,
+    EditarEmpresaComponent,
+    AgregarAsignarRolesComponent,
+    EditarAsignarRolesComponent,
+    AgregarMenuComponent,
+    EditarMenuComponent,
+    AgregarModuloComponent,
+    EditarModuloComponent,
+    AgregarOpcionesComponent,
+    EditarOpcionesComponent,
+    AgregarRoleComponent,
+    EditarRoleComponent,
+    BancoComponent,
+    AgregarBancoComponent,
+    EditarBancoComponent,
+    DepartamentoComponent,
+    EditarDepartamentoComponent,
+    AgregarDepartamentoComponent,
+    EmpleadoComponent,
+    AgregarEmpleadoComponent,
+    EditarEmpleadoComponent,
+    DocumentoPersonaComponent,
+    AgregarDocumentoPersonaComponent,
+    EditarDocumentoPersonaComponent,
+    PersonaComponent,
+    EditarPersonaComponent,
+    AgregarPersonaComponent,
+    TipoDocumentoComponent,
+    AgregarTipoDocumentoComponent,
+    EditarTipoDocumentoComponent
   ],
   imports: [
     BrowserModule,

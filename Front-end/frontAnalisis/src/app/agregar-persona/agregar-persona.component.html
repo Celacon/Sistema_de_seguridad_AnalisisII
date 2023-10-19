@@ -1,0 +1,43 @@
+<body>
+  <h1>Agregar Persona</h1>
+  <form id="agregarPersona" (ngSubmit)="agregarPersona()">
+
+    <label for="nombre">Ingrese Nombres:</label>
+    <br>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="persona.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+    <label for="apellido">Ingrese Apellidos:</label>
+    <br>
+    <input type="text" id="apellido" name="apellido" [(ngModel)]="persona.apellido" [ngModelOptions]="{standalone:true}"required><br><br>
+
+    <label for="fechaNacimiento">Ingrese Fecha de Nacimiento:</label>
+    <br>
+    <input type="date" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="persona.fechaNacimiento" [ngModelOptions]="{standalone:true}"required><br><br>
+
+    <label for="idGenero">Género:</label>
+        <select id="idGenero" type="text" class="form-control form-control-lg " [(ngModel)]="persona.idGenero"  [ngModelOptions]="{standalone:true}" requered>
+            <option ></option>
+            <option *ngFor="let gen of genero" [value]="gen.idGenero">{{gen.nombre}} </option>
+               </select>
+               <br>
+
+    <label for="direccion">Direccion:</label>
+    <br>
+    <input type="text" id="direccion" name="direccion" [(ngModel)]="persona.direccion" [ngModelOptions]="{standalone:true}"required><br><br>
+
+    <label for="telefono">Ingrese Numero Telefono:</label>
+    <br>
+    <input type="text" id="telefono" name="telefono" [(ngModel)]="persona.telefono" [ngModelOptions]="{standalone:true}"required><br><br>
+
+    <label for="idEstadoCivil">Estado Civil:</label>
+    <select id="idEstadoCivil" type="text" class="form-control form-control-lg " [(ngModel)]="persona.idEstadoCivil"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option *ngFor="let estci of estadocivil" [value]="estci.idEstadoCivil">{{estci.nombre}} </option>
+           </select>
+           <br>
+
+           <input type="submit" value="Guardar">
+
+          </form>
+          <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+        </body>

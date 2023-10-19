@@ -1,0 +1,32 @@
+<body>
+  <h1>Formulario Documento Persona</h1>
+  <form id="agregarDocumentoPersona" (ngSubmit)="agregarDocumentoPersona()">
+
+    <label for="idTipoDocumento">TIPO DOCUMENTO:</label>
+    <br>
+    <select id="idTipoDocumento" type="text" class="form-control form-control-lg " [(ngModel)]="documentopersona.id.idTipoDocumento"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option *ngFor="let tdoc of tipoDocumento" [value]="tdoc.idTipoDocumento">{{tdoc.nombre}}</option>
+         </select>
+         <br>
+
+         <label for="idPersona">Persona:</label>
+         <br>
+         <select id="idPersona" type="text" class="form-control form-control-lg " [(ngModel)]="documentopersona.id.idPersona"  [ngModelOptions]="{standalone:true}" requered>
+            <option ></option>
+            <option *ngFor="let pers of persona" [value]="pers.idPersona">{{pers.nombre}}</option>
+               </select>
+               <br>
+
+
+         <label for="noDocumento">NO. DOCUMENTO:</label>
+         <br>
+         <input type="text" id="noDocumento" name="noDocumento" [(ngModel)]="documentopersona.noDocumento" [ngModelOptions]="{standalone:true}" required><br><br>
+
+
+
+    <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

@@ -1,0 +1,56 @@
+<a href="home" style="background-color: #00BFFF; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; margin: 10px; display: inline-block; cursor: pointer;">inicio</a>
+
+
+<body>
+  <h1>Empleado</h1>
+  <button type="button" *ngIf="create" class="btn btn-danger" (click)="agregar()">AGREGAR</button>
+<table>
+  <thead>
+    <tr>
+      <th>EMPLEADO</th>
+      <th>PERSONA</th>
+      <th>SUCURSAL</th>
+      <th>FECHA CONTRATACION</th>
+      <th>PUESTO</th>
+      <th>STATUS USUARIO</th>
+      <th>INGRESO SUELDO BASE</th>
+      <th>INGRESO BONIFICACION DECRETO</th>
+      <th>INGRESO OTROS INGRESOS</th>
+      <th>DESCUENTOS IGSS</th>
+      <th>DESCUENTO ISR</th>
+      <th>DESCUENTO INASISTENCIAS</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fila of empleado">
+      <td>{{ fila.idEmpleado }}</td>
+      <td>{{ fila.idPersona }}</td>
+      <td>{{ fila.idSucursal }}</td>
+      <td>{{ fila.fechaContratacion }}</td>
+      <td>{{ fila.idPuesto }}</td>
+      <td>{{ fila.idStatusEmpleado }}</td>
+      <td>{{ fila.ingresoSueldoBase }}</td>
+      <td>{{ fila.ingresobonificiacionDecreto }}</td>
+      <td>{{ fila.ingresoOtrosIngresos}}</td>
+      <td>{{ fila.descuentoIgss}}</td>
+      <td>{{ fila.descuentoIsr}}</td>
+      <td>{{ fila.descuentoInasistencias}}</td>
+
+      <td>
+
+        <button type="button" *ngIf="delete" class="btn btn-danger" (click)="eliminar(fila)">Eliminar</button>
+        <button type="button" *ngIf="edit"class="btn btn-danger" (click)="editar(fila)">Editar</button>
+
+
+
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" *ngIf="create" class="btn btn-danger" (click)="agregar()">AGREGAR</button>
+<button type="button" *ngIf="print" class="btn btn-danger" >IMPRIMIR</button>
+<button type="button" *ngIf="export" class="btn btn-danger" >EXPORTAR</button>
+</body>

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import com.AnalisisII.AnalisisII.Repository.EmpleadoRepository;
 import com.AnalisisII.AnalisisII.Repository.PersonaRepository;
 import com.AnalisisII.AnalisisII.entity.Empleado;
 import com.AnalisisII.AnalisisII.entity.Persona;
+
 
 @RestController
 @RequestMapping("/empleado")
@@ -123,6 +125,23 @@ public class EmpleadoService {
 		    return resultadoFinal;
 	}
 	
+	@DeleteMapping("/eliminar/{idEmpleado}")
+	public ResponseEntity<Map<String, Object>> eliminar(
+	    @PathVariable("idEmpleado") Integer idEmpleado) {
+	    
+	    try {
+	        empleadoRepository.deleteById(idEmpleado);
+	        Map<String, Object> successResponse = new HashMap<>();
+	        successResponse.put("mensaje", "Registro borrado exitosamente");
+	       
+	        return ResponseEntity.ok(successResponse);
+	    } catch (Exception e) {
+	  	  Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("error", "El registro no se pudo borrar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		   }
+	}
+	
 public Double calculoISR(Double salarioBase,Double igss, Double bonificacionDecreto,Double otrosIngresos) {
 	
 	Double resultado = 0.00;
@@ -164,7 +183,7 @@ public Double calculoISR(Double salarioBase,Double igss, Double bonificacionDecr
 	}
 
 
-	
+
 	
 	
 	

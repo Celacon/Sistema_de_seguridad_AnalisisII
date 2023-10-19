@@ -1,0 +1,15 @@
+<body>
+  <h1>Editar Tipo Documento</h1>
+  <form id="tipoDocumento" (ngSubmit)="tipoDocumento()">
+
+    <label for="nombre"> Nombre Tipo Documento:</label>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="tipoDocumento.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+
+    <input type="submit" value="Guardar">
+
+
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

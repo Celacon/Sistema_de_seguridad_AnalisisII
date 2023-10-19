@@ -1,0 +1,31 @@
+<body>
+  <h1>Editar Documento Personal</h1>
+  <form id="editarDocumentoPersona" (ngSubmit)="editarDocumentoPersona()">
+
+    <label for="idTipoDocumento">TIPO DOCUMENTO:</label>
+    <select id="idTipoDocumento" type="text" class="form-control form-control-lg " [(ngModel)]="documentopersona.id.idTipoDocumento"  [ngModelOptions]="{standalone:true}" disabled required>
+      <option ></option>
+      <option *ngFor="let tdoc of tipoDocumento" [value]="tdoc.idTipoDocumento">{{tdoc.nombre}}</option>
+         </select>
+         <br>
+
+         <label for="idPersona">Persona:</label>
+         <select id="idPersona" type="text" class="form-control form-control-lg " [(ngModel)]="documentopersona.id.idPersona"  [ngModelOptions]="{standalone:true}" disabled required>
+            <option ></option>
+            <option *ngFor="let pers of persona" [value]="pers.idPersona">{{pers.nombre}}</option>
+               </select>
+               <br>
+
+
+         <label for="noDocumento">NO. DOCUMENTO:</label>
+         <input type="text" id="noDocumento" name="noDocumento" [(ngModel)]="documentopersona.noDocumento" [ngModelOptions]="{standalone:true}" required><br><br>
+
+
+
+
+
+    <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>
