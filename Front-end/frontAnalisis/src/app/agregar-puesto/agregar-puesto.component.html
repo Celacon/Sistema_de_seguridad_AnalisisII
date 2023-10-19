@@ -1,0 +1,19 @@
+<body>
+    <h1>Formulario de Editar Puesto</h1>
+    <form id="agregarPuesto" (ngSubmit)="agregarPuesto()"> 
+        
+        <label for="nombre">Nombre Puesto:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="agregaPuesto.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+        <label for="idDepartamento">Departamento:</label>
+        <select id="idDepartamento" type="text" class="form-control form-control-lg " [(ngModel)]="agregaPuesto.idDepartamento"  [ngModelOptions]="{standalone:true}" requered>
+            <option ></option>
+            <option *ngFor="let dep of departamento" [value]="dep.idDepartamento">{{dep.nombre}} </option>
+               </select>
+               <br>
+
+        <input type="submit" value="Guardar">
+    
+    </form>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

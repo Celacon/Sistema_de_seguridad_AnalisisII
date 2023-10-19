@@ -1,0 +1,28 @@
+<body>
+    <h1>Formulario de Editar Inasistencia</h1>
+    <form id="editarInasistencia" (ngSubmit)="editarInasistencia()"> 
+        
+        <label for="fechaInicial">Fecha Inicial:</label>
+        <input type="date" id="fechaInicial" name="fechaInicial" [(ngModel)]="inasistencia.fechaInicial" [ngModelOptions]="{standalone:true}"required><br><br>
+
+        <label for="fechaFinal">Fecha Final:</label>
+        <input type="date" id="fechaFinal" name="fechaFinal" [(ngModel)]="inasistencia.fechaFinal" [ngModelOptions]="{standalone:true}"required><br><br>
+
+        <label for="idEmpleado">Empleado:</label>
+        <select id="idEmpleado" type="text" class="form-control form-control-lg " [(ngModel)]="inasistencia.idEmpleado"  [ngModelOptions]="{standalone:true}" requered>
+            <option ></option>
+            <option *ngFor="let emp of inasistenciaEmpleado" [value]="emp.idEmpleado">{{emp.idEmpleado}} </option>
+               </select>
+               <br>
+        <label for="motivoInasistencia">Motivo Inasistencia:</label>
+        <input type="text" id="motivoInasistencia" name="motivoInasistencia" [(ngModel)]="inasistencia.motivoInasistencia" [ngModelOptions]="{standalone:true}"required><br><br>
+
+        <label for="fechaProcesado">Fecha Inicial:</label>
+        <input type="date" id="fechaProcesado" name="fechaProcesado" [(ngModel)]="inasistencia.fechaProcesado" [ngModelOptions]="{standalone:true}"required><br><br>
+
+   
+        <input type="submit" value="Guardar">
+    
+    </form>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

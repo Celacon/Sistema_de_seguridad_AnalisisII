@@ -1,0 +1,13 @@
+<body>
+    <h1>Formulario de Editar Estado Civil</h1>
+    <form id="editarEstatusUsuario" (ngSubmit)="editarEstatusUsuario()"> 
+        
+        <label for="nombre">Nombre Estado Civil:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="estatusUsuario.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+        <input type="submit" value="Guardar">
+    
+    </form>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>
+
