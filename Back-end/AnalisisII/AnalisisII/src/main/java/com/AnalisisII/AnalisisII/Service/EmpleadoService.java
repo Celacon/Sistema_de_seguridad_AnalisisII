@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -122,6 +123,44 @@ public class EmpleadoService {
 		    
 		    return resultadoFinal;
 	}
+	
+	
+	@DeleteMapping("/eliminar/{idEmpleado}")
+	  public ResponseEntity<Map<String, Object>> eliminar(
+	      @PathVariable("idEmpleado") Integer idEmpleado) {
+	      
+	      try {
+	          empleadoRepository.deleteById(idEmpleado);
+	          Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro borrado exitosamente");
+	         
+	          return ResponseEntity.ok(successResponse);
+	      } catch (Exception e) {
+	    	  Map<String, Object> errorResponse = new HashMap<>();
+			    errorResponse.put("error", "El registro no se pudo borrar");
+			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+		   }
+	  }
+	
+	@GetMapping(path = "/buscar2")
+	public List<Empleado> buscar2 (){
+		
+		List<Empleado> emp = empleadoRepository.findAll();
+		
+
+		for(Empleado e: emp) {
+			Double isr = calculoISR(e.getIngresoSueldoBase(),e.getDescuentoIgss(),e.getIngresobonificacionDecreto(),e.getIngresoOtrosIngresos());
+			e.setDescuentoIsr(isr);
+			empleadoRepository.save(e);
+		
+		}
+		return empleadoRepository.findAll();
+	}
+	
+	
+	
+	
+	
 	
 public Double calculoISR(Double salarioBase,Double igss, Double bonificacionDecreto,Double otrosIngresos) {
 	

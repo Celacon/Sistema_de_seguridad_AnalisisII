@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-agrega-usuario',
@@ -10,6 +11,7 @@ import {catchError,tap} from 'rxjs/operators'
 })
 export class AgregaUsuarioComponent implements OnInit{
   public usuario:any = {};
+  public genero:any = [];
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
@@ -21,6 +23,8 @@ export class AgregaUsuarioComponent implements OnInit{
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
   
    this.usuarioMomentaneo= this.temporal.usuario;
+
+   this.buscarGenero();
   }
 
 
@@ -74,5 +78,28 @@ export class AgregaUsuarioComponent implements OnInit{
 
       cancelar(){
         location.href="/usuario";
+      }
+
+
+      buscarGenero(){
+
+        this.buscarGeneroServicio().subscribe(
+          (response:any)=> this.genero=response
+    
+          
+        )
+       
+      }
+    
+      buscarGeneroServicio():Observable<any>{
+        return this.http.get<any>('http://localhost:6500/miapp/genero/buscar').pipe(
+          catchError((error) => {
+            console.log(error);
+            const mensaje =error.error;
+            const objetoJSON = JSON.parse(mensaje);
+            alert(objetoJSON.mensaje);
+            throw error; 
+            })
+        )
       }
 }

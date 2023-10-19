@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <title>Planilla</title>
+ 
+</head>
+<body>
+    <h1>Planilla de Guatemala</h1>
+ <div id="encabezado">
+        <h2>Nombre de la Planilla: Planilla de Octubre 2023</h2>
+       
+    </div>
+   <table>
+        <tr>
+            <th>Año</th>
+            <th>Mes</th>
+            <th>Total de Ingreos</th>
+            <th>Total de Descuentos</th>
+            <th>Salario Neto</th>
+            <th>Fecha Procesada</th>
+        </tr>
+        <tr>
+            <td>{{cabeceraPlanilla.idPlanillaCabecera?.anio}}</td>
+            <td>{{cabeceraPlanilla.idPlanillaCabecera?.mes}}</td>
+            <td>Q{{cabeceraPlanilla.totalIngreso}}</td>
+            <td>Q{{cabeceraPlanilla.totalDescuento}}</td>
+            <td>Q{{cabeceraPlanilla.salarioNeto}}</td>
+            <td>{{cabeceraPlanilla.fechaHoraProcesada}}</td>
+           
+        </tr>
+       
+    </table>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>F. Contratacion</th>
+            <th>Cargo</th>
+            <th>Estado</th>
+            <th>Sueldo</th>
+            <th>Incentivo</th>
+            <th>Otros Ingresos</th>
+            <th>Descuento IGSS</th>
+            <th>Descuento ISR</th>
+            <th>Otros Descuentos</th>
+            <th>Sueldo Neto</th>
+        </tr>
+        <tr *ngFor="let fila of detalle">
+            <td>{{fila.idPlanillaDetalle}}</td>
+            <td>{{fila.nombre}}</td>
+            <td>{{fila.apellido}}</td>
+            <td>{{fila.fechaContratacion}}</td>
+            <td>{{fila.puesto}}</td>
+            <td>{{fila.status}}</td>
+            <td>Q{{fila.ingresoSueldoBase}}</td>
+            <td>Q{{fila.ingresoBonificacionDecreto}}</td>
+            <td>Q{{fila.ingresoOtrosIngresos}}</td>
+            <td>Q{{fila.descuentoIgss}}</td>
+            <td>Q{{fila.descuentoIsr}}</td>
+            <td>Q{{fila.descuentoInasistencias}}</td>
+            <td>Q{{fila.salarioNeto}}</td>
+        </tr>
+       
+        <tr>
+            <td>Total:</td>
+            <td></td>
+            <td></td>
+            <td id="total-sueldo">0</td>
+            <td id="total-bonificacion">0</td>
+            <td id="total-incentivo">0</td>
+            <td id="total-ingresos">0</td>
+            <td id="total-igss">0</td>
+            <td id="total-isr">0</td>
+            <td id="total-descuentos">0</td>
+            <td id="total-neto">0</td>
+        </tr>
+    </table>
+
+  
+</body>
+</html>

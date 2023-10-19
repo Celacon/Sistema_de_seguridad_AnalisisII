@@ -22,6 +22,9 @@ import { AsignarOpcionesComponent } from './asignar-opciones/asignar-opciones.co
 import { AgregarPreguntasComponent } from './agregar-preguntas/agregar-preguntas.component';
 import { AgregaUsuarioComponent } from './agrega-usuario/agrega-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { PlanillaComponent } from './planilla/planilla.component';
+import { ReportePlanillaComponent } from './reporte-planilla/reporte-planilla.component';
+import { DetallePlanillaComponent } from './detalle-planilla/detalle-planilla.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
     AsignarOpcionesComponent,
     AgregarPreguntasComponent,
     AgregaUsuarioComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
+    PlanillaComponent,
+    ReportePlanillaComponent,
+    DetallePlanillaComponent
   ],
   imports: [
     BrowserModule,

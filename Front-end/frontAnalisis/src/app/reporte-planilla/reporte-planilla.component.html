@@ -1,0 +1,41 @@
+<h1>PLANILLA</h1>
+<a href="home" style="background-color: #00BFFF; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; margin: 10px; display: inline-block; cursor: pointer;">inicio</a>
+
+<table>
+    <thead>
+      <tr>
+        <th>AÑO</th>
+        <th>MES</th>
+        <th>INGRESOS</th>
+        <th>DESCUENTOS</th>
+        <th>SALARIO NETO</th>
+        <th>FECHA PROCESADA</th>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fila of planillaCabecera">
+        <td>{{ fila.idPlanillaCabecera.anio }}</td>
+        <td>{{ fila.idPlanillaCabecera.mes}}</td>
+        <td>{{ fila.totalIngreso}}</td>
+        <td>{{ fila.totalDescuento}}</td>
+        <td>{{ fila.salarioNeto}}</td>
+        <td>{{ fila.fechaHoraProcesada}}</td>
+       
+        <td>
+         
+          <button type="button" *ngIf="delete" class="btn btn-danger" (click)="eliminar(fila)">Eliminar</button>
+          <button type="button" *ngIf="edit"class="btn btn-danger" (click)="editar(fila)">Editar</button>
+
+
+       
+        </td>
+        
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" *ngIf="create" class="btn btn-danger" (click)="agregar()">AGREGAR</button>
+  <button type="button" *ngIf="print" class="btn btn-danger" >IMPRIMIR</button>
+  <button type="button" *ngIf="export" class="btn btn-danger" >EXPORTAR</button>

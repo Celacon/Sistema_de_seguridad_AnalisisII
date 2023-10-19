@@ -97,6 +97,7 @@ export class LoginComponent implements OnInit{
 
 
      detectBrowser(userAgent: string): string {
+      console.log(userAgent);
       // Realiza alguna lógica para determinar el navegador aquí.
       // Puedes utilizar expresiones regulares o bibliotecas de detección de navegadores, como 'bowser' o 'platform.js'.
       // Aquí hay un ejemplo básico utilizando expresiones regulares:

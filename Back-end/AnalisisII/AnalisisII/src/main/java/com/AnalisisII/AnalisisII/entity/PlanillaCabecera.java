@@ -12,6 +12,8 @@ import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "planilla_cabecera")
 public class PlanillaCabecera implements Serializable{
@@ -33,7 +35,7 @@ public class PlanillaCabecera implements Serializable{
 	@Column(name = "salarioneto")
 	private Double salarioNeto;
 	
-	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechahoraprocesada")
 	private Date fechaHoraProcesada;
 	
@@ -49,13 +51,13 @@ public class PlanillaCabecera implements Serializable{
 	@Column(name = "usuariomodificacion")
 	private String usuarioModificacion;
 	
-	 @OneToMany
+	/* @OneToMany
 	    @JoinColumns({
 	        @JoinColumn(name = "anio", referencedColumnName = "anio"),
 	        @JoinColumn(name = "mes", referencedColumnName = "mes")
 	    })
 	    private List<PlanillaDetalle> listPlanillaDetalles;
-
+*/
 	public PlanillaId getIdPlanillaCabecera() {
 		return idPlanillaCabecera;
 	}
@@ -127,7 +129,7 @@ public class PlanillaCabecera implements Serializable{
 	public void setUsuarioModificacion(String usuarioModificacion) {
 		this.usuarioModificacion = usuarioModificacion;
 	}
-
+/*
 	public List<PlanillaDetalle> getListPlanillaDetalles() {
 		return listPlanillaDetalles;
 	}
@@ -135,5 +137,5 @@ public class PlanillaCabecera implements Serializable{
 	public void setListPlanillaDetalles(List<PlanillaDetalle> listPlanillaDetalles) {
 		this.listPlanillaDetalles = listPlanillaDetalles;
 	}
-	
+	*/
 }

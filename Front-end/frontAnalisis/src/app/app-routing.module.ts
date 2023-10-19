@@ -17,6 +17,9 @@ import { AsignarRolesComponent } from './asignar-roles/asignar-roles.component';
 import { AgregarPreguntasComponent } from './agregar-preguntas/agregar-preguntas.component';
 import { AgregaUsuarioComponent } from './agrega-usuario/agrega-usuario.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { PlanillaComponent } from './planilla/planilla.component';
+import { ReportePlanillaComponent } from './reporte-planilla/reporte-planilla.component';
+import { DetallePlanillaComponent } from './detalle-planilla/detalle-planilla.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -35,8 +38,10 @@ const routes: Routes = [
   {path:'asignacion_opcion_role',component:AsignarOpcionesComponent},
   {path:'agregar_preguntas', component:AgregarPreguntasComponent},
   {path:'agregar_usuario',component:AgregaUsuarioComponent},
-  {path:'editar_usuario',component:EditarUsuarioComponent}  
-
+  {path:'editar_usuario',component:EditarUsuarioComponent},
+  {path:'calculo_planilla',component:PlanillaComponent},
+  {path:'reporte_planilla',component:ReportePlanillaComponent},  
+  {path: 'detalle_planilla', component:DetallePlanillaComponent}
   
 
 
