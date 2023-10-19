@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.AnalisisII.AnalisisII.Repository.EmpresaRepository;
 import com.AnalisisII.AnalisisII.Repository.SucursalRepository;
@@ -51,8 +55,10 @@ public class LoginService {
 		boolean usuarioExiste = (boolean) resultados.get("valorBooleano");
 		String mensaje = (String) resultados.get("valorString");
 		Usuario usuarioExistente = (Usuario) resultados.get("usuario");
-		//Integer cantUsuarioIntentos = usuarioExistente.getIntentosDeAcceso();
-		//System.out.println(cantUsuarioIntentos + "888888888888888888888");
+		
+		String userAgent = getUserAgent();
+		System.out.println(userAgent);
+	
 		
 
 		if (usuarioExiste) {
@@ -257,6 +263,19 @@ public class LoginService {
 	    errorResponse.put("mensaje", "Cierre de sesion exitosa");
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 	}
+	
+	
+	   private String getUserAgent() {
+	        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+
+	        if (requestAttributes instanceof ServletRequestAttributes) {
+	            HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+	            String userAgent = request.getHeader("User-Agent");
+	            return userAgent;
+	        } else {
+	            return "User-Agent not available";
+	        }
+	    }
 	
 	
 

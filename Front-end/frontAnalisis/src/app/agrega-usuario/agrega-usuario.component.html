@@ -20,9 +20,13 @@
         <input type="password" id="password" name="password"  [(ngModel)]="usuario.password" [ngModelOptions]="{standalone:true}" required><br><br>
 
         <label for="idGenero">ID de Género:</label>
-        <input type="number" id="idGenero" name="idGenero" [(ngModel)]="usuario.idGenero" [ngModelOptions]="{standalone:true}" required><br><br>
-
-        <label for="correoElectronico">Correo Electrónico:</label>
+        <select id="idGenero" type="text" class="form-control form-control-lg " [(ngModel)]="usuario.idGenero"  [ngModelOptions]="{standalone:true}" requered>
+            <option ></option>
+            <option *ngFor="let gen of genero" [value]="gen.idGenero">{{gen.nombre}} </option>
+               </select>
+               <br>
+       
+               <label for="correoElectronico">Correo Electrónico:</label>
         <input type="email" id="correoElectronico" name="correoElectronico" [(ngModel)]="usuario.correoElectronico" [ngModelOptions]="{standalone:true}" required><br><br>
 
         <label for="telefonoMovil">Teléfono Móvil:</label>

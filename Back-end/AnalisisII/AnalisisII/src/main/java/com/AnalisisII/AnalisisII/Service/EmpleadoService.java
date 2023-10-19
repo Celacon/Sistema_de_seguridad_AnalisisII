@@ -125,23 +125,48 @@ public class EmpleadoService {
 		    return resultadoFinal;
 	}
 	
+
+	
+
+	
 	@DeleteMapping("/eliminar/{idEmpleado}")
-	public ResponseEntity<Map<String, Object>> eliminar(
-	    @PathVariable("idEmpleado") Integer idEmpleado) {
-	    
-	    try {
-	        empleadoRepository.deleteById(idEmpleado);
-	        Map<String, Object> successResponse = new HashMap<>();
-	        successResponse.put("mensaje", "Registro borrado exitosamente");
-	       
-	        return ResponseEntity.ok(successResponse);
-	    } catch (Exception e) {
-	  	  Map<String, Object> errorResponse = new HashMap<>();
+	  public ResponseEntity<Map<String, Object>> eliminar(
+	      @PathVariable("idEmpleado") Integer idEmpleado) {
+	      
+	      try {
+	          empleadoRepository.deleteById(idEmpleado);
+	          Map<String, Object> successResponse = new HashMap<>();
+	          successResponse.put("mensaje", "Registro borrado exitosamente");
+	         
+	          return ResponseEntity.ok(successResponse);
+	      } catch (Exception e) {
+	    	  Map<String, Object> errorResponse = new HashMap<>();
 			    errorResponse.put("error", "El registro no se pudo borrar");
 			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		   }
+	  }
+	
+	@GetMapping(path = "/buscar2")
+	public List<Empleado> buscar2 (){
+		
+		List<Empleado> emp = empleadoRepository.findAll();
+		
+
+		for(Empleado e: emp) {
+			Double isr = calculoISR(e.getIngresoSueldoBase(),e.getDescuentoIgss(),e.getIngresobonificacionDecreto(),e.getIngresoOtrosIngresos());
+			e.setDescuentoIsr(isr);
+			empleadoRepository.save(e);
+		
+		}
+		return empleadoRepository.findAll();
 	}
 	
+	
+	
+	
+	
+	
+
 public Double calculoISR(Double salarioBase,Double igss, Double bonificacionDecreto,Double otrosIngresos) {
 	
 	Double resultado = 0.00;
