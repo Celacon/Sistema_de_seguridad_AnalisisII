@@ -56,6 +56,11 @@ import { AgregarPersonaComponent } from './agregar-persona/agregar-persona.compo
 import { TipoDocumentoComponent } from './tipo-documento/tipo-documento.component';
 import { AgregarTipoDocumentoComponent } from './agregar-tipo-documento/agregar-tipo-documento.component';
 import { EditarTipoDocumentoComponent } from './editar-tipo-documento/editar-tipo-documento.component';
+import { CommonModule } from '@angular/common';
+import { ReportePlanilla2Component } from './reporte-planilla2/reporte-planilla2.component';
+import { ReportePlanillaComponent } from './reporte-planilla/reporte-planilla.component';
+import { DetallePlanillaComponent } from './detalle-planilla/detalle-planilla.component';
+import { PlanillaComponent } from './planilla/planilla.component';
 
 @NgModule({
   declarations: [
@@ -110,14 +115,19 @@ import { EditarTipoDocumentoComponent } from './editar-tipo-documento/editar-tip
     AgregarPersonaComponent,
     TipoDocumentoComponent,
     AgregarTipoDocumentoComponent,
-    EditarTipoDocumentoComponent
+    EditarTipoDocumentoComponent,
+    ReportePlanilla2Component,
+    ReportePlanillaComponent,
+    DetallePlanillaComponent, 
+    PlanillaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
