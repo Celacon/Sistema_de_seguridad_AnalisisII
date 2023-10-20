@@ -127,7 +127,9 @@ export class DetallePlanillaComponent implements OnInit{
     }
 
   
-    
+    cancelar(){
+      location.href="/reporte_planilla";
+    }
   
    
     
