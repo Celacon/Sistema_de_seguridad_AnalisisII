@@ -1479,14 +1479,20 @@ select * from banco;
 select * from flujo_status_empleado;
 select * from nomina.status_empleado;
 select * from empleado;
+select * from role_opcion;
 
 select * from periodo_planilla;
+
+
+select * from empleado;
+select * from status_empleado;
 select * from planilla_cabecera;
 select * from planilla_detalle;
 
 select * from opcion;
+select * from tipo_acceso;
 
 
-
-
+use nomina;
+select * from modulo;
 

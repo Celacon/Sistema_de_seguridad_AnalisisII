@@ -1,0 +1,30 @@
+<body>
+  <h1>Agregar Opciones</h1>
+  <form id="agregarOpcion" (ngSubmit)="agregarOpcion()">
+
+
+    <label for="menu">Menu:</label>
+    <br>
+    <select id="menu" type="text" class="form-control form-control-lg " [(ngModel)]="opcion.idMenu"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option *ngFor="let men of menu" [value]="men.idMenu">{{men.nombre}}</option>
+         </select>
+         <br>
+     <label for="nombre">Nombre Opcion:</label>
+     <br>
+     <input type="text" id="nombre" name="nombre" [(ngModel)]="opcion.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+     <label for="orden">Orden Menu:</label>
+     <br>
+     <input type="number" id="orden" name="orden" [(ngModel)]="opcion.ordenMenu" [ngModelOptions]="{standalone:true}"required><br><br>
+
+     <label for="pagina">PAGINA:</label>
+     <br>
+     <input type="text" id="pagina" name="pagina" [(ngModel)]="opcion.pagina" [ngModelOptions]="{standalone:true}"required><br><br>
+
+
+     <input type="submit" value="Guardar">
+
+   </form>
+   <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+   </body>

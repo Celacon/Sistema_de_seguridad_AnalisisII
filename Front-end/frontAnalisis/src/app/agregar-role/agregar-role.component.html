@@ -1,0 +1,15 @@
+<body>
+  <h1>Editar Roles</h1>
+  <form id="agregarRole" (ngSubmit)="agregarRole()">
+
+
+    <label for="nombre">Nombre del Rol:</label>
+    <br>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="role.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+
+    <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+  </body>

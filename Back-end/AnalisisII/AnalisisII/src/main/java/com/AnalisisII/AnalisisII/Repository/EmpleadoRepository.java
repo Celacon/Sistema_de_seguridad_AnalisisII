@@ -12,6 +12,7 @@ import com.AnalisisII.AnalisisII.entity.Empleado;
 public interface EmpleadoRepository extends JpaRepository<Empleado, Serializable> {
 
 	List<Empleado> findByIdEmpleado(Integer idEmpleado);
+	List<Empleado> findByIdStatusEmpleado(Integer idStatusEmpleado);
 	
 	
 

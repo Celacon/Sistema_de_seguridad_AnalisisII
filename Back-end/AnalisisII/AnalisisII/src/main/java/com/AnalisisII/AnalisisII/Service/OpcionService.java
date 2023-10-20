@@ -98,7 +98,7 @@ public class OpcionService {
 	          return ResponseEntity.ok(successResponse);
 	      } catch (Exception e) {
 	    	  Map<String, Object> errorResponse = new HashMap<>();
-			    errorResponse.put("error", "El registro no se pudo borrar");
+			    errorResponse.put("mensaje", "El registro no se pudo borrar");
 			    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 		   }
 

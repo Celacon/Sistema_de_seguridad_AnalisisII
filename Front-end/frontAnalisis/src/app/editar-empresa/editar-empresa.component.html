@@ -1,0 +1,19 @@
+<body>
+  <h1>Formulario de Empresa</h1>
+  <form id="editarEmpresa" (ngSubmit)="editarEmpresa()">
+
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+    <label for="direccion">DIRECCION</label>
+    <input type="text" id="direccion" name="direccion" [(ngModel)]="empresa.direccion" [ngModelOptions]="{standalone:true}" required><br><br>
+
+    <label for="nit">NIT</label>
+    <input type="number" id="nit" name="nit" [(ngModel)]="empresa.nit" [ngModelOptions]="{standalone:true}" required><br><br>
+
+      <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

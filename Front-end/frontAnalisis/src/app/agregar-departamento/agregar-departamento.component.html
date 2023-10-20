@@ -1,0 +1,23 @@
+<body>
+  <h1>Agregar Departamento</h1>
+  <form id="agregarDepartamento" (ngSubmit)="agregarDepartamento()">
+
+
+
+    <label for="nombre">NOMBRE DEPARTAMENTO:</label>
+    <br>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="departamento.nombre" [ngModelOptions]="{standalone:true}" required><br><br>
+
+
+    <label for="idEmpresa">Empresa:</label>
+    <br>
+    <select id="idEmpresa" type="text" class="form-control form-control-lg " [(ngModel)]="departamento.idEmpresa"  [ngModelOptions]="{standalone:true}" requered>
+    <option ></option>
+    <option *ngFor="let emp of empresa" [value]="emp.idEmpresa">{{emp.nombre}}</option>
+    </select>
+    <br>
+      <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

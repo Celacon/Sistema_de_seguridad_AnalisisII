@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "planilla_detalle")
 public class PlanillaDetalle implements Serializable{
@@ -36,6 +38,8 @@ public class PlanillaDetalle implements Serializable{
 	@Column(name = "idempleado")
 	private Integer idEmpleado;
 	
+	//@Temporal(TemporalType.DATE) // Especifica que solo se debe almacenar la fecha, sin la hora
+    @JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechacontratacion")
 	private Date fechaContratacion;
 	

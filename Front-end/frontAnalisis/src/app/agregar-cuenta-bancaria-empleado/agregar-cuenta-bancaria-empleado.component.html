@@ -1,1 +1,34 @@
-<p>agregar-cuenta-bancaria-empleado works!</p>
+<body>
+    <h1>Agregar Departamento</h1>
+    <form id="agregarCuentaBancaria" (ngSubmit)="agregarCuentaBancaria()">
+  
+        <label for="idEmpleado">EMPLEADO:</label>
+        <br>
+        <select id="idEmpleado" type="text" class="form-control form-control-lg " [(ngModel)]="cuentaBancaria.idEmpleado"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option *ngFor="let emp of empleado" [value]="emp.idEmpleado">{{emp.idEmpleado}}</option>
+        </select>
+        <br>
+
+        <label for="idBanco">BANCO:</label>
+        <br>
+        <select id="idBanco" type="text" class="form-control form-control-lg " [(ngModel)]="cuentaBancaria.idBanco"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option *ngFor="let ban of banco" [value]="ban.idBanco">{{ban.nombre}}</option>
+        </select>
+        <br>
+
+        <label for="numeroDeCuenta">NUMERO DE CUENTA:</label>
+        <br>
+        <input type="text" id="numeroDeCuenta" name="numeroDeCuenta" [(ngModel)]="cuentaBancaria.numeroDeCuenta" [ngModelOptions]="{standalone:true}" required><br><br>
+    
+        <label for="activa">NUMERO DE CUENTA:</label>
+        <br>
+        <input type="text" id="activa" name="activa" [(ngModel)]="cuentaBancaria.activa" [ngModelOptions]="{standalone:true}" required><br><br>
+    
+        <input type="submit" value="Guardar">
+  
+    </form>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+  </body>
+  

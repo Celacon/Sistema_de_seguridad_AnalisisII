@@ -1,0 +1,69 @@
+<body>
+  <h1>Agregar Asignar Opciones</h1>
+  <form id="agregarAsignarOpciones" (ngSubmit)="agregarAsignarOpciones()">
+
+    <label for="idRole">Role:</label>
+    <select id="idRole" type="text" class="form-control form-control-lg " [(ngModel)]="asignaropciones.id.idRole"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option *ngFor="let rol of role" [value]="rol.idRole">{{rol.nombre}}</option>
+         </select>
+         <br>
+
+
+    <label for="idOpcion">Opcion:</label>
+    <select id="idOpcion" type="text" class="form-control form-control-lg " [(ngModel)]="asignaropciones.id.idOpcion"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option *ngFor="let opc of opcion" [value]="opc.idOpcion">{{opc.nombre}}</option>
+           </select>
+           <br>
+
+    <label for="alta">Alta:</label>
+    <select id="alta" type="text" class="form-control form-control-lg " [(ngModel)]="asignaropciones.alta"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option [value]="1">si</option>
+      <option [value]="0">no</option>
+         </select>
+         <br>
+
+    <label for="baja">Baja:</label>
+    <select id="baja" type="text" class="form-control form-control-lg " [(ngModel)]="asignaropciones.baja"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option [value]="1">si</option>
+      <option [value]="0">no</option>
+         </select>
+         <br>
+
+
+    <label for="cambio">Cambio:</label>
+    <select id="cambio" type="text" class="form-control form-control-lg " [(ngModel)]="asignaropciones.cambio"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option [value]="1">si</option>
+      <option [value]="0">no</option>
+         </select>
+         <br>
+
+    <label for="imprimir">Imprimir:</label>
+    <select id="imprimir" type="text" class="form-control form-control-lg " [(ngModel)]="asignaropciones.imprimir"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option [value]="1">si</option>
+      <option [value]="0">no</option>
+         </select>
+         <br>
+
+
+    <label for="exportar">Exportar:</label>
+    <select id="exportar" type="text" class="form-control form-control-lg " [(ngModel)]="asignaropciones.exportar"  [ngModelOptions]="{standalone:true}" requered>
+      <option ></option>
+      <option [value]="1">si</option>
+      <option [value]="0">no</option>
+         </select>
+         <br>
+
+
+
+
+      <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

@@ -1,0 +1,13 @@
+
+<body>
+  <h1>Formulario de Genero</h1>
+  <form id="editargenero" (ngSubmit)="editarGenero()">
+    <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" [(ngModel)]="genero.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+
+      <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

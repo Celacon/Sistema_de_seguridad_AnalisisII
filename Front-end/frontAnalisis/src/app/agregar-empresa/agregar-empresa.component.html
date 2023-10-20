@@ -1,0 +1,22 @@
+<body>
+<h1>Agregar de Empresa</h1>
+<form id="agregarEmpresa" (ngSubmit)="agregarEmpresa()">
+
+
+  <label for="nombre">Nombre:</label>
+  <br>
+  <input type="text" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+  <label for="direccion">DIRECCION</label>
+  <br>
+  <input type="text" id="direccion" name="direccion" [(ngModel)]="empresa.direccion" [ngModelOptions]="{standalone:true}" required><br><br>
+
+  <label for="nit">NIT</label>
+  <br>
+  <input type="number" id="nit" name="nit" [(ngModel)]="empresa.nit" [ngModelOptions]="{standalone:true}" required><br><br>
+
+  <input type="submit" value="Guardar">
+
+</form>
+<button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

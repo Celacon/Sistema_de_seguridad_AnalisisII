@@ -1,0 +1,21 @@
+
+<body>
+  <h1>Editar Departamento</h1>
+  <form id="editarDepartamento" (ngSubmit)="editarDepartamento()">
+
+
+
+
+    <label for="nombre">NOMBRE:</label>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="departamento.nombre" [ngModelOptions]="{standalone:true}" required><br><br>
+
+
+
+
+
+
+      <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

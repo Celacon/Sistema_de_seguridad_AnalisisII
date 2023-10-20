@@ -1,0 +1,17 @@
+<body>
+  <h1>Editar Modulo</h1>
+  <form id="editarModulo" (ngSubmit)="editarModulo()">
+    <label for=" "idModulo> ID de Modulo</label>
+    <input type="text" id="idModulo" name="idModulo" [(ngModel)]="modulo.idModulo" [ngModelOptions]="{standalone:true}" required><br><br>
+    <label for="nombre">Nombre del Modulo:</label>
+      <input type="text" id="nombre" name="nombre" [(ngModel)]="modulo.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+      <label for="orden">Orden Menu:</label>
+      <input type="number" id="orden" name="orden" [(ngModel)]="modulo.ordenMenu" [ngModelOptions]="{standalone:true}"required><br><br>
+
+
+
+      <input type="submit" value="Guardar">
+
+  </form>
+  <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

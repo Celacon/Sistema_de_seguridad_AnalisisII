@@ -1,1 +1,40 @@
-<p>editar-cuenta-bancaria-empleado works!</p>
+<body>
+    <h1>Agregar Departamento</h1>
+    <form id="editarCuenta" (ngSubmit)="editarCuenta()">
+  
+        <label for="idEmpleado">EMPLEADO:</label>
+        <br>
+        <select id="idEmpleado" type="text" class="form-control form-control-lg " [(ngModel)]="cuentaEmpleado.idEmpleado"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option *ngFor="let emp of empleado" [value]="emp.idEmpleado">{{emp.idEmpleado}}</option>
+        </select>
+        <br>
+
+        <label for="idBanco">BANCO:</label>
+        <br>
+        <select id="idBanco" type="text" class="form-control form-control-lg " [(ngModel)]="cuentaEmpleado.idBanco"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option *ngFor="let ban of banco" [value]="ban.idBanco">{{ban.nombre}}</option>
+        </select>
+        <br>
+
+        <label for="numeroDeCuenta">NUMERO DE CUENTA:</label>
+        <br>
+        <input type="text" id="numeroDeCuenta" name="numeroDeCuenta" [(ngModel)]="cuentaEmpleado.numeroDeCuenta" [ngModelOptions]="{standalone:true}" required><br><br>
+    
+        <label for="activa">ESTATUS:</label>
+        <br>
+        <select id="activa" type="text" class="form-control form-control-lg " [(ngModel)]="cuentaEmpleado.activa"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option [value]="1">ACTIVA</option>
+        <option [value]="0">INACTIVA</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Guardar">
+        <br>
+    </form>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+  </body>
+  
+
