@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "inasistencia")
 public class Inasistencia implements Serializable{
@@ -29,24 +31,29 @@ public class Inasistencia implements Serializable{
 	@Column(name = "idempleado")
 	private Integer idEmpleado;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechainicial")
 	private Date fechaInicial;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechafinal")
 	private Date fechaFinal;
 	
 	@Column(name = "motivoinasistencia")
 	private String motivoInasistencia;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechaprocesado")
 	private Date fechaProcesado;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechacreacion")
 	private Date fechaCreacion;
 	
 	@Column(name = "usuariocreacion")
 	private String usuarioCreacion;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechamodificacion")
 	private Date fechaModificacion;
 

@@ -55,7 +55,26 @@ import { EditarPersonaComponent } from './editar-persona/editar-persona.componen
 import { TipoDocumentoComponent } from './tipo-documento/tipo-documento.component';
 import { AgregarTipoDocumentoComponent } from './agregar-tipo-documento/agregar-tipo-documento.component';
 import { EditarTipoDocumentoComponent } from './editar-tipo-documento/editar-tipo-documento.component';
-
+import { CuentaBancariaEmpleadoComponent } from './cuenta-bancaria-empleado/cuenta-bancaria-empleado.component';
+import { AgregarCuentaBancariaEmpleadoComponent } from './agregar-cuenta-bancaria-empleado/agregar-cuenta-bancaria-empleado.component';
+import { EditarCuentaBancariaEmpleadoComponent } from './editar-cuenta-bancaria-empleado/editar-cuenta-bancaria-empleado.component';
+import { EstadoCivilComponent } from './estado-civil/estado-civil.component';
+import { AgregarEstadoCivilComponent } from './agregar-estado-civil/agregar-estado-civil.component';
+import { EditarEstadoCivilComponent } from './editar-estado-civil/editar-estado-civil.component';
+import { FlujoStatusEmpleadoComponent } from './flujo-status-empleado/flujo-status-empleado.component';
+import { AgregarFlujoStatusEmpleadoComponent } from './agregar-flujo-status-empleado/agregar-flujo-status-empleado.component';
+import { EditarFlujoStatusEmpleadoComponent } from './editar-flujo-status-empleado/editar-flujo-status-empleado.component';
+import { InasistenciaComponent } from './inasistencia/inasistencia.component';
+import { AgregarInasistenciaComponent } from './agregar-inasistencia/agregar-inasistencia.component';
+import { EditarInasistenciaComponent } from './editar-inasistencia/editar-inasistencia.component';
+import { PuestoComponent } from './puesto/puesto.component';
+import { AgregarPuestoComponent } from './agregar-puesto/agregar-puesto.component';
+import { EditarPuestoComponent } from './editar-puesto/editar-puesto.component';
+import { StatusEmpleadoComponent } from './status-empleado/status-empleado.component';
+import { AgregarEstatusEmpleadoComponent } from './agregar-estatus-empleado/agregar-estatus-empleado.component';
+import { EditarEstatusEmpleadoComponent } from './editar-estatus-empleado/editar-estatus-empleado.component';
+import { AgregarSucursalComponent } from './agregar-sucursal/agregar-sucursal.component';
+import { EditarSucursalComponent } from './editar-sucursal/editar-sucursal.component';
 
 
 const routes: Routes = [
@@ -113,9 +132,26 @@ const routes: Routes = [
 {path: 'tipos_documento', component:TipoDocumentoComponent},
 {path: 'agregarTipoDocumento',component:AgregarTipoDocumentoComponent},
 {path: 'editarTipoDocumento', component:EditarTipoDocumentoComponent},
-
-
-
+{path:'cuenta_bancaria_empleado',component:CuentaBancariaEmpleadoComponent},
+{path:'agregar_cuenta_bancaria_empleado',component:AgregarCuentaBancariaEmpleadoComponent},
+{path:'editar_cuenta_bancaria_empleado',component:EditarCuentaBancariaEmpleadoComponent},
+{path:'estado_civil',component:EstadoCivilComponent},
+{path:'agregar-estado-civil',component:AgregarEstadoCivilComponent},
+{path:'editar-estado-civil',component:EditarEstadoCivilComponent},
+{path:'flujo_status_empleado',component:FlujoStatusEmpleadoComponent},
+{path:'agregar_flujo_status_empleado',component:AgregarFlujoStatusEmpleadoComponent},
+{path:'editar_flujo_status_empleado',component:EditarFlujoStatusEmpleadoComponent},
+{path:'inasistencia',component:InasistenciaComponent},
+{path:'agregar-inasistencia',component:AgregarInasistenciaComponent},
+{path:'editar-inasistencia',component:EditarInasistenciaComponent},
+{path:'puesto',component:PuestoComponent},
+{path:'agregar-puesto',component:AgregarPuestoComponent},
+{path:'editar-puesto',component:EditarPuestoComponent},
+{path:'status_empleado',component:StatusEmpleadoComponent},
+{path:'agregar-estatus-empleado',component:AgregarEstatusEmpleadoComponent},
+{path:'editar-estatus-empleado',component:EditarEstatusEmpleadoComponent},
+{path:'agregar-sucursal',component:AgregarSucursalComponent},
+{path:'editar-sucursal',component:EditarSucursalComponent}
 ];
 
 @NgModule({

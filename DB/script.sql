@@ -3,7 +3,7 @@ drop schema if exists Nomina;
 create schema if not exists Nomina; 
 
 use  Nomina;
-
+SELECT * FROM OPCION;
 create table EMPRESA(
 	IdEmpresa int not null auto_increment,
 	Nombre varchar(100) not null,

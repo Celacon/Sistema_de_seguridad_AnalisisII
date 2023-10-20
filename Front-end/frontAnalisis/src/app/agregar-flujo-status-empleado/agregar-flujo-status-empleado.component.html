@@ -1,0 +1,27 @@
+<body>
+    <h1>Formulario de Agregar Flujo Estatus Empleado</h1>
+    <form id="agregarFlujoEmpleado" (ngSubmit)="agregarFlujoEmpleado()"> 
+        
+        <label for="idStatusActual">Estatus Actual:</label>
+        <select id="idStatusActual" type="text" class="form-control form-control-lg " [(ngModel)]="flujoEmpleado.idStatusActual"  [ngModelOptions]="{standalone:true}" requered>
+           <option ></option>
+           <option *ngFor="let pers of estatus" [value]="pers.idStatusEmpleado">{{pers.nombre}}</option>
+              </select>
+              <br>
+
+              <label for="idStatusNuevo">Estatus Nuevo:</label>
+              <select id="idStatusNuevo" type="text" class="form-control form-control-lg " [(ngModel)]="flujoEmpleado.idStatusNuevo"  [ngModelOptions]="{standalone:true}" requered>
+                 <option ></option>
+                 <option *ngFor="let pers of estatus" [value]="pers.idStatusEmpleado">{{pers.nombre}}</option>
+                    </select>
+                    <br>
+
+            <label for="nombreEvento">Evento:</label>
+        <input type="text" id="nombreEvento" name="nombreEvento" [(ngModel)]="flujoEmpleado.nombreEvento" [ngModelOptions]="{standalone:true}"required><br><br>
+
+      
+        <input type="submit" value="Guardar">
+    
+    </form>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

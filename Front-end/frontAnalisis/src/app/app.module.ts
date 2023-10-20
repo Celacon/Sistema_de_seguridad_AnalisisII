@@ -61,6 +61,28 @@ import { ReportePlanilla2Component } from './reporte-planilla2/reporte-planilla2
 import { ReportePlanillaComponent } from './reporte-planilla/reporte-planilla.component';
 import { DetallePlanillaComponent } from './detalle-planilla/detalle-planilla.component';
 import { PlanillaComponent } from './planilla/planilla.component';
+import { EditarEstatusUsuarioComponent } from './editar-estatus-usuario/editar-estatus-usuario.component';
+import { AgregarEstatusUsuarioComponent } from './agregar-estatus-usuario/agregar-estatus-usuario.component';
+import { AgregarCuentaBancariaEmpleadoComponent } from './agregar-cuenta-bancaria-empleado/agregar-cuenta-bancaria-empleado.component';
+import { AgregarEstadoCivilComponent } from './agregar-estado-civil/agregar-estado-civil.component';
+import { AgregarEstatusEmpleadoComponent } from './agregar-estatus-empleado/agregar-estatus-empleado.component';
+import { AgregarFlujoStatusEmpleadoComponent } from './agregar-flujo-status-empleado/agregar-flujo-status-empleado.component';
+import { EditarFlujoStatusEmpleadoComponent } from './editar-flujo-status-empleado/editar-flujo-status-empleado.component';
+import { AgregarInasistenciaComponent } from './agregar-inasistencia/agregar-inasistencia.component';
+import { AgregarSucursalComponent } from './agregar-sucursal/agregar-sucursal.component';
+import { CuentaBancariaEmpleadoComponent } from './cuenta-bancaria-empleado/cuenta-bancaria-empleado.component';
+import { EditarCuentaBancariaEmpleadoComponent } from './editar-cuenta-bancaria-empleado/editar-cuenta-bancaria-empleado.component';
+import { EditarEstadoCivilComponent } from './editar-estado-civil/editar-estado-civil.component';
+import { EditarEstatusEmpleadoComponent } from './editar-estatus-empleado/editar-estatus-empleado.component';
+import { EditarInasistenciaComponent } from './editar-inasistencia/editar-inasistencia.component';
+import { PuestoComponent } from './puesto/puesto.component';
+import { AgregarPuestoComponent } from './agregar-puesto/agregar-puesto.component';
+import { EditarPuestoComponent } from './editar-puesto/editar-puesto.component';
+import { EditarSucursalComponent } from './editar-sucursal/editar-sucursal.component';
+import { FlujoStatusEmpleadoComponent } from './flujo-status-empleado/flujo-status-empleado.component';
+import { StatusEmpleadoComponent } from './status-empleado/status-empleado.component';
+import { EstadoCivilComponent } from './estado-civil/estado-civil.component';
+import { InasistenciaComponent } from './inasistencia/inasistencia.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +141,29 @@ import { PlanillaComponent } from './planilla/planilla.component';
     ReportePlanilla2Component,
     ReportePlanillaComponent,
     DetallePlanillaComponent, 
-    PlanillaComponent
+    PlanillaComponent,
+    EditarEstatusUsuarioComponent,
+    AgregarEstatusUsuarioComponent,
+    AgregarCuentaBancariaEmpleadoComponent,
+    AgregarEstadoCivilComponent,
+    AgregarEstatusEmpleadoComponent,
+    AgregarFlujoStatusEmpleadoComponent,
+    EditarFlujoStatusEmpleadoComponent,
+    AgregarInasistenciaComponent,
+    AgregarSucursalComponent,
+    CuentaBancariaEmpleadoComponent,
+    EditarCuentaBancariaEmpleadoComponent,
+    EditarEstadoCivilComponent,
+    EditarEstatusEmpleadoComponent,
+    EditarInasistenciaComponent,
+    EditarPuestoComponent,
+    EditarSucursalComponent,
+    FlujoStatusEmpleadoComponent,
+    StatusEmpleadoComponent,
+    PuestoComponent,
+    AgregarPuestoComponent,
+    EstadoCivilComponent,
+    InasistenciaComponent
   ],
   imports: [
     BrowserModule,

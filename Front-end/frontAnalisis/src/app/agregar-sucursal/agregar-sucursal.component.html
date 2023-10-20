@@ -1,0 +1,18 @@
+<body>
+    <h1>Formulario de Sucursal</h1>
+    <form id="agregarSucursal" (ngSubmit)="agregarSucursal()"> 
+       
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="sucursal.nombre" [ngModelOptions]="{standalone:true}"required><br><br>
+
+        <label for="direccion">Direccion:</label>
+        <input type="text" id="direccion" name="direccion" [(ngModel)]="sucursal.direccion" [ngModelOptions]="{standalone:true}" required><br><br>
+
+        <label for="idEmpresa">ID de Empresa:</label>
+        <input type="text" id="idEmpresa" name="idEmpresa" [(ngModel)]="sucursal.idEmpresa" [ngModelOptions]="{standalone:true}" required><br><br>
+
+        <input type="submit" value="Guardar">
+    
+    </form>
+    <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+</body>

@@ -1,0 +1,48 @@
+<a href="home" style="background-color: #00BFFF; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; margin: 10px; display: inline-block; cursor: pointer;">inicio</a>
+
+<body>
+  <h1>Cuenta Bancaria Empleado</h1>
+    <table id="cuentaBancaria">
+  <thead>
+    <tr>
+      <th>CUENTA BANCARIA</th>
+      <th>EMPLEADO</th>
+      <th>BANCO</th>
+      <th>NUMERO DE CUENTA</th>
+      <th>ACTIVA</th>
+      <th>FECHA DE CREACIÓN</th>
+      <th>USUARIO DE CREACIÓN</th>
+      <th>FECHA DE MODIFICACIÓN</th>
+      <th>USUARIO DE MODIFICACIÓN</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fila of cuentaEmpleado">
+      <td>{{ fila.idCuentaBancaria }}</td>
+      <td>{{ fila.idEmpleado}}</td>
+      <td>{{ fila.idBanco }}</td>
+      <td>{{ fila.numeroDeCuenta }}</td>
+      <td>{{ fila.activa }}</td>
+      <td>{{ fila.fechaCreacion }}</td>
+      <td>{{ fila.usuarioCreacion }}</td>
+      <td>{{ fila.fechaModificacion }}</td>
+      <td>{{ fila.usuarioModificacion }}</td>
+      <td>
+
+        <button type="button" *ngIf="delete" class="btn btn-danger" (click)="eliminar(fila)">Eliminar</button>
+        <button type="button" *ngIf="edit"class="btn btn-danger" (click)="editar(fila)">Editar</button>
+
+
+
+      </td>
+
+    </tr>
+  </tbody>
+</table>
+
+<button type="button" *ngIf="create" class="btn btn-danger" (click)="agregar()">AGREGAR</button>
+<button type="button" *ngIf="print" class="btn btn-danger" onclick="javascript:window.print()" >IMPRIMIR</button>
+<button type="button" *ngIf="export" class="btn btn-danger" (click)="exportToExcel()" >EXPORTAR</button>
+</body>
+
