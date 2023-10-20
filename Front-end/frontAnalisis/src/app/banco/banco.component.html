@@ -4,7 +4,7 @@
 
 <body>
   <h1>Bancos</h1>
-<table>
+<table id="banco">
   <thead>
     <tr>
       <th>ID</th>
@@ -32,6 +32,7 @@
 </table>
 
 <button type="button" *ngIf="create" class="btn btn-danger" (click)="agregar()">AGREGAR</button>
-<button type="button" *ngIf="print" class="btn btn-danger" >IMPRIMIR</button>
-<button type="button" *ngIf="export" class="btn btn-danger" >EXPORTAR</button>
+<button type="button" *ngIf="print" class="btn btn-danger" onclick="javascript:window.print()" >IMPRIMIR</button>
+<button type="button" *ngIf="export" class="btn btn-danger" (click)="exportToExcel()" >EXPORTAR</button>
+
 </body>

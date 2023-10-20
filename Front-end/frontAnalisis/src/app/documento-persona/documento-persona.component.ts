@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-documento-persona',
@@ -107,6 +108,17 @@ export class DocumentoPersonaComponent implements OnInit{
   agregar(){
 
     location.href="/agregarDocumentoPersona";
+  }
+
+  name = 'reportedocumentopersona.xlsx';
+  exportToExcel(): void {
+    let element = document.getElementById('docpersona');
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, worksheet, 'Sheet1');
+
+    XLSX.writeFile(book, this.name);
   }
 
 
