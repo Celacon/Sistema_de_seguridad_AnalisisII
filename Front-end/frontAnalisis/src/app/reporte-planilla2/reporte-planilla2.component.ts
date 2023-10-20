@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators' 
 import { Observable } from 'rxjs';
-import * as XLSX from 'xlsx';
-
 @Component({
-  selector: 'app-reporte-planilla',
-  templateUrl: './reporte-planilla.component.html',
-  styleUrls: ['./reporte-planilla.component.css']
+  selector: 'app-reporte-planilla2',
+  templateUrl: './reporte-planilla2.component.html',
+  styleUrls: ['./reporte-planilla2.component.css']
 })
-export class ReportePlanillaComponent implements OnInit{
+export class ReportePlanilla2Component implements OnInit{
   planillaCabecera:any=[];
   paginaActual:number=1;
   idOpcion:any={};
@@ -126,16 +124,5 @@ this.export = (opcion[0].exportar === 1) ? true : false;
          catchError(e=> "error")
        )
      }
-
-     name = 'reporte.xlsx';
-     exportToExcel(): void {
-       let element = document.getElementById('planilla');
-       const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-   
-       const book: XLSX.WorkBook = XLSX.utils.book_new();
-       XLSX.utils.book_append_sheet(book, worksheet, 'Sheet1');
-   
-       XLSX.writeFile(book, this.name);
-     }     
 
 }

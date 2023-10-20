@@ -22,10 +22,14 @@
         <br>
         <input type="text" id="numeroDeCuenta" name="numeroDeCuenta" [(ngModel)]="cuentaBancaria.numeroDeCuenta" [ngModelOptions]="{standalone:true}" required><br><br>
     
-        <label for="activa">NUMERO DE CUENTA:</label>
+        <label for="activa">ESTATUS:</label>
         <br>
-        <input type="text" id="activa" name="activa" [(ngModel)]="cuentaBancaria.activa" [ngModelOptions]="{standalone:true}" required><br><br>
-    
+        <select id="activa" type="text" class="form-control form-control-lg " [(ngModel)]="cuentaBancaria.activa"  [ngModelOptions]="{standalone:true}" requered>
+        <option ></option>
+        <option [value]="1">ACTIVA</option>
+        <option [value]="0">INACTIVA</option>
+        </select>
+        <br>
         <input type="submit" value="Guardar">
   
     </form>

@@ -3,11 +3,18 @@
     <form id="editarFlujoStatusEmpleado" (ngSubmit)="editarFlujoStatusEmpleado()"> 
  
         <label for="idStatusActual">Estatus Actual:</label>
-        <input type="text" id="idStatusActual" name="idStatusActual" [(ngModel)]="flujoEstatusEmpleado.id.idStatusActual" [ngModelOptions]="{standalone:true}"required><br><br>
-        
-        <label for="idStatusNuevo">Estatus Actual:</label>
-        <input type="text" id="idStatusNuevo" name="idStatusNuevo" [(ngModel)]="flujoEstatusEmpleado.id.idStatusNuevo" [ngModelOptions]="{standalone:true}"required><br><br>
+        <select id="idStatusActual" type="text" class="form-control form-control-lg " [(ngModel)]="flujoEstatusEmpleado.id.idStatusActual"  [ngModelOptions]="{standalone:true}" requered>
+           <option ></option>
+           <option *ngFor="let pers of estatus" [value]="pers.idStatusEmpleado">{{pers.nombre}}</option>
+              </select>
+              <br>
 
+              <label for="idStatusNuevo">Estatus Nuevo:</label>
+              <select id="idStatusNuevo" type="text" class="form-control form-control-lg " [(ngModel)]="flujoEstatusEmpleado.id.idStatusNuevo"  [ngModelOptions]="{standalone:true}" requered>
+                 <option ></option>
+                 <option *ngFor="let pers of estatus" [value]="pers.idStatusEmpleado">{{pers.nombre}}</option>
+                    </select>
+                    <br>
         <label for="nombreEvento">Nombre del Evento:</label>
         <input type="text" id="nombreEvento" name="nombreEvento" [(ngModel)]="flujoEstatusEmpleado.nombreEvento" [ngModelOptions]="{standalone:true}"required><br><br>
 

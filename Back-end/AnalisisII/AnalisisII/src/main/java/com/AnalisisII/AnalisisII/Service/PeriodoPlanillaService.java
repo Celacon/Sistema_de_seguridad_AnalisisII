@@ -41,7 +41,7 @@ public class PeriodoPlanillaService {
 	    public List<PeriodoPlanilla> geById(@PathVariable ("anio")Integer anio, @PathVariable ("mes")Integer mes) {
 	        PlanillaId id = new PlanillaId(anio, mes);
 	        List<PeriodoPlanilla> result = periodoPlanillaRepository.findById(id);
-	        //RoleOpcion us = result.get(0);
+	       
 	        return  result;
 	    }
 	 

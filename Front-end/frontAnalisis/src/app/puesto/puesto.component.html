@@ -1,5 +1,5 @@
 <a href="home" style="background-color: #00BFFF; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; margin: 10px; display: inline-block; cursor: pointer;">inicio</a>
-<table>
+<table id="puesto">
     <thead>
       <tr>
         <th>ID PUESTO</th>
@@ -33,6 +33,7 @@
   </table>
 
   <button type="button" *ngIf="create" class="btn btn-danger" (click)="agregar()">AGREGAR</button>
-  <button type="button" *ngIf="print" class="btn btn-danger" >IMPRIMIR</button>
-  <button type="button" *ngIf="export" class="btn btn-danger" >EXPORTAR</button>
+  <button type="button" *ngIf="print" class="btn btn-danger" onclick="javascript:window.print()" >IMPRIMIR</button>
+  <button type="button" *ngIf="export" class="btn btn-danger" (click)="exportToExcel()" >EXPORTAR</button>
+
 

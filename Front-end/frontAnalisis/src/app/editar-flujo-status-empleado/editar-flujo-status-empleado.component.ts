@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
+import { Observable } from 'rxjs'; 
 
 @Component({
   selector: 'app-editar-flujo-status-empleado',
@@ -10,6 +11,8 @@ import {catchError,tap} from 'rxjs/operators'
 })
 export class EditarFlujoStatusEmpleadoComponent implements OnInit{
   public flujoEstatusEmpleado:any = {};
+  public flujoEmpleado2:any = {};
+  public estatus:any = [];
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
@@ -18,6 +21,7 @@ export class EditarFlujoStatusEmpleadoComponent implements OnInit{
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
     this.flujoEstatusEmpleado=JSON.parse(localStorage.getItem("editar")||'{}');
+    this.buscarStatus();
    }
 
    editarFlujoStatusEmpleado(){
@@ -57,6 +61,24 @@ export class EditarFlujoStatusEmpleadoComponent implements OnInit{
       cancelar(){
         localStorage.removeItem("editar")
         location.href="/flujo_status_empleado";
+      }
+
+      buscarStatus(){
+        this.buscarStatusServicio().subscribe(
+          (response:any)=> this.estatus=response
+        )
+      }
+
+      buscarStatusServicio():Observable<any>{
+        return this.http.get<any>('http://localhost:6500/miapp/statusEmpleado/buscar').pipe(
+          catchError((error) => {
+            console.log(error);
+            const mensaje =error.error;
+            const objetoJSON = JSON.parse(mensaje);
+            alert(objetoJSON.mensaje);
+            throw error;
+            })
+        )
       }
 
 }

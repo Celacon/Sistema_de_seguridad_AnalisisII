@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
   public flujoEmpleado:any = {};
-  public empleados:any = [];
+  public flujoEmpleado2:any = {};
+  public estatus:any = [];
   public buscarStatusUsuario:any = [];
   public usuarioMomentaneo:any = {};
   temporal:any ={};
@@ -20,10 +21,17 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
   ngOnInit(): void {
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
    this.usuarioMomentaneo= this.temporal.usuario;
-   this.buscarEmpleados();
+   this.buscarStatus();
   }
 
   agregarFlujoEmpleado(){
+   this.flujoEmpleado2 = {
+        id: {
+        idStatusActual: this.flujoEmpleado.idStatusActual,
+        idStatusNuevo: this.flujoEmpleado.idStatusNuevo
+      },nombreEvento:this.flujoEmpleado.nombreEvento
+    };
+    console.log(this.flujoEmpleado2)
     let formularioValido:any = document.getElementById("agregarFlujoEmpleado");
     if(formularioValido.reportValidity()){
       this.servicioLogin().subscribe(
@@ -46,9 +54,9 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
         }),responseType:'text' as 'json'
       } 
      
-      this.flujoEmpleado.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
+      this.flujoEmpleado2.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
       
-      return this.http.post<any>('http://localhost:6500/miapp/flujoStatusEmpleado/guardar',this.flujoEmpleado,httpOptions).pipe(
+      return this.http.post<any>('http://localhost:6500/miapp/flujoStatusEmpleado/guardar',this.flujoEmpleado2,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -62,18 +70,14 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
         location.href="/flujo_status_empleado";
       }
 
-      buscarEmpleados(){
-
-        this.buscarEmpleadosServicio().subscribe(
-          (response:any)=> this.empleados=response
-
-
+      buscarStatus(){
+        this.buscarStatusServicio().subscribe(
+          (response:any)=> this.estatus=response
         )
-
       }
 
-      buscarEmpleadosServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/empleado/buscar').pipe(
+      buscarStatusServicio():Observable<any>{
+        return this.http.get<any>('http://localhost:6500/miapp/statusEmpleado/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

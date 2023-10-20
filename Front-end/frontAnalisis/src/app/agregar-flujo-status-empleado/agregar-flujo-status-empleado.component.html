@@ -2,21 +2,23 @@
     <h1>Formulario de Agregar Flujo Estatus Empleado</h1>
     <form id="agregarFlujoEmpleado" (ngSubmit)="agregarFlujoEmpleado()"> 
         
-        <label for="idPersona">Empleado:</label>
-        <select id="idPersona" type="text" class="form-control form-control-lg " [(ngModel)]="flujoEmpleado.idPersona"  [ngModelOptions]="{standalone:true}" requered>
+        <label for="idStatusActual">Estatus Actual:</label>
+        <select id="idStatusActual" type="text" class="form-control form-control-lg " [(ngModel)]="flujoEmpleado.idStatusActual"  [ngModelOptions]="{standalone:true}" requered>
            <option ></option>
-           <option *ngFor="let pers of empleados" [value]="pers.idPersona">{{pers.nombre}}</option>
+           <option *ngFor="let pers of estatus" [value]="pers.idStatusEmpleado">{{pers.nombre}}</option>
               </select>
               <br>
 
-        <label for="idStatusActual">Estatus Actual:</label>
-        <input type="text" id="idStatusActual" name="idStatusActual" [(ngModel)]="flujoEmpleado.id.idStatusActual" [ngModelOptions]="{standalone:true}"required><br><br>
-              
-        <label for="idStatusNuevo">Estatus Actual:</label>
-        <input type="text" id="idStatusNuevo" name="idStatusNuevo" [(ngModel)]="flujoEmpleado.id.idStatusNuevo" [ngModelOptions]="{standalone:true}"required><br><br>
-      
-        <label for="nombreEvento">Nombre del Evento:</label>
+              <label for="idStatusNuevo">Estatus Nuevo:</label>
+              <select id="idStatusNuevo" type="text" class="form-control form-control-lg " [(ngModel)]="flujoEmpleado.idStatusNuevo"  [ngModelOptions]="{standalone:true}" requered>
+                 <option ></option>
+                 <option *ngFor="let pers of estatus" [value]="pers.idStatusEmpleado">{{pers.nombre}}</option>
+                    </select>
+                    <br>
+
+            <label for="nombreEvento">Evento:</label>
         <input type="text" id="nombreEvento" name="nombreEvento" [(ngModel)]="flujoEmpleado.nombreEvento" [ngModelOptions]="{standalone:true}"required><br><br>
+
       
         <input type="submit" value="Guardar">
     
