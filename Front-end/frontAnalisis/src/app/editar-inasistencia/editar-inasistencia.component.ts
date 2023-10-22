@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-editar-inasistencia',
@@ -15,7 +17,10 @@ export class EditarInasistenciaComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void { 
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
@@ -36,7 +41,8 @@ export class EditarInasistenciaComponent implements OnInit{
       let json = JSON.parse(res);
       console.log(json);
       alert(json.mensaje);
-        location.href="/inasistencia";
+        //location.href="/inasistencia";
+        this.router.navigateByUrl("/inasistencia")
     }
  
     servicioLogin(){
@@ -47,7 +53,7 @@ export class EditarInasistenciaComponent implements OnInit{
       } 
      
       this.inasistencia.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
-      return this.http.post<any>('http://localhost:6500/miapp/inasistencia/editar',this.inasistencia,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/inasistencia/editar',this.inasistencia,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -59,7 +65,8 @@ export class EditarInasistenciaComponent implements OnInit{
 
       cancelar(){
         localStorage.removeItem("editar")
-        location.href="/inasistencia";
+       // location.href="/inasistencia";
+       this.router.navigateByUrl("/inasistencia")
       }
 
       buscarEmpleado(){
@@ -69,7 +76,7 @@ export class EditarInasistenciaComponent implements OnInit{
       }
     
       buscarEmpleadoServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/empleado/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/empleado/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

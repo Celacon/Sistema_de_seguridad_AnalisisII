@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-persona',
@@ -20,7 +22,9 @@ export class PersonaComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarPersona();
@@ -38,7 +42,7 @@ export class PersonaComponent implements OnInit{
 
   }
   buscarPersonaServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/persona/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/persona/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -52,7 +56,8 @@ export class PersonaComponent implements OnInit{
 
     datos.password=null;
       localStorage.setItem("editar",JSON.stringify(datos))
-      location.href="/editarPersona";
+      //location.href="/editarPersona";
+      this.router.navigateByUrl("/editarPersona")
     }
 
     eliminar(datos:any){
@@ -69,7 +74,7 @@ export class PersonaComponent implements OnInit{
      }
 
      eliminarPersonaServicio(id:any){
-         return this.http.delete<any>('http://localhost:6500/miapp/persona/eliminar/'+id).pipe(
+         return this.http.delete<any>(this.url.url+'miapp/persona/eliminar/'+id).pipe(
            catchError(e=> "error")
          )
        }
@@ -96,7 +101,7 @@ export class PersonaComponent implements OnInit{
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -110,7 +115,8 @@ export class PersonaComponent implements OnInit{
 
   agregar(){
 
-    location.href="/agregarPersona";
+    //location.href="/agregarPersona";
+    this.router.navigateByUrl("/agregarPersona")
   }
 
   name = 'reportepersona.xlsx';

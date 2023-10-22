@@ -1,7 +1,9 @@
 import { Component,OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import {catchError,tap} from 'rxjs/operators' 
+import {catchError,tap} from 'rxjs/operators'
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router"; 
 
 @Component({
   selector: 'app-editar-usuario',
@@ -13,7 +15,10 @@ export class EditarUsuarioComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void { 
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
@@ -42,7 +47,9 @@ export class EditarUsuarioComponent implements OnInit{
     
       alert(json.mensaje);
  
-        location.href="/usuario";
+       // location.href="/usuario";
+
+        this.router.navigateByUrl("/usuario")
   
      
   
@@ -60,7 +67,7 @@ export class EditarUsuarioComponent implements OnInit{
      
       this.usuario.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
       
-      return this.http.post<any>('http://localhost:6500/miapp/usuario/actualizarUsuario',this.usuario,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/usuario/actualizarUsuario',this.usuario,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -72,7 +79,8 @@ export class EditarUsuarioComponent implements OnInit{
 
       cancelar(){
         localStorage.removeItem("editar")
-        location.href="/usuario";
+        //location.href="/usuario";
+        this.router.navigateByUrl("/usuario")
       }
 
 

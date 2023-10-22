@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-actualizar-password',
@@ -19,7 +21,7 @@ export class ActualizarPasswordComponent implements OnInit{
   public userOnline:any = [] ;
  
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,  private router: Router, private url:AppComponent) { }
   ngOnInit(): void {
 
     
@@ -57,18 +59,11 @@ export class ActualizarPasswordComponent implements OnInit{
      
  
         localStorage.setItem("usu",JSON.stringify(json))        
-        //this.session = true;
-        //this.mensaje = "Bienvenido " + json.usuario;
+  
         alert(json.mensaje);
         location.href=json.pagina;
   
-      }/* else {
-        this.session = true;
- 
-          this.mensaje = "*Intente de nuevo o contáctese con el administrador del sistema";
-          alert("Usuario o Contraseña Inválido");
-          formularioLogin.reset();
-      }*/
+      }
   
     }
  
@@ -84,7 +79,7 @@ export class ActualizarPasswordComponent implements OnInit{
      
       this.usuarioA.idUsuario = this.usuarioMomentaneo.idUsuario;
       
-      return this.http.post<any>('http://localhost:6500/miapp/usuario/actualizarPassword',this.usuarioA,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/usuario/actualizarPassword',this.usuarioA,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -97,6 +92,7 @@ export class ActualizarPasswordComponent implements OnInit{
       salir(){
         localStorage.clear();
         location.href="/";
+        this.router.navigateByUrl("/")
       }
     
  

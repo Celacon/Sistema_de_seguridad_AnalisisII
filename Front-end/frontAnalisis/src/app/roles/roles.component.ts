@@ -5,6 +5,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-roles',
@@ -22,7 +24,9 @@ export class RolesComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarRoles();
@@ -37,7 +41,7 @@ export class RolesComponent implements OnInit{
     )
   }
   buscarRolesServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/role/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -51,7 +55,8 @@ export class RolesComponent implements OnInit{
 
     datos.password=null;
       localStorage.setItem("editar",JSON.stringify(datos))
-      location.href="/editar_roles";
+      //location.href="/editar_roles";
+      this.router.navigateByUrl("/editar_roles")
     }
     eliminar(datos:any){
 
@@ -67,7 +72,7 @@ export class RolesComponent implements OnInit{
      }
 
      eliminarRolesServicio(id:any){
-         return this.http.delete<any>('http://localhost:6500/miapp/role/EliminarRole/'+id).pipe(
+         return this.http.delete<any>(this.url.url+'miapp/role/EliminarRole/'+id).pipe(
            catchError(e=> "error")
          )
        }
@@ -93,7 +98,7 @@ export class RolesComponent implements OnInit{
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -107,7 +112,8 @@ export class RolesComponent implements OnInit{
 
   agregar(){
 
-    location.href="/AgregueRole";
+   // location.href="/AgregueRole";
+    this.router.navigateByUrl("/AgregueRole")
   }
 
 

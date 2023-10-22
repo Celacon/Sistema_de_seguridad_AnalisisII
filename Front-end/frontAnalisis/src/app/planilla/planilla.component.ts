@@ -3,10 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
 import { Observable } from 'rxjs';
-
-
-
-
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-planilla',
@@ -20,7 +18,10 @@ export class PlanillaComponent implements OnInit{
   cabecera:any ={};
   cabecera2:any ={};
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+    
   ngOnInit(): void {
 
     this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
@@ -42,7 +43,7 @@ export class PlanillaComponent implements OnInit{
   }
 
   buscarPeriodoServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/periodoPlanilla/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/periodoPlanilla/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -84,7 +85,8 @@ export class PlanillaComponent implements OnInit{
     
       alert(json.mensaje);
  
-      location.href="/reporte_planilla";
+      //location.href="/reporte_planilla";
+      this.router.navigateByUrl("/reporte_planilla")
   
      
   
@@ -102,7 +104,7 @@ export class PlanillaComponent implements OnInit{
      console.log(this.cabecera2)
       this.cabecera2.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
       
-      return this.http.post<any>('http://localhost:6500/miapp/planillaCabecera/guardar',this.cabecera2,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/planillaCabecera/guardar',this.cabecera2,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -113,7 +115,8 @@ export class PlanillaComponent implements OnInit{
       }
 
   cancelar(){
-    location.href="/reporte_planilla";
+    //location.href="/reporte_planilla";
+    this.router.navigateByUrl("/reporte_planilla")
   }
 
 }

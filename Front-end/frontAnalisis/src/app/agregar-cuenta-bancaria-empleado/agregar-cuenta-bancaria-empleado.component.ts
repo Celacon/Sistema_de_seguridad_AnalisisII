@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-cuenta-bancaria-empleado',
@@ -16,7 +18,10 @@ export class AgregarCuentaBancariaEmpleadoComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
    this.usuarioMomentaneo= this.temporal.usuario;
@@ -37,7 +42,8 @@ export class AgregarCuentaBancariaEmpleadoComponent implements OnInit{
       let json = JSON.parse(res);
       console.log(json);
       alert(json.mensaje);
-      location.href="/cuenta_bancaria_empleado";
+     // location.href="/cuenta_bancaria_empleado";
+     this.router.navigateByUrl("/cuenta_bancaria_empleado")
     }
 
     servicioLogin(){
@@ -48,7 +54,7 @@ export class AgregarCuentaBancariaEmpleadoComponent implements OnInit{
       }
 
       this.cuentaBancaria.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
-      return this.http.post<any>('http://localhost:6500/miapp/cuentaBancariaEmpleado/guardar',this.cuentaBancaria,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/cuentaBancariaEmpleado/guardar',this.cuentaBancaria,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -59,7 +65,8 @@ export class AgregarCuentaBancariaEmpleadoComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/cuenta_bancaria_empleado";
+        //location.href="/cuenta_bancaria_empleado";
+        this.router.navigateByUrl("/cuenta_bancaria_empleado")
       }
 
       buscarEmpleado(){
@@ -69,7 +76,7 @@ export class AgregarCuentaBancariaEmpleadoComponent implements OnInit{
       }
 
       buscarEmpleadoServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/empleado/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/empleado/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;
@@ -87,7 +94,7 @@ export class AgregarCuentaBancariaEmpleadoComponent implements OnInit{
       }
 
       buscarBancoServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/banco/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/banco/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

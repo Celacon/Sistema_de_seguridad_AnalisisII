@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-editar-modulo',
@@ -13,7 +15,10 @@ export class EditarModuloComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
@@ -42,7 +47,8 @@ export class EditarModuloComponent implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/modulo";
+      //  location.href="/modulo";
+      this.router.navigateByUrl("/modulo")
 
 
 
@@ -60,7 +66,7 @@ export class EditarModuloComponent implements OnInit{
 
       this.modulo.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/modulo/editar',this.modulo,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/modulo/editar',this.modulo,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -72,7 +78,8 @@ export class EditarModuloComponent implements OnInit{
 
       cancelar(){
         localStorage.removeItem("editar")
-        location.href="/modulo";
+       // location.href="/modulo";
+       this.router.navigateByUrl("/modulo")
       }
 
 }

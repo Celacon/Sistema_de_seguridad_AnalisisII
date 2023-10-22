@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -23,7 +25,9 @@ export class UsuariosComponent implements OnInit{
 
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarUsuarios();
@@ -44,7 +48,7 @@ export class UsuariosComponent implements OnInit{
   }
 
   buscarUsuariosServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/usuario/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/usuario/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -62,7 +66,8 @@ editar(datos:any){
 
 datos.password=null;
   localStorage.setItem("editar",JSON.stringify(datos))
-  location.href="/editar_usuario";
+  //location.href="/editar_usuario";
+  this.router.navigateByUrl("/editar_usuario")
 }
 
 
@@ -80,7 +85,7 @@ datos.password=null;
   }
 
     eliminarAlumnoServicio(id:any){
-      return this.http.delete<any>('http://localhost:6500/miapp/usuario/eliminar/'+id).pipe(
+      return this.http.delete<any>(this.url.url+'miapp/usuario/eliminar/'+id).pipe(
         catchError(e=> "error")
       )
     }
@@ -109,7 +114,7 @@ datos.password=null;
     }
 
     buscarOpcionServicio(id:any):Observable<any>{
-      return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+      return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -130,7 +135,8 @@ datos.password=null;
 
     agregar(){
 
-      location.href="/agregar_usuario";
+    //  location.href="/agregar_usuario";
+      this.router.navigateByUrl("/agregar_usuario")
     }
 
     name = 'reporteusuarios.xlsx';

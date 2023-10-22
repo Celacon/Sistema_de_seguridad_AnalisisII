@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -21,7 +23,9 @@ export class SucursalComponent implements OnInit {
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarSucursal();
@@ -37,7 +41,7 @@ export class SucursalComponent implements OnInit {
 
   buscarSucursalServicio(): Observable<any> {
     return this.http
-      .get<any>('http://localhost:6500/miapp/sucursal/buscar')
+      .get<any>(this.url.url+'miapp/sucursal/buscar')
       .pipe(
         catchError((error) => {
           console.log(error);
@@ -52,7 +56,8 @@ export class SucursalComponent implements OnInit {
   editar(datos: any) {
     datos.password = null;
     localStorage.setItem('editar', JSON.stringify(datos));
-    location.href = '/editar-sucursal';
+    //location.href = '/editar-sucursal';
+    this.router.navigateByUrl("/editar-sucursal")
   }
 
   eliminar(datos: any) {
@@ -68,7 +73,7 @@ export class SucursalComponent implements OnInit {
 
   eliminarSucursalServicio(id: any) {
     return this.http
-      .delete<any>('http://localhost:6500/miapp/sucursal/EliminaSucursal/' + id)
+      .delete<any>(this.url.url+'miapp/sucursal/EliminaSucursal/' + id)
       .pipe(catchError((e) => 'error'));
   }
 
@@ -91,7 +96,7 @@ export class SucursalComponent implements OnInit {
   buscarOpcionServicio(id: any): Observable<any> {
     return this.http
       .get<any>(
-        'http://localhost:6500/miapp/role-opcion/buscarId/' +
+        this.url.url+'miapp/role-opcion/buscarId/' +
           id.idRole +
           '/' +
           id.idOpcion
@@ -108,7 +113,8 @@ export class SucursalComponent implements OnInit {
   }
 
   agregar() {
-    location.href = '/agregar-sucursal';
+    //location.href = '/agregar-sucursal';
+    this.router.navigateByUrl("/agregar-sucursal")
   }
 
   name = 'sucursalReporte.xlsx';

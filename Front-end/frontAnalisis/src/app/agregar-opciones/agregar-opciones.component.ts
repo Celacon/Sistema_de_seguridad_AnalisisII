@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-opciones',
@@ -15,7 +17,9 @@ export class AgregarOpcionesComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
   ngOnInit(): void {
 
 
@@ -48,8 +52,8 @@ export class AgregarOpcionesComponent implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/opcion";
-
+       // location.href="/opcion";
+       this.router.navigateByUrl("/opcion")
 
 
     }
@@ -66,7 +70,7 @@ export class AgregarOpcionesComponent implements OnInit{
 
       this.opcion.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/opcion/guardar',this.opcion,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/opcion/guardar',this.opcion,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -77,7 +81,8 @@ export class AgregarOpcionesComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/opcion";
+        //location.href="/opcion";
+        this.router.navigateByUrl("/opcion")
       }
 
       buscarMenu(){
@@ -91,7 +96,7 @@ export class AgregarOpcionesComponent implements OnInit{
       }
 
       buscarMenuServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/menu/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/menu/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

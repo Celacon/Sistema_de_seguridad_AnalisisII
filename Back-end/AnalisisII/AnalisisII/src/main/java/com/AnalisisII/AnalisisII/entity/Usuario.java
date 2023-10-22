@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "usuario")
+//@Table(name = "USUARIO")
 public class Usuario implements Serializable{
 	
 	/**

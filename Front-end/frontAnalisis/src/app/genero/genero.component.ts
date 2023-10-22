@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-genero',
@@ -20,7 +22,9 @@ export class GeneroComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarGenero();
@@ -35,7 +39,7 @@ export class GeneroComponent implements OnInit{
     )
   }
   buscarGeneroServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/genero/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/genero/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -49,7 +53,8 @@ export class GeneroComponent implements OnInit{
 
     datos.password=null;
       localStorage.setItem("editar",JSON.stringify(datos))
-      location.href="/editar_genero";
+      //location.href="/editar_genero";
+      this.router.navigateByUrl("/editar_genero")
     }
     eliminar(datos:any){
 
@@ -63,7 +68,7 @@ export class GeneroComponent implements OnInit{
        this.buscarGenero()
      }
      eliminarGeneroService(id:any){
-      return this.http.delete<any>('http://localhost:6500/miapp/genero/eliminarGenero/'+id).pipe(
+      return this.http.delete<any>(this.url.url+'miapp/genero/eliminarGenero/'+id).pipe(
         catchError(e=> "error")
       )
     }
@@ -87,7 +92,7 @@ this.export = (opcion[0].exportar === 1) ? true : false;
 
 }
 buscarOpcionServicio(id:any):Observable<any>{
-return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
   catchError((error) => {
     console.log(error);
     const mensaje =error.error;
@@ -99,7 +104,8 @@ return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id
 }
 agregar(){
 
-  location.href="/InserteGenero";
+  //location.href="/InserteGenero";
+  this.router.navigateByUrl("/InserteGenero")
 }
 
 name = 'reportegenero.xlsx';

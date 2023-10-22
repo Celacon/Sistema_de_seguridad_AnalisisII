@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-status-empleado',
@@ -20,7 +22,9 @@ export class StatusEmpleadoComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarStatusEmpleado();
@@ -35,7 +39,7 @@ export class StatusEmpleadoComponent implements OnInit{
 
   buscarStatusEmpleadoServicio(): Observable<any> {
     return this.http
-      .get<any>('http://localhost:6500/miapp/statusEmpleado/buscar')
+      .get<any>(this.url.url+'miapp/statusEmpleado/buscar')
       .pipe(
         catchError((error) => {
           console.log(error);
@@ -50,7 +54,8 @@ export class StatusEmpleadoComponent implements OnInit{
   editar(datos: any) {
     datos.password = null;
     localStorage.setItem('editar', JSON.stringify(datos));
-    location.href = '/editar-estatus-empleado';
+    //location.href = '/editar-estatus-empleado';
+    this.router.navigateByUrl("/editar-estatus-empleado")
   }
 
   eliminar(datos: any) {
@@ -66,7 +71,7 @@ export class StatusEmpleadoComponent implements OnInit{
 
   eliminarStatusEmpleadoServicio(id: any) {
     return this.http
-      .delete<any>('http://localhost:6500/miapp/statusEmpleado/eliminar/' + id)
+      .delete<any>(this.url.url+'miapp/statusEmpleado/eliminar/' + id)
       .pipe(catchError((e) => 'error'));
   }
 
@@ -87,7 +92,7 @@ export class StatusEmpleadoComponent implements OnInit{
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -99,7 +104,8 @@ export class StatusEmpleadoComponent implements OnInit{
   }
 
   agregar() {
-    location.href = '/agregar-estatus-empleado';
+    //location.href = '/agregar-estatus-empleado';
+    this.router.navigateByUrl("/agregar-estatus-empleado")
   }
 
   name = 'StatusReporte.xlsx';

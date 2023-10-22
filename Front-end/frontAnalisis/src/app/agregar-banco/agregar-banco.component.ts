@@ -2,6 +2,9 @@ import { Component , OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
+
 
 
 @Component({
@@ -14,7 +17,10 @@ export class AgregarBancoComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
 
 
@@ -45,8 +51,8 @@ export class AgregarBancoComponent implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/banco";
-
+      //  location.href="/banco";
+      this.router.navigateByUrl("/banco")
 
 
     }
@@ -63,7 +69,7 @@ export class AgregarBancoComponent implements OnInit{
 
       this.banco.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/banco/guardar',this.banco,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/banco/guardar',this.banco,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -74,7 +80,8 @@ export class AgregarBancoComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/banco";
+       // location.href="/banco";
+       this.router.navigateByUrl("/banco")
       }
 }
 

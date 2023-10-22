@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-asignar-roles',
@@ -20,7 +22,9 @@ export class AsignarRolesComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarAsignarRoles();
@@ -38,7 +42,7 @@ export class AsignarRolesComponent implements OnInit{
 
   }
   buscarAsignarRolesServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/usuario-role/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/usuario-role/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -52,7 +56,8 @@ export class AsignarRolesComponent implements OnInit{
 
     datos.password=null;
       localStorage.setItem("editar",JSON.stringify(datos))
-      location.href="/editar_asignarroles";
+      //location.href="/editar_asignarroles";
+      this.router.navigateByUrl("/editar_asignarroles")
     }
 
     eliminar(datos:any){
@@ -67,7 +72,7 @@ export class AsignarRolesComponent implements OnInit{
        this.buscarAsignarRoles()
      }
      eliminarAsignarRolesServicio(id:any){
-      return this.http.delete<any>('http://localhost:6500/miapp/usuario-role/eliminarUsuarioRole/'+id.idUsuario+'/'+id.idRole).pipe(
+      return this.http.delete<any>(this.url.url+'miapp/usuario-role/eliminarUsuarioRole/'+id.idUsuario+'/'+id.idRole).pipe(
         catchError(e=> "error")
       )
     }
@@ -91,7 +96,7 @@ this.export = (opcion[0].exportar === 1) ? true : false;
 
 }
 buscarOpcionServicio(id:any):Observable<any>{
-return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
   catchError((error) => {
     console.log(error);
     const mensaje =error.error;
@@ -103,7 +108,8 @@ return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id
 }
 agregar(){
 
-  location.href="/agregarAsignarRoles";
+  //location.href="/agregarAsignarRoles";
+  this.router.navigateByUrl("/agregarAsignarRoles")
 }
 
 name = 'reporteasignarroles.xlsx';

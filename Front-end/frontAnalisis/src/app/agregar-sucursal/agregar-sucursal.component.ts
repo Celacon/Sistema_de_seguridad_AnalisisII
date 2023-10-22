@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-sucursal',
@@ -13,7 +15,10 @@ export class AgregarSucursalComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {   
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
    this.usuarioMomentaneo= this.temporal.usuario;
@@ -32,7 +37,9 @@ export class AgregarSucursalComponent implements OnInit{
       let json = JSON.parse(res);
       console.log(json);
       alert(json.mensaje);
-        location.href="/sucursal";
+      //  location.href="/sucursal";
+        this.router.navigateByUrl("/sucursal")
+        
     }
  
     servicioLogin(){
@@ -43,7 +50,7 @@ export class AgregarSucursalComponent implements OnInit{
       } 
      
       this.sucursal.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
-      return this.http.post<any>('http://localhost:6500/miapp/sucursal/guardar',this.sucursal,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/sucursal/guardar',this.sucursal,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -54,7 +61,8 @@ export class AgregarSucursalComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/sucursal";
+       // location.href="/sucursal";
+       this.router.navigateByUrl("/sucursal")
       }
 
 

@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-editar-empleado',
@@ -19,7 +21,10 @@ export class EditarEmpleadoComponent implements OnInit {
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
@@ -55,8 +60,8 @@ export class EditarEmpleadoComponent implements OnInit {
 
       alert(json.mensaje);
 
-        location.href="/empleado";
-
+       // location.href="/empleado";
+       this.router.navigateByUrl("/empleado")
 
 
     }
@@ -73,7 +78,7 @@ export class EditarEmpleadoComponent implements OnInit {
 
       this.empleado.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/empleado/editar',this.empleado,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/empleado/editar',this.empleado,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -85,7 +90,8 @@ export class EditarEmpleadoComponent implements OnInit {
 
       cancelar(){
         localStorage.removeItem("editar")
-        location.href="/empleado";
+      //  location.href="/empleado";
+      this.router.navigateByUrl("/empleado")
       }
 
       buscarPersona(){
@@ -99,7 +105,7 @@ export class EditarEmpleadoComponent implements OnInit {
       }
 
       buscarPersonaServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/persona/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/persona/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;
@@ -120,7 +126,7 @@ export class EditarEmpleadoComponent implements OnInit {
       }
 
       buscarSucursalServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/sucursal/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/sucursal/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;
@@ -142,7 +148,7 @@ export class EditarEmpleadoComponent implements OnInit {
       }
 
       buscarPuestoServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/puesto/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/puesto/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;
@@ -164,7 +170,7 @@ export class EditarEmpleadoComponent implements OnInit {
       }
 
       buscarStatusEmpleadoServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/statusEmpleado/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/statusEmpleado/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

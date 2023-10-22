@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-detalle-planilla',
@@ -17,15 +19,12 @@ export class DetallePlanillaComponent implements OnInit{
   public empleado:any = [];
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void { 
-   // this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
-  //   this.usuarioMomentaneo= this.temporal.usuario;
-    // this.idCabeceraPlanilla2=JSON.parse(localStorage.getItem("editar")||'{}');
   
-   // this.buscarCabecera(this.idCabeceraPlanilla2);
-    //this. buscarEmpleado();
     this.localStorage()
     
     }
@@ -57,7 +56,7 @@ export class DetallePlanillaComponent implements OnInit{
     }
   
     buscarCabeceraServicio(id:any):Observable<any>{
-      return this.http.get<any>('http://localhost:6500/miapp/planillaCabecera/buscarId/'+id.anio+'/'+id.mes).pipe(
+      return this.http.get<any>(this.url.url+'miapp/planillaCabecera/buscarId/'+id.anio+'/'+id.mes).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -81,7 +80,7 @@ export class DetallePlanillaComponent implements OnInit{
     }
   
     buscarDetalleServicio(id:any):Observable<any>{
-      return this.http.get<any>('http://localhost:6500/miapp/planillaDetalle/buscarId2/'+id.anio+'/'+id.mes).pipe(
+      return this.http.get<any>(this.url.url+'miapp/planillaDetalle/buscarId2/'+id.anio+'/'+id.mes).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -104,7 +103,7 @@ export class DetallePlanillaComponent implements OnInit{
     }
   
     buscarEmpleadoServicio():Observable<any>{
-      return this.http.get<any>('http://localhost:6500/miapp/empleado/buscar/').pipe(
+      return this.http.get<any>(this.url.url+'miapp/empleado/buscar/').pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -128,7 +127,8 @@ export class DetallePlanillaComponent implements OnInit{
 
   
     cancelar(){
-      location.href="/reporte_planilla";
+      //location.href="/reporte_planilla";
+      this.router.navigateByUrl("/reporte_planilla")
     }
   
    

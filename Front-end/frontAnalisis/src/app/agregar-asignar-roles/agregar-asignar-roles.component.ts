@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-asignar-roles',
@@ -16,7 +18,10 @@ export class AgregarAsignarRolesComponent  implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
 
 
@@ -50,7 +55,8 @@ export class AgregarAsignarRolesComponent  implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/asignacion_role_usuario";
+        //location.href="/asignacion_role_usuario";
+        this.router.navigateByUrl("/asignacion_role_usuario")
 
 
 
@@ -68,7 +74,7 @@ export class AgregarAsignarRolesComponent  implements OnInit{
 
       this.asignarroles.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/usuario-role/guardar',this.asignarroles,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/usuario-role/guardar',this.asignarroles,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -79,7 +85,9 @@ export class AgregarAsignarRolesComponent  implements OnInit{
       }
 
       cancelar(){
-        location.href="/asignacion_role_usuario";
+        //location.href="/asignacion_role_usuario";
+        this.router.navigateByUrl("/asignacion_role_usuario")
+
       }
 
       buscarRole(){
@@ -93,7 +101,7 @@ export class AgregarAsignarRolesComponent  implements OnInit{
       }
 
       buscarRoleServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/role/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/role/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;
@@ -116,7 +124,7 @@ export class AgregarAsignarRolesComponent  implements OnInit{
       }
 
       buscarUsuarioServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/usuario/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/usuario/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

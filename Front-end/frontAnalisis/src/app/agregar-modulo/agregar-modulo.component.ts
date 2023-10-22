@@ -2,6 +2,8 @@ import { Component , OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -14,7 +16,10 @@ export class AgregarModuloComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
 
 
@@ -45,8 +50,8 @@ export class AgregarModuloComponent implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/modulo";
-
+       // location.href="/modulo";
+       this.router.navigateByUrl("/modulo")
 
 
     }
@@ -63,7 +68,7 @@ export class AgregarModuloComponent implements OnInit{
 
       this.modulo.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/modulo/guardar',this.modulo,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/modulo/guardar',this.modulo,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -74,7 +79,8 @@ export class AgregarModuloComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/modulo";
+        //location.href="/modulo";
+        this.router.navigateByUrl("/modulo")
       }
 
 }

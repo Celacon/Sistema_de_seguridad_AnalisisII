@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-menu',
@@ -21,7 +23,9 @@ export class MenuComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarMenu();
@@ -39,7 +43,7 @@ export class MenuComponent implements OnInit{
 
   }
   buscarMenuServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/menu/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/menu/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -53,7 +57,8 @@ export class MenuComponent implements OnInit{
 
     datos.password=null;
       localStorage.setItem("editar",JSON.stringify(datos))
-      location.href="/editar_menu";
+      //location.href="/editar_menu";
+      this.router.navigateByUrl("/editar_menu")
     }
 
     eliminar(datos:any){
@@ -69,7 +74,7 @@ export class MenuComponent implements OnInit{
      }
 
      eliminarMenuServicio(id:any){
-         return this.http.delete<any>('http://localhost:6500/miapp/menu/EliminarMenu/'+id).pipe(
+         return this.http.delete<any>(this.url.url+'miapp/menu/EliminarMenu/'+id).pipe(
            catchError(e=> "error")
          )
        }
@@ -95,7 +100,7 @@ export class MenuComponent implements OnInit{
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -109,7 +114,8 @@ export class MenuComponent implements OnInit{
 
   agregar(){
 
-    location.href="/InserteMenu";
+    //location.href="/InserteMenu";
+    this.router.navigateByUrl("/IserteMenu")
   }
 
   name = 'reportemenu.xlsx';

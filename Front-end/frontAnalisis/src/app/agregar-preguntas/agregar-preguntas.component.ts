@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError} from 'rxjs/operators' 
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-preguntas',
@@ -20,8 +22,9 @@ export class AgregarPreguntasComponent {
   temporal:any ={};
   public usuarioMomentaneo:any = {};
 
-  constructor(private http: HttpClient) {
-   }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
@@ -69,7 +72,8 @@ export class AgregarPreguntasComponent {
   responsePregunta(res: any){
     let json = JSON.parse(res);
   alert(json.mensaje);
-  location.href=json.pagina;
+ // location.href=json.pagina;
+  this.router.navigateByUrl(json.pagina)
     console.log(json);
 
     
@@ -85,7 +89,7 @@ export class AgregarPreguntasComponent {
       }),responseType:'text' as 'json'
       
     } 
-    return this.http.post<any>('http://localhost:6500/miapp/usuario-pregunta/guardar',this.preguntas,httpOptions).pipe(
+    return this.http.post<any>(this.url.url+'miapp/usuario-pregunta/guardar',this.preguntas,httpOptions).pipe(
       catchError((error) => {
    
      //  const mensaje =error.error;
@@ -96,7 +100,8 @@ export class AgregarPreguntasComponent {
     }
     salir(){
       localStorage.clear();
-      location.href="/";
+      //location.href="/";
+      this.router.navigateByUrl("/")
     }
   
 

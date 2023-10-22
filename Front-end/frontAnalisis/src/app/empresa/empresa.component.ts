@@ -5,6 +5,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators'
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-empresa',
@@ -22,7 +24,9 @@ export class EmpresaComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarEmpresa();
@@ -40,7 +44,7 @@ export class EmpresaComponent implements OnInit{
 
   }
   buscarEmpresaServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/empresa/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/empresa/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -54,7 +58,8 @@ export class EmpresaComponent implements OnInit{
 
     datos.password=null;
       localStorage.setItem("editar",JSON.stringify(datos))
-      location.href="/editar_empresa";
+      //location.href="/editar_empresa";
+      this.router.navigateByUrl("/editar_empresa")
     }
 
     eliminar(datos:any){
@@ -71,7 +76,7 @@ export class EmpresaComponent implements OnInit{
      }
 
        eliminarEmpresaServicio(id:any){
-         return this.http.delete<any>('http://localhost:6500/miapp/empresa/eliminarEmpresa/'+id).pipe(
+         return this.http.delete<any>(this.url.url+'miapp/empresa/eliminarEmpresa/'+id).pipe(
            catchError(e=> "error")
          )
        }
@@ -98,7 +103,7 @@ export class EmpresaComponent implements OnInit{
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -112,7 +117,8 @@ export class EmpresaComponent implements OnInit{
 
   agregar(){
 
-    location.href="/AgregueEmpresa";
+    //location.href="/AgregueEmpresa";
+    this.router.navigateByUrl("/AgregeEmpresa")
   }
 
   name = 'reporteempresa.xlsx';

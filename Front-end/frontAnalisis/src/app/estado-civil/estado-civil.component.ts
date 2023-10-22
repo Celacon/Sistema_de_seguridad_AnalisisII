@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-estado-civil',
@@ -20,7 +22,9 @@ export class EstadoCivilComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarEstadoCivil();
@@ -35,7 +39,7 @@ export class EstadoCivilComponent implements OnInit{
 
   buscarEstadoCivilServicio(): Observable<any> {
     return this.http
-      .get<any>('http://localhost:6500/miapp/estadoCivil/buscar')
+      .get<any>(this.url.url+'miapp/estadoCivil/buscar')
       .pipe(
         catchError((error) => {
           console.log(error);
@@ -50,7 +54,8 @@ export class EstadoCivilComponent implements OnInit{
   editar(datos: any) {
     datos.password = null;
     localStorage.setItem('editar', JSON.stringify(datos));
-    location.href = '/editar-estado-civil';
+    //location.href = '/editar-estado-civil';
+    this.router.navigateByUrl("/editar-estado-civil")
   }
 
   eliminar(datos: any) {
@@ -66,7 +71,7 @@ export class EstadoCivilComponent implements OnInit{
 
   eliminarEstadoCivilServicio(id: any) {
     return this.http
-      .delete<any>('http://localhost:6500/miapp/estadoCivil/eliminar/' + id)
+      .delete<any>(this.url.url+'miapp/estadoCivil/eliminar/' + id)
       .pipe(catchError((e) => 'error'));
   }
 
@@ -89,7 +94,7 @@ export class EstadoCivilComponent implements OnInit{
   buscarOpcionServicio(id: any): Observable<any> {
     return this.http
       .get<any>(
-        'http://localhost:6500/miapp/role-opcion/buscarId/' +
+        this.url.url+'miapp/role-opcion/buscarId/' +
           id.idRole +
           '/' +
           id.idOpcion
@@ -106,7 +111,8 @@ export class EstadoCivilComponent implements OnInit{
   }
 
   agregar() {
-    location.href = '/agregar-estado-civil';
+    //location.href = '/agregar-estado-civil';
+    this.router.navigateByUrl("/agregar-estado-civil")
   }
 
   name = 'estadoCivil.xlsx';

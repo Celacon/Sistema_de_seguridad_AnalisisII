@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators' 
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-reporte-planilla2',
   templateUrl: './reporte-planilla2.component.html',
@@ -18,7 +21,9 @@ export class ReportePlanilla2Component implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarPlanillaCabecera();
@@ -40,7 +45,7 @@ export class ReportePlanilla2Component implements OnInit{
   }
 
   buscarPlanillaCabeceraServicio():Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/planillaCabecera/buscar').pipe(
+    return this.http.get<any>(this.url.url+'miapp/planillaCabecera/buscar').pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -83,7 +88,7 @@ this.export = (opcion[0].exportar === 1) ? true : false;
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -96,13 +101,15 @@ this.export = (opcion[0].exportar === 1) ? true : false;
 
   agregar(){
    
-    location.href="/calculo_planilla";
+    //location.href="/calculo_planilla";
+    this.router.navigateByUrl("/calculo_planilla")
   }
 
   editar(datos:any){
 
       localStorage.setItem("editar",JSON.stringify(datos.idPlanillaCabecera))
-      location.href="/detalle_planilla";
+      //location.href="/detalle_planilla";
+      this.router.navigateByUrl("/detalle_planilla")
     }
 
 
@@ -120,7 +127,7 @@ this.export = (opcion[0].exportar === 1) ? true : false;
    }
    
      eliminarAlumnoServicio(id:any){
-       return this.http.delete<any>('http://localhost:6500/miapp/planillaCabecera/eliminar/'+id.anio+'/'+id.mes).pipe(
+       return this.http.delete<any>(this.url.url+'miapp/planillaCabecera/eliminar/'+id.anio+'/'+id.mes).pipe(
          catchError(e=> "error")
        )
      }

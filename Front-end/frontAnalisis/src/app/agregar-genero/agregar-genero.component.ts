@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-genero',
@@ -13,7 +15,10 @@ export class AgregarGeneroComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
 
 
@@ -44,7 +49,9 @@ export class AgregarGeneroComponent implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/genero";
+       // location.href="/genero";
+
+       this.router.navigateByUrl("/genero")
 
 
 
@@ -62,7 +69,7 @@ export class AgregarGeneroComponent implements OnInit{
 
       this.genero.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/genero/guardar',this.genero,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/genero/guardar',this.genero,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -73,6 +80,7 @@ export class AgregarGeneroComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/genero";
+       // location.href="/genero";
+       this.router.navigateByUrl("/genero")
       }
 }

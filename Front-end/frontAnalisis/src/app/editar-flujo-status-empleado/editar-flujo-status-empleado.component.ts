@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators' 
 import { Observable } from 'rxjs'; 
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-editar-flujo-status-empleado',
@@ -16,7 +18,10 @@ export class EditarFlujoStatusEmpleadoComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void { 
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
@@ -37,7 +42,8 @@ export class EditarFlujoStatusEmpleadoComponent implements OnInit{
       let json = JSON.parse(res);
       console.log(json);
       alert(json.mensaje);
-        location.href="/flujo_status_empleado";
+       // location.href="/flujo_status_empleado";
+       this.router.navigateByUrl("/flujo_status_empleado")
     }
  
     servicioLogin(){
@@ -48,7 +54,7 @@ export class EditarFlujoStatusEmpleadoComponent implements OnInit{
       } 
      
       this.flujoEstatusEmpleado.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
-      return this.http.post<any>('http://localhost:6500/miapp/flujoStatusEmpleado/editar',this.flujoEstatusEmpleado,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/flujoStatusEmpleado/editar',this.flujoEstatusEmpleado,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -60,7 +66,8 @@ export class EditarFlujoStatusEmpleadoComponent implements OnInit{
 
       cancelar(){
         localStorage.removeItem("editar")
-        location.href="/flujo_status_empleado";
+        //location.href="/flujo_status_empleado";
+        this.router.navigateByUrl("/flujo_status_empleado")
       }
 
       buscarStatus(){
@@ -70,7 +77,7 @@ export class EditarFlujoStatusEmpleadoComponent implements OnInit{
       }
 
       buscarStatusServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/statusEmpleado/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/statusEmpleado/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

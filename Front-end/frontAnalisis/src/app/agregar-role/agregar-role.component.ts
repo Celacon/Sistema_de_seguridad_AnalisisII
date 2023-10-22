@@ -2,6 +2,8 @@ import { Component , OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-role',
@@ -12,8 +14,11 @@ export class AgregarRoleComponent implements OnInit{
   public role:any = {};
   public usuarioMomentaneo:any = {};
   temporal:any ={};
+  
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
-  constructor(private http: HttpClient) { }
   ngOnInit(): void {
 
 
@@ -44,7 +49,8 @@ export class AgregarRoleComponent implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/role";
+        //location.href="/role";
+        this.router.navigateByUrl("/role")
 
 
 
@@ -62,7 +68,7 @@ export class AgregarRoleComponent implements OnInit{
 
       this.role.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/role/guardar',this.role,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/role/guardar',this.role,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -73,7 +79,7 @@ export class AgregarRoleComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/role";
+        this.router.navigateByUrl("/role")
       }
 
 

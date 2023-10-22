@@ -76,8 +76,7 @@ public class Empresa implements Serializable{
 	
 	@OneToMany(mappedBy = "idEmpresa")
 	private List<Sucursal> listSucursal;
-	
-	@OneToMany(mappedBy = "idEmpresa")
+		@OneToMany(mappedBy = "idEmpresa")
 	private List<Departamento> listDepartamento;
 	
 
@@ -225,7 +224,7 @@ public class Empresa implements Serializable{
 		this.listDepartamento = listDepartamento;
 	}
 	
-	
+	//   this.router.navigateByUrl("/home")
 	
 	
 }

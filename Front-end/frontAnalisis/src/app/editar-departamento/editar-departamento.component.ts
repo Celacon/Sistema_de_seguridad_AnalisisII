@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-editar-departamento',
@@ -16,7 +18,10 @@ export class EditarDepartamentoComponent implements OnInit {
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
@@ -47,7 +52,8 @@ export class EditarDepartamentoComponent implements OnInit {
 
       alert(json.mensaje);
 
-        location.href="/departamento";
+        //location.href="/departamento";
+        this.router.navigateByUrl("/departamento")
 
 
 
@@ -65,7 +71,7 @@ export class EditarDepartamentoComponent implements OnInit {
 
       this.departamento.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/departamento/editar',this.departamento,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/departamento/editar',this.departamento,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -77,7 +83,8 @@ export class EditarDepartamentoComponent implements OnInit {
 
       cancelar(){
         localStorage.removeItem("editar")
-        location.href="/departamento";
+        //location.href="/departamento";
+        this.router.navigateByUrl("/departamento")
       }
 
       buscarDepartamentos(){
@@ -91,7 +98,7 @@ export class EditarDepartamentoComponent implements OnInit {
       }
 
       buscarDepartamentosServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/departamento/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/departamento/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;
@@ -114,7 +121,7 @@ export class EditarDepartamentoComponent implements OnInit {
       }
 
       buscarEmpresaServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/departamento/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/departamento/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

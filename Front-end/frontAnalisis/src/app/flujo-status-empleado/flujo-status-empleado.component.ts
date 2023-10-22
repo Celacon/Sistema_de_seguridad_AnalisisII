@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as XLSX from 'xlsx';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-flujo-status-empleado',
@@ -20,7 +22,9 @@ export class FlujoStatusEmpleadoComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarFlujoStatusEmpleado();
@@ -36,7 +40,7 @@ export class FlujoStatusEmpleadoComponent implements OnInit{
 
   buscarFlujoStatusEmpleadoServicio(): Observable<any> {
     return this.http
-      .get<any>('http://localhost:6500/miapp/flujoStatusEmpleado/buscar')
+      .get<any>(this.url.url+'miapp/flujoStatusEmpleado/buscar')
       .pipe(
         catchError((error) => {
           console.log(error);
@@ -56,7 +60,7 @@ export class FlujoStatusEmpleadoComponent implements OnInit{
 
   buscarFlujoStatusEmpleadoIdServicio(): Observable<any> {
     return this.http
-      .get<any>('http://localhost:6500/miapp/flujoStatusEmpleado/buscar')
+      .get<any>(this.url.url+'miapp/flujoStatusEmpleado/buscar')
       .pipe(
         catchError((error) => {
           console.log(error);
@@ -71,7 +75,8 @@ export class FlujoStatusEmpleadoComponent implements OnInit{
   editar(datos: any) {
     datos.password = null;
     localStorage.setItem('editar', JSON.stringify(datos));
-    location.href = '/editar_flujo_status_empleado';
+   // location.href = '/editar_flujo_status_empleado';
+    this.router.navigateByUrl("/editar_flujo_status_empleado")
   }
 
   eliminar(datos: any) {
@@ -87,7 +92,7 @@ export class FlujoStatusEmpleadoComponent implements OnInit{
 
   eliminarStatusUsuarioServicio(id: any) {
     return this.http
-      .delete<any>('http://localhost:6500/miapp/flujoStatusEmpleado/eliminar/' + id.idStatusActual + '/' + id.idStatusNuevo)
+      .delete<any>(this.url.url+'miapp/flujoStatusEmpleado/eliminar/' + id.idStatusActual + '/' + id.idStatusNuevo)
       .pipe(catchError((e) => 'error'));
   }
 
@@ -108,7 +113,7 @@ export class FlujoStatusEmpleadoComponent implements OnInit{
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -120,7 +125,8 @@ export class FlujoStatusEmpleadoComponent implements OnInit{
   }
 
   agregar() {
-    location.href = '/agregar_flujo_status_empleado';
+   // location.href = '/agregar_flujo_status_empleado';
+    this.router.navigateByUrl("/agregar_flujo_status_empleado")
   }
 
   name = 'reporteFlujoEmpleado.xlsx';

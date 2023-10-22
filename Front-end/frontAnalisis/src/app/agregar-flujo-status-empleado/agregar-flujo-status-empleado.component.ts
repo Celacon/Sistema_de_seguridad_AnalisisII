@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs'; 
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-flujo-status-empleado',
@@ -17,7 +19,10 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
    this.usuarioMomentaneo= this.temporal.usuario;
@@ -31,7 +36,7 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
         idStatusNuevo: this.flujoEmpleado.idStatusNuevo
       },nombreEvento:this.flujoEmpleado.nombreEvento
     };
-    console.log(this.flujoEmpleado2)
+   
     let formularioValido:any = document.getElementById("agregarFlujoEmpleado");
     if(formularioValido.reportValidity()){
       this.servicioLogin().subscribe(
@@ -44,8 +49,9 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
       let json = JSON.parse(res);
       console.log(json);
       alert(json.mensaje);
-        location.href="/flujo_status_empleado";
-    }
+        //location.href="/flujo_status_empleado";
+        this.router.navigateByUrl("/flujo_status_empleado")
+      }
  
     servicioLogin(){
       let httpOptions ={
@@ -56,7 +62,7 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
      
       this.flujoEmpleado2.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
       
-      return this.http.post<any>('http://localhost:6500/miapp/flujoStatusEmpleado/guardar',this.flujoEmpleado2,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/flujoStatusEmpleado/guardar',this.flujoEmpleado2,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -67,8 +73,9 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
       }
 
       cancelar(){
-        location.href="/flujo_status_empleado";
-      }
+      //  location.href="/flujo_status_empleado";
+      this.router.navigateByUrl("/flujo_status_empleado")  
+    }
 
       buscarStatus(){
         this.buscarStatusServicio().subscribe(
@@ -77,7 +84,7 @@ export class AgregarFlujoStatusEmpleadoComponent implements OnInit{
       }
 
       buscarStatusServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/statusEmpleado/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/statusEmpleado/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -20,7 +22,9 @@ export class EstatusUsuarioComponent implements OnInit{
   print: boolean = true;
   export: boolean = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
   ngOnInit(): void {
     this.buscarStatusUsuario();
@@ -36,7 +40,7 @@ export class EstatusUsuarioComponent implements OnInit{
 
   buscarStatusUsuarioServicio(): Observable<any> {
     return this.http
-      .get<any>('http://localhost:6500/miapp/status-usuario/buscar')
+      .get<any>(this.url.url+'miapp/status-usuario/buscar')
       .pipe(
         catchError((error) => {
           console.log(error);
@@ -51,7 +55,9 @@ export class EstatusUsuarioComponent implements OnInit{
   editar(datos: any) {
     datos.password = null;
     localStorage.setItem('editar', JSON.stringify(datos));
-    location.href = '/editar-estatus-usuario';
+    //location.href = '/editar-estatus-usuario';
+    this.router.navigateByUrl("/editar-estatus-usuario")
+    
   }
 
   eliminar(datos: any) {
@@ -67,7 +73,7 @@ export class EstatusUsuarioComponent implements OnInit{
 
   eliminarStatusUsuarioServicio(id: any) {
     return this.http
-      .delete<any>('http://localhost:6500/miapp/status-usuario/EliminarEstatusUsuario/' + id)
+      .delete<any>(this.url.url+'miapp/status-usuario/EliminarEstatusUsuario/' + id)
       .pipe(catchError((e) => 'error'));
   }
 
@@ -88,7 +94,7 @@ export class EstatusUsuarioComponent implements OnInit{
   }
 
   buscarOpcionServicio(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
+    return this.http.get<any>(this.url.url+'miapp/role-opcion/buscarId/'+id.idRole+'/'+id.idOpcion).pipe(
       catchError((error) => {
         console.log(error);
         const mensaje =error.error;
@@ -100,7 +106,8 @@ export class EstatusUsuarioComponent implements OnInit{
   }
 
   agregar() {
-    location.href = '/agregar-estatus-usuario';
+    //location.href = '/agregar-estatus-usuario';
+    this.router.navigateByUrl("/agregar-estatus-usuario")
   }
 
 

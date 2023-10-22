@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-persona',
@@ -16,7 +18,10 @@ export class AgregarPersonaComponent implements OnInit {
     public usuarioMomentaneo:any = {};
     temporal:any ={};
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient
+      , private router: Router, 
+      private url:AppComponent) { }
+
     ngOnInit(): void {
 
 
@@ -53,8 +58,8 @@ export class AgregarPersonaComponent implements OnInit {
 
         alert(json.mensaje);
 
-          location.href="/personas";
-
+         // location.href="/personas";
+         this.router.navigateByUrl("/personas")
 
 
       }
@@ -71,7 +76,7 @@ export class AgregarPersonaComponent implements OnInit {
 
         this.persona.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-        return this.http.post<any>('http://localhost:6500/miapp/persona/guardar',this.persona,httpOptions).pipe(
+        return this.http.post<any>(this.url.url+'miapp/persona/guardar',this.persona,httpOptions).pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;
@@ -82,7 +87,8 @@ export class AgregarPersonaComponent implements OnInit {
         }
 
         cancelar(){
-          location.href="/personas";
+          //location.href="/personas";
+          this.router.navigateByUrl("/personas")
         }
 
         buscarGenero(){
@@ -96,7 +102,7 @@ export class AgregarPersonaComponent implements OnInit {
         }
 
         buscarGeneroServicio():Observable<any>{
-          return this.http.get<any>('http://localhost:6500/miapp/genero/buscar').pipe(
+          return this.http.get<any>(this.url.url+'miapp/genero/buscar').pipe(
             catchError((error) => {
               console.log(error);
               const mensaje =error.error;
@@ -118,7 +124,7 @@ export class AgregarPersonaComponent implements OnInit {
         }
 
         buscarEstadoCivilServicio():Observable<any>{
-          return this.http.get<any>('http://localhost:6500/miapp/estadoCivil/buscar').pipe(
+          return this.http.get<any>(this.url.url+'miapp/estadoCivil/buscar').pipe(
             catchError((error) => {
               console.log(error);
               const mensaje =error.error;

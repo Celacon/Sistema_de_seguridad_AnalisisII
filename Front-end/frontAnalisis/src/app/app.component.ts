@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontAnalisis';
+  port: String = "6500";
+  hostName: String = "localhost";
+  url: String = "http://"+this.hostName+":"+this.port+"/";
+
 }

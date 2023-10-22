@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -14,7 +16,9 @@ export class HomeComponent implements OnInit {
   temporal:any ={};
   public usuarioMomentaneo:any = {};
 
-  constructor(private http: HttpClient ){}
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
 
 
   ngOnInit(): void {
@@ -42,7 +46,7 @@ opcionesService(id:any){
 }
 
   buscarOpciones(id:any):Observable<any>{
-    return this.http.get<any>('http://localhost:6500/miapp/modulo/buscarIdRole/'+id).pipe(
+    return this.http.get<any>(this.url.url+'miapp/modulo/buscarIdRole/'+id).pipe(
       catchError(e=> "error")
     )
   }
@@ -53,7 +57,8 @@ opcionesService(id:any){
   
   salir(){
     localStorage.clear();
-    location.href="/";
+    //location.href="/";
+    this.router.navigateByUrl("/")
 this.salirSer();
 
   }
@@ -93,8 +98,8 @@ this.salirSer();
         //this.session = true;
         //this.mensaje = "Bienvenido " + json.usuario;
         alert(json.mensaje);
-        location.href=json.pagina;
-  
+     //   location.href=json.pagina;
+     this.router.navigateByUrl(json.pagina)
       }
   
     }
@@ -111,7 +116,7 @@ this.salirSer();
      
      
       
-      return this.http.post<any>('http://localhost:6500/miapp/login/cerrar',this.usuarioMomentaneo,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/login/cerrar',this.usuarioMomentaneo,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -122,7 +127,12 @@ this.salirSer();
       }
 
 
- 
+      direccion(page:string){
+        
+        
+        this.router.navigateByUrl("/"+page)
+      
+      }
   
 
 }

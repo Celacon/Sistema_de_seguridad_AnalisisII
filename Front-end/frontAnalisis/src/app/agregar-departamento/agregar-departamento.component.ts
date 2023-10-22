@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-agregar-departamento',
@@ -15,7 +17,10 @@ export class AgregarDepartamentoComponent implements OnInit {
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
 
 
@@ -48,8 +53,8 @@ export class AgregarDepartamentoComponent implements OnInit {
 
       alert(json.mensaje);
 
-        location.href="/departamento";
-
+        //location.href="/departamento";
+        this.router.navigateByUrl("/departamento")
 
 
     }
@@ -66,7 +71,7 @@ export class AgregarDepartamentoComponent implements OnInit {
 
       this.departamento.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/departamento/guardar',this.departamento,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/departamento/guardar',this.departamento,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -77,7 +82,8 @@ export class AgregarDepartamentoComponent implements OnInit {
       }
 
       cancelar(){
-        location.href="/departamento";
+       // location.href="/departamento";
+        this.router.navigateByUrl("/departamento")
       }
 
       buscarEmpresa(){
@@ -91,7 +97,7 @@ export class AgregarDepartamentoComponent implements OnInit {
       }
 
       buscarEmpresaServicio():Observable<any>{
-        return this.http.get<any>('http://localhost:6500/miapp/empresa/buscar').pipe(
+        return this.http.get<any>(this.url.url+'miapp/empresa/buscar').pipe(
           catchError((error) => {
             console.log(error);
             const mensaje =error.error;

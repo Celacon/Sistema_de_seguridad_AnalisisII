@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import {catchError,tap} from 'rxjs/operators'
+import { AppComponent } from '../app.component';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -14,7 +16,10 @@ export class EditarBancoComponent implements OnInit{
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient
+    , private router: Router, 
+    private url:AppComponent) { }
+
   ngOnInit(): void {
    this.temporal=JSON.parse(localStorage.getItem("usu")||'{}');
     this.usuarioMomentaneo= this.temporal.usuario;
@@ -43,7 +48,8 @@ export class EditarBancoComponent implements OnInit{
 
       alert(json.mensaje);
 
-        location.href="/banco";
+        //location.href="/banco";
+        this.router.navigateByUrl("/banco")
 
 
 
@@ -61,7 +67,7 @@ export class EditarBancoComponent implements OnInit{
 
       this.banco.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
 
-      return this.http.post<any>('http://localhost:6500/miapp/banco/editar',this.banco,httpOptions).pipe(
+      return this.http.post<any>(this.url.url+'miapp/banco/editar',this.banco,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
           const mensaje =error.error;
@@ -73,7 +79,8 @@ export class EditarBancoComponent implements OnInit{
 
       cancelar(){
         localStorage.removeItem("editar")
-        location.href="/banco";
+        //location.href="/banco";
+        this.router.navigateByUrl("/banco")
       }
 
 }
