@@ -81,6 +81,8 @@ export class AgregarEmpleadoComponent implements OnInit {
       }
 
       this.empleado.usuarioCreacion = this.usuarioMomentaneo.idUsuario;
+      this.empleado.idStatusEmpleado=1;
+      this.empleado.descuentoInasistencias=0;
 
       return this.http.post<any>(this.url.url+'miapp/empleado/guardar',this.empleado,httpOptions).pipe(
         catchError((error) => {

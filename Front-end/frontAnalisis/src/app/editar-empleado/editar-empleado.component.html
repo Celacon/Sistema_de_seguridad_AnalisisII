@@ -29,10 +29,18 @@
             <br>
 
             <label for="idStatusEmpleado">Status Empleado:</label>
-            <select id="idStatusEmpleado" type="text" class="form-control form-control-lg " [(ngModel)]="empleado.idStatusEmpleado"  [ngModelOptions]="{standalone:true}" requered>
+            <select id="idStatusEmpleado" type="text" class="form-control form-control-lg " [(ngModel)]="empleado.idStatusEmpleado"  [ngModelOptions]="{standalone:true}" requered disabled>
               <option ></option>
-              <option [value]="1">Activo</option>
-              <option [value]="0">Inactivo</option>
+              <option *ngFor="let pues of statusempleado" [value]="pues.idStatusEmpleado" >{{pues.nombre}}</option>
+              
+                 </select>
+                 <br>
+
+                 <label for="idStatusEmpleado">Status Nuevo:</label>
+            <select id="idStatusEmpleado" type="text" class="form-control form-control-lg " [(ngModel)]="empleado.idNuevo"  [ngModelOptions]="{standalone:true}" requered >
+              <option ></option>
+              <option *ngFor="let pues of statusNuevo" [value]="pues.idStatusEmpleado" >{{pues.nombre}}</option>
+              
                  </select>
                  <br>
 

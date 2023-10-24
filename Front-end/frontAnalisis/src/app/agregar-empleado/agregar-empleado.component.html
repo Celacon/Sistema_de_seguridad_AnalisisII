@@ -5,7 +5,7 @@
       <label for="idPersona">Persona:</label>
       <select id="idPersona" type="text" class="form-control form-control-lg " [(ngModel)]="empleado.idPersona"  [ngModelOptions]="{standalone:true}" requered>
          <option ></option>
-         <option *ngFor="let pers of persona" [value]="pers.idPersona">{{pers.nombre}}</option>
+         <option *ngFor="let pers of persona" [value]="pers.idPersona">{{pers.nombre}} {{pers.apellido}}</option>
             </select>
             <br>
 
@@ -28,17 +28,12 @@
         </select>
         <br>
 
-      <label for="idStatusEmpleado">Status Empleado:</label>
-      <select id="idStatusEmpleado" type="text" class="form-control form-control-lg " [(ngModel)]="empleado.idStatusEmpleado"  [ngModelOptions]="{standalone:true}" requered>
-        <option ></option>
-        <option *ngFor="let stat of statusempleado" [value]="stat.idPuesto">{{stat.nombre}}</option>
-        </select>
-        <br>
+     
 
       <label for="ingresosueldobase">Ingreso Sueldo Base:</label>
       <input type="double" id="ingresosueldobase" name="ingresosueldobase" [(ngModel)]="empleado.ingresoSueldoBase" [ngModelOptions]="{standalone:true}"required><br><br>
 
-      <label for="ingresobonificaciondecreto">Ingreso Bonificacion Decreto:</label>
+      <label for="ingresobonificaciondecreto">Ingreso Bonificacion:</label>
       <input type="double" id="ingresobonificaciondecreto" name="ingresobonificaciondecreto" [(ngModel)]="empleado.ingresobonificacionDecreto" [ngModelOptions]="{standalone:true}"required><br><br>
 
       <label for="ingresootrosingresos">Otros Ingresos:</label>

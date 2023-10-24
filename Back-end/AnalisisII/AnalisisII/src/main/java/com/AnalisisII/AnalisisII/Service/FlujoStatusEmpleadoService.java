@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.AnalisisII.AnalisisII.Repository.FlujoStatusEmpleadoRepository;
+import com.AnalisisII.AnalisisII.Repository.StatusEmpleadoRepository;
 import com.AnalisisII.AnalisisII.entity.FlujoStatusEmpleado;
 import com.AnalisisII.AnalisisII.entity.FlujoStatusEmpleadoId;
+import com.AnalisisII.AnalisisII.entity.StatusEmpleado;
 
 
 @RestController
@@ -31,6 +33,9 @@ public class FlujoStatusEmpleadoService {
 	
 	@Autowired
 	FlujoStatusEmpleadoRepository flujoStatusEmpleadoRepository;
+	
+	@Autowired
+	StatusEmpleadoRepository statusEmpleadoRepository;
 
 	@GetMapping(path ="buscar")
 	public List<FlujoStatusEmpleado> buscar(){
@@ -102,10 +107,12 @@ public class FlujoStatusEmpleadoService {
 	  }
 	  
 	  @GetMapping("/buscarIdStatusActual/{idStatusActual}")
-	  public List<FlujoStatusEmpleado> getFlujoStatusEmpleadoByIdStatusActual(@PathVariable("idStatusActual") Integer idStatusActual) {
+	  public List<StatusEmpleado> getFlujoStatusEmpleadoByIdStatusActual(@PathVariable("idStatusActual") Integer idStatusActual) {
 		 
 		  List<FlujoStatusEmpleado> todos = flujoStatusEmpleadoRepository.findAll();
+		  List<StatusEmpleado> statusEmpleado = statusEmpleadoRepository.findAll();
 		  List<FlujoStatusEmpleado> result = new ArrayList<>();
+		  List<StatusEmpleado> stados = new ArrayList<>();
 		  
 		  for(FlujoStatusEmpleado nuevo: todos) {
 				if(nuevo.getId().getIdStatusActual().equals(idStatusActual)) {
@@ -113,8 +120,17 @@ public class FlujoStatusEmpleadoService {
 
 				}
 			}
+		  
+		  for(FlujoStatusEmpleado nuevo: result) {
+			for (StatusEmpleado st: statusEmpleado) {
+				if(nuevo.getId().getIdStatusNuevo()==st.getIdStatusEmpleado()) {
+					stados.add(st);
+
+				}
+			}
+			}
 	      
-	      return result;
+	      return stados;
 	  }
 	
 }

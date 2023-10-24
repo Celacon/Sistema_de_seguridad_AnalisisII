@@ -118,7 +118,7 @@ export class EmpresaComponent implements OnInit{
   agregar(){
 
     //location.href="/AgregueEmpresa";
-    this.router.navigateByUrl("/AgregeEmpresa")
+    this.router.navigateByUrl("/AgregueEmpresa")
   }
 
   name = 'reporteempresa.xlsx';

@@ -18,6 +18,7 @@ export class EditarEmpleadoComponent implements OnInit {
   public sucursal:any = [];
   public puesto:any = [];
   public statusempleado:any = [];
+  public statusNuevo:any = [];
   public usuarioMomentaneo:any = {};
   temporal:any ={};
 
@@ -35,7 +36,8 @@ export class EditarEmpleadoComponent implements OnInit {
     this.buscarSucursal();
     this.buscarPuesto();
     this.buscarStatusEmpleado();
-
+    
+    this.buscarFlujoStatusEmpleado(this.empleado.idStatusEmpleado)
 
    }
 
@@ -77,7 +79,8 @@ export class EditarEmpleadoComponent implements OnInit {
       }
 
       this.empleado.usuarioModificacion = this.usuarioMomentaneo.idUsuario;
-
+      this.empleado.idStatusEmpleado = this.empleado.idNuevo;
+console.log(this.empleado)
       return this.http.post<any>(this.url.url+'miapp/empleado/editar',this.empleado,httpOptions).pipe(
         catchError((error) => {
           console.log(error);
@@ -162,10 +165,11 @@ export class EditarEmpleadoComponent implements OnInit {
       buscarStatusEmpleado(){
 
         this.buscarStatusEmpleadoServicio().subscribe(
-          (response:any)=> this.statusempleado=response
+          (response:any)=> this.statusempleado=response,
 
 
-        )
+        );
+     
 
       }
 
@@ -180,6 +184,32 @@ export class EditarEmpleadoComponent implements OnInit {
             })
         )
       }
+
+      buscarFlujoStatusEmpleado(id:any){
+
+        this.buscarFlujoStatusEmpleadoServicio(id).subscribe(
+          (response:any)=> this.statusNuevo=response
+
+
+        )
+
+      }
+
+      buscarFlujoStatusEmpleadoServicio(id:any):Observable<any>{
+        return this.http.get<any>(this.url.url+'miapp/flujoStatusEmpleado/buscarIdStatusActual/'+id).pipe(
+          catchError((error) => {
+            console.log(error);
+            const mensaje =error.error;
+            const objetoJSON = JSON.parse(mensaje);
+            alert(objetoJSON.mensaje);
+            throw error;
+            })
+        )
+      }
+
+
+   
+      
 
 
 
